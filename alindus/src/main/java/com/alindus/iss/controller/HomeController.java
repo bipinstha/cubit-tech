@@ -9,10 +9,15 @@ public class HomeController {
 
 	@RequestMapping
 	public String home() {
-		return "Home";
+		return "dashboard";
 	}
 	@RequestMapping(value="/login")
 	public String loginPage() {
 		return "login";
 	}
+	
+	/*@RequestMapping(value="/dashboard")
+	public String dashboard() {
+		return "dashboard";
+	}*/
 }

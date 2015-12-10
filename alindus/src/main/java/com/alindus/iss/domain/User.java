@@ -1,5 +1,6 @@
 package com.alindus.iss.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,6 +21,7 @@ public class User extends Person {
 	private String password;
 	@Transient
 	private String rePassword;
+	//@Column()
 	private Boolean enable = true;
 	@Enumerated(EnumType.STRING)
 	private Role role;
