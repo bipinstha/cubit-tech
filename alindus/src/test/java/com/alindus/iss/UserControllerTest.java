@@ -18,7 +18,7 @@ import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 
-public class UserTest extends BaseTest {
+public class UserControllerTest extends BaseTest {
 
 	private static final String FIRST_NAME = "Bipin";
 	private static final String LAST_NAME = "Shrestha";
@@ -61,7 +61,7 @@ public class UserTest extends BaseTest {
 		// String person1 = "{\"firstName\" : \"Naren\", \"lastName\" :
 		// \"Thapa\", \"email\" : \"naren@gmail.com\", \"phone\" : {\"areaCode\"
 		// : 879, \"prefixValue\" : 345, \"number\" : 9898}}";
-		mvc.perform(MockMvcRequestBuilders.post("/user/add").contentType(MediaType.APPLICATION_JSON_VALUE)
+		mvc.perform(MockMvcRequestBuilders.post("/secure/user/add").contentType(MediaType.APPLICATION_JSON_VALUE)
 				.accept(MediaType.APPLICATION_JSON_VALUE).content(user.toJson())).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
 				// .andExpect(jsonPath("$.id", is("1")));

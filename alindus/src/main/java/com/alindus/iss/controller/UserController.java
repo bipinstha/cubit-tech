@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alindus.iss.domain.Person;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.service.UserService;
 
 @RestController
-@RequestMapping(value = "/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/secure/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 @ResponseStatus(HttpStatus.OK)
 public class UserController {
 
@@ -28,7 +27,7 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Person addPerson(@RequestBody User user) {
+	public User addPerson(@RequestBody User user) {
 		System.out.println(user);
 		try {
 			this.userService.add(user);
@@ -40,7 +39,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Person updatePerson(@RequestBody User user) {
+	public User updatePerson(@RequestBody User user) {
 		try {
 			this.userService.update(user);
 			return user;
@@ -51,7 +50,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public Person getOnePerson(@PathVariable Long userId) {
+	public User getOnePerson(@PathVariable Long userId) {
 		try {
 			return this.userService.findOne(userId);
 		} catch (IllegalArgumentException ex) {

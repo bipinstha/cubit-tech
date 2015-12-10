@@ -20,6 +20,7 @@ public class User extends Person {
 	private String password;
 	@Transient
 	private String rePassword;
+	private Boolean enable = true;
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
@@ -56,6 +57,14 @@ public class User extends Person {
 
 	public void setRePassword(String rePassword) {
 		this.rePassword = rePassword;
+	}
+
+	public Boolean getEnable() {
+		return enable;
+	}
+
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
 	}
 
 	public Role getRole() {

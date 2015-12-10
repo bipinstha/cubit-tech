@@ -19,6 +19,7 @@ public abstract class Person implements Serializable {
 	private String middleName;
 	@Column(name = "last_name")
 	private String lastName;
+	@Column(unique= true)
 	private String email;
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
