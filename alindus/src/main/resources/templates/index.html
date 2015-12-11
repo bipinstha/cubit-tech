@@ -3,16 +3,29 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>Hello World!</title>
+<title>Cubic Report App</title>
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
 	crossorigin="anonymous" />
 <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+<script type="text/javascript" src="../static/js/angular. min.js"></script>
+<script type="text/javascript" src="../static/js/ui-bootstrap.js"></script>
 <script type="text/javascript" src="../static/js/app.js"></script>
 </head>
 <body>
-<h1>Welcome to dashboard</h1>
+	<header>
+		<div class="container">
+			<h1>Cubic App</h1>
+			<nav>
+				<ul>
+					<li><a href="#dashboard">Dashboard</a></li>
+					<li><a href="#reports">Reports</a></li>
+					<li><a href="#manage">Manage</a></li>
+					<li><a href="#admin">Admin</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
 </body>
 </html>

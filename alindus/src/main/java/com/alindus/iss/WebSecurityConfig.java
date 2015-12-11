@@ -18,27 +18,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 
-//	@Autowired
-//	UserDetailsService userDetailsService;
+	// @Autowired
+	// UserDetailsService userDetailsService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and()
-				.logout().permitAll();
+		http.authorizeRequests().anyRequest().authenticated()
+			.and()
+				.formLogin().loginPage("/login").permitAll()
+			.and()
+				.logout().permitAll()
+			.and()
+				.exceptionHandling().accessDeniedPage("/403")
+			.and()
+				.csrf();
 	}
 
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
-		auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder()).dataSource(dataSource)
-				.usersByUsernameQuery("select email,password, enable from users where email=?")
-				.authoritiesByUsernameQuery("select email, role from users where email=?");
+	public void configureGlobal(AuthenticationManagerBuilder auth)
+			throws Exception {
+		auth.inMemoryAuthentication().withUser("user").password("password")
+				.roles("USER");
+		auth.jdbcAuthentication()
+				.passwordEncoder(new BCryptPasswordEncoder())
+				.dataSource(dataSource)
+				.usersByUsernameQuery(
+						"select email,password, enable from users where email=?")
+				.authoritiesByUsernameQuery(
+						"select email, role from users where email=?");
 
 	}
 
-//	@Autowired
-//	private void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-//	}
+	// @Autowired
+	// private void configAuthentication(AuthenticationManagerBuilder auth)
+	// throws Exception {
+	// auth.userDetailsService(userDetailsService).passwordEncoder(new
+	// BCryptPasswordEncoder());
+	// }
 
 }
