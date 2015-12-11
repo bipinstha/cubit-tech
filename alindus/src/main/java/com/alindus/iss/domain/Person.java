@@ -19,7 +19,7 @@ public abstract class Person implements Serializable {
 	private String middleName;
 	@Column(name = "last_name")
 	private String lastName;
-	@Column(unique= true)
+	@Column(unique = true)
 	private String email;
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
@@ -31,6 +31,10 @@ public abstract class Person implements Serializable {
 	private Phone phone;
 
 	public Person() {
+	}
+
+	public Person(String email) {
+		this.email = email;
 	}
 
 	public Person(String firstName, String lastName, String email, Address address, Phone phone) {
@@ -91,14 +95,14 @@ public abstract class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Person [firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName
-				+ ", email=" + email + ", phone=" + phone + "]";
+		return "Person [firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", email="
+				+ email + ", phone=" + phone + "]";
 	}
 
 	public String toJson() {
-		return "{\"firstName\":\"" + firstName + "\", \"middleName\":\"" + middleName
-				+ "\", \"lastName\":\"" + lastName + "\", \"email\":\"" + email + "\",\"address\":" + address.toJson()
-				+ ", \"phone\":" + phone.toJson() + "}";
+		return "{\"firstName\":\"" + firstName + "\", \"middleName\":\"" + middleName + "\", \"lastName\":\"" + lastName
+				+ "\", \"email\":\"" + email + "\",\"address\":" + address.toJson() + ", \"phone\":" + phone.toJson()
+				+ "}";
 	}
 
 }

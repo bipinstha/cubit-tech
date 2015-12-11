@@ -5,8 +5,11 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.alindus.iss.domain.Address;
+import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
 import com.alindus.iss.repository.UserRepository;
@@ -27,23 +30,37 @@ public class UserServiceImpl implements UserService {
 		if (!t.getPassword().equals(t.getRePassword())) {
 			throw new IllegalArgumentException("Password does not match with repassword");
 		}
+		t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
 		this.userRepository.save(t);
 	}
 
 	@Override
 	@Transactional
 	public void update(User t) {
-		// TODO Auto-generated method stub
-		if (this.userRepository.findOne(t.getId()) == null) {
+		User u = this.userRepository.findByEmail(t.getEmail());
+		if (u == null) {
 			throw new IllegalArgumentException("User does not exist.");
 		}
-		this.userRepository.save(t);
+		// Create the new object of address, phone and user with existing id
+		// Don't allow password to change while update user information
+		Address address = new Address(t.getAddress().getAddress(), t.getAddress().getCity(), t.getAddress().getState(),
+				t.getAddress().getZipCode());
+		address.setAddress1(t.getAddress().getAddress1());
+		if (u.getAddress() != null)
+			address.setId(u.getAddress().getId());
+		Phone phone = new Phone(t.getPhone().getAreaCode(), t.getPhone().getPrefixValue(), t.getPhone().getNumber());
+		if (u.getPhone() != null)
+			phone.setId(u.getPhone().getId());
+		User updateUser = new User(t.getFirstName(), t.getLastName(), u.getEmail(), address, phone, u.getPassword(),
+				u.getPassword(), t.getRole());
+		updateUser.setId(u.getId());
+		updateUser.setMiddleName(t.getMiddleName());
+		this.userRepository.save(updateUser);
 	}
 
 	@Override
 	@Transactional
 	public void remove(Long obj) {
-		// TODO Auto-generated method stub
 		if (obj == null) {
 			throw new IllegalArgumentException("Invalid id.");
 		}
@@ -52,7 +69,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findOne(Long obj) {
-		// TODO Auto-generated method stub
 		return this.userRepository.findOne(obj);
 	}
 
@@ -64,7 +80,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUserByEmail(String email) {
-		// TODO Auto-generated method stub
 		if (email == null) {
 			throw new IllegalArgumentException("Email not valid.");
 		}
@@ -76,20 +91,21 @@ public class UserServiceImpl implements UserService {
 	public void updatePassword(ChangePassword changePassword) {
 		// TODO Auto-generated method stub
 		// TODO encrypt the password before compare
-		if (changePassword.getOldPassword().equals(changePassword.getPassword())) {
-			throw new IllegalArgumentException("New Password must be different than Old password.");
-		}
 		if (!changePassword.getPassword().equals(changePassword.getRePassword())) {
 			throw new IllegalArgumentException("New password and Re-Password must be same.");
+		}
+		if (changePassword.getOldPassword().equals(changePassword.getPassword())) {
+			throw new IllegalArgumentException("New Password must be different than Old password.");
 		}
 		User user = this.userRepository.findByEmail(changePassword.getEmail());
 		if (user == null) {
 			throw new IllegalArgumentException("Invalid user.");
 		}
-		if (!user.getPassword().equals(changePassword.getOldPassword())) {
+		if (!new BCryptPasswordEncoder().matches(changePassword.getOldPassword(), user.getPassword())) {
 			throw new IllegalArgumentException("Old password does not match.");
 		}
-		this.userRepository.updatePassword(changePassword.getEmail(), changePassword.getPassword());
+		this.userRepository.updatePassword(changePassword.getEmail(),
+				new BCryptPasswordEncoder().encode(changePassword.getPassword()));
 	}
 
 	@Override
@@ -100,6 +116,26 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("User not found.");
 		}
 		this.userRepository.delete(user);
+	}
+
+	@Override
+	@Transactional
+	public void enableUserByEmail(String email) {
+		User user = this.userRepository.findByEmail(email);
+		if (user == null) {
+			throw new IllegalArgumentException("User not found.");
+		}
+		this.userRepository.enableUser(email);
+	}
+
+	@Override
+	@Transactional
+	public void disableUserByEmal(String email) {
+		User user = this.userRepository.findByEmail(email);
+		if (user == null) {
+			throw new IllegalArgumentException("User not found.");
+		}
+		this.userRepository.disableUser(email);
 	}
 
 }

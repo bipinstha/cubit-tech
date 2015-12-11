@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alindus.iss.domain.User;
+import com.alindus.iss.dto.ChangePassword;
 import com.alindus.iss.service.UserService;
 
 @RestController
@@ -27,7 +28,7 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public User addPerson(@RequestBody User user) {
+	public User addUser(@RequestBody User user) {
 		System.out.println(user);
 		try {
 			this.userService.add(user);
@@ -39,7 +40,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public User updatePerson(@RequestBody User user) {
+	public User updateUser(@RequestBody User user) {
 		try {
 			this.userService.update(user);
 			return user;
@@ -49,10 +50,10 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public User getOnePerson(@PathVariable Long userId) {
+	@RequestMapping(value = "/{email}", method = RequestMethod.GET)
+	public User findUserByEmail(@PathVariable String email) {
 		try {
-			return this.userService.findOne(userId);
+			return this.userService.findUserByEmail(email);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
@@ -60,9 +61,19 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<User> getAllPerson() {
+	public List<User> getAllUser() {
 		try {
 			return this.userService.findAll();
+		} catch (IllegalArgumentException ex) {
+			this.logger.error(ex.getMessage());
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/password/change", method = RequestMethod.POST)
+	public void changePassword(@RequestBody ChangePassword changePassword) {
+		try {
+			this.userService.updatePassword(changePassword);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());

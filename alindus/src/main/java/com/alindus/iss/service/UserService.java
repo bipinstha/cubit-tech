@@ -10,5 +10,9 @@ public interface UserService extends AbstractService<User, Long>{
 	public void updatePassword(ChangePassword changePassword);
 	
 	public void removeByEmail(String email);
+	
+	public void enableUserByEmail(String email);
+	
+	public void disableUserByEmal(String email);
 
 }

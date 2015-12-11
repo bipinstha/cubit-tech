@@ -1,6 +1,5 @@
 package com.alindus.iss.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,13 +20,22 @@ public class User extends Person {
 	private String password;
 	@Transient
 	private String rePassword;
-	//@Column()
-	private Boolean enable = true;
+	// @Column()
+	private Boolean enable;
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
 	public User() {
 	}
+
+
+	public User(String email, String password, String rePassword, Role role) {
+		super(email);
+		this.password = password;
+		this.rePassword = rePassword;
+		this.role = role;
+	}
+
 
 	public User(String firstName, String lastName, String email, Address address, Phone phone, String password,
 			String rePassword, Role role) {
@@ -84,8 +92,8 @@ public class User extends Person {
 
 	@Override
 	public String toJson() {
-		return "{\"id\":" + id + ", \"password\":\"" + password + "\", \"rePassword\":\"" + rePassword + "\", \"role\":\""
-				+ role + "\"," + "\"firstName\":\"" + super.getFirstName() + "\", \"middleName\":\""
+		return "{\"id\":" + id + ", \"password\":\"" + password + "\", \"rePassword\":\"" + rePassword
+				+ "\", \"role\":\"" + role + "\"," + "\"firstName\":\"" + super.getFirstName() + "\", \"middleName\":\""
 				+ super.getMiddleName() + "\", \"lastName\":\"" + super.getLastName() + "\", \"email\":\""
 				+ super.getEmail() + "\",\"address\":" + super.getAddress().toJson() + ", \"phone\":"
 				+ super.getPhone().toJson() + "}";
