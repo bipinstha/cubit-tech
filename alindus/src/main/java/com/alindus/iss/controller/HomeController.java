@@ -16,6 +16,10 @@ public class HomeController {
 		return "login";
 	}
 	
+	@RequestMapping(value="/403")
+	public String pageNotFound() {
+		return "404";
+	}
 	/*@RequestMapping(value="/dashboard")
 	public String dashboard() {
 		return "dashboard";
