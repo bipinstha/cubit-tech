@@ -26,7 +26,7 @@ public class UserControllerTest extends BaseTest {
 	private static final Integer AREA_CODE = 469;
 	private static final Integer PREFIX_VALUE = 346;
 	private static final Integer NUMBER = 1618;
-	
+
 	private static final String PASSWORD = "password";
 	private static final String RE_PASSWORD = "password";
 	private static final Role ROLE = Role.ROLE_ADMIN;
@@ -53,16 +53,21 @@ public class UserControllerTest extends BaseTest {
 	public void addUser() throws Exception {
 		Phone phone = new Phone(AREA_CODE, PREFIX_VALUE, NUMBER);
 		Address address = new Address(ADDRESS, CITY, STATE, ZIP_CODE);
-		User user = new User(FIRST_NAME, LAST_NAME, EMAIL, address, phone, PASSWORD, RE_PASSWORD, ROLE);
-//		Person person = new Person(FIRST_NAME, LAST_NAME, EMAIL, address, phone);
+		// User user = new User(FIRST_NAME, LAST_NAME, EMAIL, address, phone,
+		// PASSWORD, RE_PASSWORD, ROLE);
+		// User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
+		// Person person = new Person(FIRST_NAME, LAST_NAME, EMAIL, address,
+		// phone);
 		// GsonFactoryBean gson = new GsonFactoryBean();
 		// gson.
-		System.out.println(user.toJson());
+
+		String user = "{\"email\" : \"aakee.stha@gmail.com\", \"password\":\"12345\", \"rePassword\":\"12345\", \"role\":\"ROLE_ADMIN\"}";
+		System.out.println(user);
 		// String person1 = "{\"firstName\" : \"Naren\", \"lastName\" :
 		// \"Thapa\", \"email\" : \"naren@gmail.com\", \"phone\" : {\"areaCode\"
 		// : 879, \"prefixValue\" : 345, \"number\" : 9898}}";
 		mvc.perform(MockMvcRequestBuilders.post("/secure/user/add").contentType(MediaType.APPLICATION_JSON_VALUE)
-				.accept(MediaType.APPLICATION_JSON_VALUE).content(user.toJson())).andExpect(status().isOk())
+				.accept(MediaType.APPLICATION_JSON_VALUE).content(user)).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
 				// .andExpect(jsonPath("$.id", is("1")));
 				// System.out.println(p);
