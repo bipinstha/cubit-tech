@@ -14,7 +14,7 @@ public class SocialSecurityNumber {
 	private Long id;
 	private Integer initValue;
 	private Integer midValue;
-	//@Column(unique = true)
+	@Column(unique = true)
 	private Integer lastValue;
 
 	public SocialSecurityNumber() {
