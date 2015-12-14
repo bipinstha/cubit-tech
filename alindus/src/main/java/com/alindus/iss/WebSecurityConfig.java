@@ -21,26 +21,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 
-	// @Autowired
-	// UserDetailsService userDetailsService;
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().anyRequest().authenticated().and().formLogin()
 				.loginPage("/login").permitAll().and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login").permitAll().and()
-				.authorizeRequests().anyRequest().authenticated().and()
-				.csrf().disable();
-				;
+				.authorizeRequests().anyRequest().authenticated().and().csrf()
+				.disable();
 
 	}
-	
-	private CsrfTokenRepository csrfTokenRepository() {
-		  HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-		  repository.setHeaderName("X-XSRF-TOKEN");
-		  return repository;
-		}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth)
@@ -56,12 +46,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"select email, role from users where email=?");
 
 	}
-
-	// @Autowired
-	// private void configAuthentication(AuthenticationManagerBuilder auth)
-	// throws Exception {
-	// auth.userDetailsService(userDetailsService).passwordEncoder(new
-	// BCryptPasswordEncoder());
-	// }
 
 }
