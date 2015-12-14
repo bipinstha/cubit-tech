@@ -9,7 +9,7 @@
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
 	crossorigin="anonymous" />
 <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
-<script type="text/javascript" src="../static/js/angular. min.js"></script>
+<script type="text/javascript" src="../static/js/angular.min.js"></script>
 <script type="text/javascript" src="../static/js/ui-bootstrap.js"></script>
 <script type="text/javascript" src="../static/js/app.js"></script>
 </head>
@@ -28,5 +28,15 @@
 			</nav>
 		</div>
 	</header>
+	<section id="content">
+		<div class="container">
+			<div ng-view></div>
+		</div>
+	</section>
+	<footer>
+		<div class="container">
+			<p>Copyright &copy; 2015. All rights reserved at Cubic Technologies.</p>
+		</div>
+	</footer>
 </body>
 </html>
