@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
 				u.getPassword(), t.getRole());
 		updateUser.setId(u.getId());
 		updateUser.setMiddleName(t.getMiddleName());
+		updateUser.setEnable(t.getEnable());
 		this.userRepository.save(updateUser);
 	}
 

@@ -50,10 +50,15 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/{email}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{email}/find", method = RequestMethod.GET)
 	public User findUserByEmail(@PathVariable String email) {
+//		HttpHeaders header = new HttpHeaders();
+//		header.add("Content-Type", "application/json; charset=utf-8");
+
 		try {
-			return this.userService.findUserByEmail(email);
+			System.out.println("reqyested email: " + email);
+//			return new ResponseEntity<User>(this.userService.findUserByEmail(email), header, HttpStatus.OK);
+			 return this.userService.findUserByEmail(email);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());

@@ -3,6 +3,8 @@ package com.alindus.iss;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -19,6 +21,7 @@ import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class UserControllerTest extends BaseTest {
 
@@ -48,14 +51,13 @@ public class UserControllerTest extends BaseTest {
 		mvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 
-	@Test
-	public void addUser() throws Exception {
-		Phone phone = new Phone(AREA_CODE, PREFIX_VALUE, NUMBER);
-		Address address = new Address(ADDRESS, CITY, STATE, ZIP_CODE);
-		User user1 = new User(FIRST_NAME, LAST_NAME, EMAIL, address, phone, PASSWORD, RE_PASSWORD, ROLE);
-		user1.setEnable(true);
+	// @Test
+	public void addUserTest() throws Exception {
+		User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
+		user.setEnable(true);
+		user.setEnable(true);
 		Gson gson = new Gson();
-		String json = gson.toJson(user1);
+		String json = gson.toJson(user);
 		System.out.println("json obj: " + json);
 		MvcResult result = mvc
 				.perform(MockMvcRequestBuilders.post("/secure/user/add").contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -63,8 +65,43 @@ public class UserControllerTest extends BaseTest {
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
 		System.out.println(result.getResponse().getContentAsString());
+		User user1 = gson.fromJson(result.getResponse().getContentAsString(), User.class);
+		System.out.println("obj: " + user1.getEmail());
+	}
+
+	@Test
+	public void updateUserTest() throws Exception {
+		Gson gson = new Gson();
+		MvcResult result = mvc
+				.perform(MockMvcRequestBuilders.get("/secure/user/{email}/find", EMAIL)
+						.contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		Phone phone = new Phone(AREA_CODE, PREFIX_VALUE, NUMBER);
+		Address address = new Address(ADDRESS, CITY, STATE, ZIP_CODE);
+		// result.getResponse().
+		System.out.println("response: " + result.getResponse().getContentAsString());
 		User user = gson.fromJson(result.getResponse().getContentAsString(), User.class);
-		System.out.println("obj: " + user.getEmail());
+		user.setFirstName(FIRST_NAME);
+		user.setLastName(LAST_NAME);
+		user.setAddress(address);
+		user.setPhone(phone);
+		System.out.println("User Json:  " + gson.toJson(user));
+		mvc.perform(MockMvcRequestBuilders.post("/secure/user/update").contentType(MediaType.APPLICATION_JSON_VALUE)
+				.accept(MediaType.APPLICATION_JSON_VALUE).content(gson.toJson(user))).andExpect(status().isOk());
+	}
+
+	@Test
+	public void viewAllTest() throws Exception {
+		Gson gson = new Gson();
+		MvcResult result = mvc
+				.perform(MockMvcRequestBuilders.get("/secure/user/all").contentType(MediaType.APPLICATION_JSON_VALUE)
+						.accept(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		List<User> list = gson.fromJson(result.getResponse().getContentAsString(), new TypeToken<List<User>>() {
+		}.getType());
+		System.out.println("user list: " + list.toString());
 	}
 
 }
