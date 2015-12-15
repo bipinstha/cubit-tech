@@ -63,7 +63,7 @@ public class CandidateServiceImpl implements CandidateService {
 		ssn.setId(c.getSsn().getId());
 
 		Candidate can = new Candidate(t.getFirstName(), t.getLastName(), t.getEmail(), address, phone, ssn,
-				t.getSkypeId());
+				t.getSkypeId(), t.getStatus());
 		can.setId(c.getId());
 		can.setMiddleName(t.getMiddleName());
 		can.setEmail1(t.getEmail1());

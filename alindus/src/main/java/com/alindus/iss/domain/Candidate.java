@@ -2,6 +2,8 @@ package com.alindus.iss.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,16 +32,19 @@ public class Candidate extends Person {
 	private String email1;
 	private String skypeId;
 	private String skypeId1;
+	@Enumerated(EnumType.STRING)
+	private CandidateStatus status = CandidateStatus.MARKETING;
 
 	public Candidate() {
 		super();
 	}
 
 	public Candidate(String firstName, String lastName, String email, Address address, Phone phone,
-			SocialSecurityNumber ssn, String skypeId) {
+			SocialSecurityNumber ssn, String skypeId, CandidateStatus status) {
 		super(firstName, lastName, email, address, phone);
 		this.ssn = ssn;
 		this.skypeId = skypeId;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -88,6 +93,18 @@ public class Candidate extends Person {
 
 	public void setSkypeId1(String skypeId1) {
 		this.skypeId1 = skypeId1;
+	}
+	
+	public CandidateStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CandidateStatus status) {
+		this.status = status;
+	}
+
+	public enum CandidateStatus {
+		WORKING, MARKETING, LEFT, VACATION
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Candidate;
+import com.alindus.iss.domain.Candidate.CandidateStatus;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.SocialSecurityNumber;
 import com.alindus.iss.service.CandidateService;
@@ -19,6 +20,7 @@ public class CandidateServiceTest extends BaseTest {
 	private static final String LAST_NAME = "Thapa";
 	private static final String EMAIL = "bharat.thapa@gmail.com";
 	private static final String SKYPE_ID = "bharat.thapa";
+	private static final CandidateStatus STATUS = CandidateStatus.MARKETING;
 
 	private static final Integer AREA_CODE = 641;
 	private static final Integer PREFIX_VALUE = 451;
@@ -41,11 +43,11 @@ public class CandidateServiceTest extends BaseTest {
 		Address address = new Address(ADDRESS, CITY, STATE, ZIP_CODE);
 		Phone phone = new Phone(AREA_CODE, PREFIX_VALUE, NUMBER);
 		SocialSecurityNumber ssn = new SocialSecurityNumber(SSN_FIRST_VAL, SSN_SECOND_VAL, SSN_THIRD_VAL);
-		Candidate candidate = new Candidate(FIRST_NAME, LAST_NAME, EMAIL, address, phone, ssn, SKYPE_ID);
+		Candidate candidate = new Candidate(FIRST_NAME, LAST_NAME, EMAIL, address, phone, ssn, SKYPE_ID, STATUS);
 		this.candidateService.add(candidate);
 		Candidate c1 = this.candidateService.findCandidateByEmail(EMAIL);
 		Candidate c2 = this.candidateService.findCandidateBySSN(SSN_THIRD_VAL);
-		//System.out.println(this.candidateService.searchCandidateLike("Bha").size());
+		// System.out.println(this.candidateService.searchCandidateLike("Bha").size());
 		Assert.assertEquals(c1.getEmail(), c2.getEmail());
 	}
 
@@ -53,6 +55,7 @@ public class CandidateServiceTest extends BaseTest {
 	public void updateCandidateTest() {
 		Candidate c = this.candidateService.findCandidateByEmail(EMAIL);
 		c.setMiddleName(MIDDLE_NAME);
+		c.setStatus(CandidateStatus.WORKING);
 		c.setPhone1(new Phone(319, 614, 2805));
 		c.setEmail1("bharat123@gmail.com");
 		c.setSkypeId1("bharati");
