@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -17,6 +18,7 @@ import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
+import com.google.gson.Gson;
 
 public class UserControllerTest extends BaseTest {
 
@@ -36,9 +38,6 @@ public class UserControllerTest extends BaseTest {
 	private static final String STATE = "IA";
 	private static final String ZIP_CODE = "52557";
 
-	// @Autowired
-	// private PersonController personController;
-
 	private MockMvc mvc;
 	@Autowired
 	private WebApplicationContext wac;
@@ -53,33 +52,19 @@ public class UserControllerTest extends BaseTest {
 	public void addUser() throws Exception {
 		Phone phone = new Phone(AREA_CODE, PREFIX_VALUE, NUMBER);
 		Address address = new Address(ADDRESS, CITY, STATE, ZIP_CODE);
-		// User user = new User(FIRST_NAME, LAST_NAME, EMAIL, address, phone,
-		// PASSWORD, RE_PASSWORD, ROLE);
-		// User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
-		// Person person = new Person(FIRST_NAME, LAST_NAME, EMAIL, address,
-		// phone);
-		// GsonFactoryBean gson = new GsonFactoryBean();
-		// gson.
-
-		String user = "{\"email\" : \"aakee.stha@gmail.com\", \"password\":\"12345\", \"rePassword\":\"12345\", \"role\":\"ROLE_ADMIN\"}";
-		System.out.println(user);
-		// String person1 = "{\"firstName\" : \"Naren\", \"lastName\" :
-		// \"Thapa\", \"email\" : \"naren@gmail.com\", \"phone\" : {\"areaCode\"
-		// : 879, \"prefixValue\" : 345, \"number\" : 9898}}";
-		mvc.perform(MockMvcRequestBuilders.post("/secure/user/add").contentType(MediaType.APPLICATION_JSON_VALUE)
-				.accept(MediaType.APPLICATION_JSON_VALUE).content(user)).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
-				// .andExpect(jsonPath("$.id", is("1")));
-				// System.out.println(p);
-				// mvc.perform(MockMvcRequestBuilders.get("/")
-				// .accept(MediaType.APPLICATION_JSON))
-				// .andExpect(status().isOk())
-				// .andExpect(content().string(equalTo("Greetings from Spring
-				// Boot!")));
-				// this.personController.addPerson(person);
-
-		// Person p1 = this.personController.getOnePerson(1L);
-		// Assert.assertEquals(p, person);
+		User user1 = new User(FIRST_NAME, LAST_NAME, EMAIL, address, phone, PASSWORD, RE_PASSWORD, ROLE);
+		user1.setEnable(true);
+		Gson gson = new Gson();
+		String json = gson.toJson(user1);
+		System.out.println("json obj: " + json);
+		MvcResult result = mvc
+				.perform(MockMvcRequestBuilders.post("/secure/user/add").contentType(MediaType.APPLICATION_JSON_VALUE)
+						.accept(MediaType.APPLICATION_JSON_VALUE).content(json))
+				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+		System.out.println(result.getResponse().getContentAsString());
+		User user = gson.fromJson(result.getResponse().getContentAsString(), User.class);
+		System.out.println("obj: " + user.getEmail());
 	}
 
 }
