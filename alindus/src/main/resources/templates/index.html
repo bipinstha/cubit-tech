@@ -9,11 +9,14 @@
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
 	crossorigin="anonymous" />
 <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
-<script type="text/javascript" src="../static/js/angular.min.js"></script>
-<script type="text/javascript" src="../static/js/ui-bootstrap.js"></script>
-<script type="text/javascript" src="../static/js/app.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="../static/js/bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="../static/js/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script type="text/javascript" src="../static/js/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../static/js/app.js"></script>
+<script src="../static/js/controllers.js"></script>
 </head>
-<body>
+<body ng-app="cubicApp">
 	<header>
 		<div class="container">
 			<h1>Cubic App</h1>
@@ -30,12 +33,13 @@
 	</header>
 	<section id="content">
 		<div class="container">
-			<div ng-view></div>
+			<div ng-view=""></div>
 		</div>
 	</section>
 	<footer>
 		<div class="container">
-			<p>Copyright &copy; 2015. All rights reserved at Cubic Technologies.</p>
+			<p>Copyright &copy; 2015. All rights reserved at Cubic
+				Technologies.</p>
 		</div>
 	</footer>
 </body>

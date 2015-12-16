@@ -1,20 +1,57 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Login | Cubic Report App</title>
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+<style type="text/css">
+.loginform {
+	width: 350px;
+	margin: 150px auto;
+	background: #ddd;
+	padding: 25px 30px;
+	font-family: sans-serif;
+	border-radius: 7px;
+	color: #333;
+	border: 1px solid #aaa;
+	box-shadow: 0px 4px 3px #ddd;
+}
+
+.loginform h1 {
+	margin: 0px 0px 20px 0px;
+	font-size: 27px;
+}
+
+.loginform .btn-default {
+	width: 100%;
+	background: #333;
+	color: #fff;
+}
+</style>
+</head>
+<body>
+	<div class="loginform">
+		<h1>Login</h1>
+		<div class="text-danger" th:if="${param.error}">Invalid username
+			and password.</div>
+		<div class="text-danger" th:if="${param.logout}">You have been
+			logged out.</div>
+
+		<form th:action="@{/login}" method="post">
+			<div class="form-group">
+				<input type="email" class="form-control" placeholder="Email"
+					name="username" />
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control" placeholder="Password" />
+			</div>
+			<button type="submit" class="btn btn-default">Login</button>
+		</form>
+	</div>
+</body>
 </html>
