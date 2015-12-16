@@ -13,7 +13,7 @@ import javax.validation.Valid;
 public abstract class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Column(name = "first_name", unique = true)
+	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "middle_name")
 	private String middleName;

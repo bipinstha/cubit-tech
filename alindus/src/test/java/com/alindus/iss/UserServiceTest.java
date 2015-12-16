@@ -1,5 +1,6 @@
 package com.alindus.iss;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class UserServiceTest extends BaseTest {
 	public void addUserTest() {
 		User us = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
 		this.userService.add(us);
-
+		System.out.println("before execute");
 		User user1 = this.userService.findUserByEmail(EMAIL);
 		Assert.assertEquals(ROLE, user1.getRole());
 	}
@@ -73,8 +74,10 @@ public class UserServiceTest extends BaseTest {
 
 	}
 
-	//@After
+	@After
 	public void removeUserTest() {
+		User u = this.userService.findUserByEmail(EMAIL);
+		System.out.println(u.getEmail());
 		this.userService.removeByEmail(EMAIL);
 	}
 }
