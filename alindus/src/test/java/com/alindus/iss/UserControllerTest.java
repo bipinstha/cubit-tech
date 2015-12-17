@@ -51,7 +51,7 @@ public class UserControllerTest extends BaseTest {
 		mvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 
-	// @Test
+	@Test
 	public void addUserTest() throws Exception {
 		User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
 		user.setEnable(true);
