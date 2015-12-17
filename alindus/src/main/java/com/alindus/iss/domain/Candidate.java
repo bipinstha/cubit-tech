@@ -34,6 +34,9 @@ public class Candidate extends Person {
 	private String skypeId1;
 	@Enumerated(EnumType.STRING)
 	private CandidateStatus status = CandidateStatus.MARKETING;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "technology_id")
+	private Technology technology;
 
 	public Candidate() {
 		super();
@@ -101,6 +104,14 @@ public class Candidate extends Person {
 
 	public void setStatus(CandidateStatus status) {
 		this.status = status;
+	}
+
+	public Technology getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(Technology technology) {
+		this.technology = technology;
 	}
 
 	public enum CandidateStatus {
