@@ -1,5 +1,7 @@
 package com.alindus.iss.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +23,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Modifying
 	@Query("update User u set u.enable = true where u.email = ?1")
 	public void enableUser(String email);
+	
+	public List<User> findByEnableFalse();
+	
+	public List<User> findByEnableTrue();
 }

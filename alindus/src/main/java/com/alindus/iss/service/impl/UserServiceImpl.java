@@ -131,12 +131,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void disableUserByEmal(String email) {
+	public void disableUserByEmail(String email) {
 		User user = this.userRepository.findByEmail(email);
 		if (user == null) {
 			throw new IllegalArgumentException("User not found.");
 		}
 		this.userRepository.disableUser(email);
+	}
+
+	@Override
+	public List<User> findByEnableFalse() {	
+		return this.userRepository.findByEnableFalse();
+	}
+
+	@Override
+	public List<User> findByEnableTrue() {
+		return this.userRepository.findByEnableTrue();
 	}
 
 }
