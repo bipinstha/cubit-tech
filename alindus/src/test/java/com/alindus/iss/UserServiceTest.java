@@ -38,9 +38,7 @@ public class UserServiceTest extends BaseTest {
 	@Before
 	public void addUserTest() {
 		User us = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
-		User us1 = new User("prabin.adhikari@gmail.com", "prabin@123", "prabin@123", Role.ROLE_MARKETING);
 		this.userService.add(us);
-		this.userService.add(us1);
 		System.out.println("before execute");
 		User user1 = this.userService.findUserByEmail(EMAIL);
 		Assert.assertEquals(ROLE, user1.getRole());
