@@ -97,7 +97,7 @@ public class Candidate extends Person {
 	public void setSkypeId1(String skypeId1) {
 		this.skypeId1 = skypeId1;
 	}
-	
+
 	public CandidateStatus getStatus() {
 		return status;
 	}
@@ -116,6 +116,12 @@ public class Candidate extends Person {
 
 	public enum CandidateStatus {
 		WORKING, MARKETING, LEFT, VACATION
+	}
+
+	@Override
+	public String toString() {
+		return "Candidate [id=" + id + ", ssn=" + ssn + ", phone1=" + phone1 + ", email1=" + email1 + ", skypeId="
+				+ skypeId + ", skypeId1=" + skypeId1 + ", status=" + status + ", technology=" + technology + "]";
 	}
 
 }
