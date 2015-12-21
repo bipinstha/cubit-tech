@@ -1,0 +1,23 @@
+<table class="table table-border table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Address</th>
+			<th>Phone</th>
+			<th>Role</th>
+			<th>Manage</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in users">
+			<td>{{user.firstName+" "+user.lastName}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.address.city+", "+user.address.state}}</td>
+			<td>{{user.phone.areacode+""+user.phone.prefixValue+""+user.phone.number}}</td>
+			<td>{{user.role}}</td>
+			<td><a href="#user/{{user.email}}">Detail</a> | <a href="#">Update</a> | <a href="#">Disable</a> | <a
+				href="#">Delete</a></td>
+		</tr>
+	</tbody>
+</table>

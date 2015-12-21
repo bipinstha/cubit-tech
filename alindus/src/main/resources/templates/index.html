@@ -9,17 +9,28 @@
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
 	crossorigin="anonymous" />
 <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="../static/js/bower_components/angular/angular.min.js"></script>
 <script src="../static/js/bower_components/angular-route/angular-route.js"></script>
-<script type="text/javascript" src="../static/js/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-<script type="text/javascript" src="../static/js/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../static/js/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="../static/js/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="../static/js/app.js"></script>
 <script src="../static/js/controllers.js"></script>
+<script src="../static/js/services/userService.js"></script>
+<script src="../static/js/controller/adminCtrl.js"></script>
+<script src="../static/js/controller/userCtrl.js"></script>
+<style type="text/css">
+
+#logo {
+    padding: 15px 0px;
+}
+</style>
 </head>
 <body ng-app="cubicApp">
 	<header>
 		<div class="container">
-			<h1>Cubic App</h1>
+			<div id="logo">
+				<img src="../static/images/logo.png" alt="Cubic App" />
+			</div>
 			<nav>
 				<ul>
 					<li><a href="#dashboard">Dashboard</a></li>
@@ -39,7 +50,7 @@
 	<footer>
 		<div class="container">
 			<p>Copyright &copy; 2015. All rights reserved at Cubic
-				Technologies.</p>
+				Technologies. Changed</p>
 		</div>
 	</footer>
 </body>

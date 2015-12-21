@@ -1,0 +1,37 @@
+
+<h1>Admin Page</h1>
+
+<div class="row">
+	<div class="col-sm-6">
+		<h3>Manage Users</h3>
+
+		<div class="users-list">
+			<table class="table row-border hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Address</th>
+						<th>Phone</th>
+						<th>Role</th>
+						<th>Manage</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in users">
+						<td>{{user.firstName+" "+user.lastName}}</td>
+						<td>{{user.email}}</td>
+						<td>{{user.address.city+", "+user.address.state}}</td>
+						<td>{{user.role}}</td>
+						<td>{{user.phone.areacode+""+user.phone.prefixValue+""+user.phone.number}}</td>
+						<td><a href="#">Update</a> | <a href="#">Disable</a> | <a href="#">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+	<div class="col-sm-6">
+		<h3>Pending Approvals</h3>
+	</div>
+</div>

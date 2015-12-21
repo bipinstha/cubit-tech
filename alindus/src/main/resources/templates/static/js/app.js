@@ -5,13 +5,20 @@
 var myApp = angular.module('cubicApp', [ 'ngRoute', 'ui.bootstrap']);
 
 myApp.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider.when('/', {
+	$routeProvider.
+	when('/', {
 		templateUrl : '/static/js/dashboard.html',
 		controller : 'dashboardCtrl'
-	}).when('/reports', {
+	}).
+	when('/reports', {
 		templateUrl : '/static/js/reports.html',
 		controller : 'reportCtrl'
-	}).otherwise({
+	}).
+	when('/admin',{
+		templateUrl : '/static/pages/admin.html',
+		controller : 'AdminCtrl'
+	}).
+	otherwise({
 		redirectTo : '/'
 	})
 } ])
