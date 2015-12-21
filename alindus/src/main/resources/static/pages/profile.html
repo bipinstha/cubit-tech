@@ -2,13 +2,12 @@
 <div class="row">
 	<div class="col-sm-12">
 		<uib-tabset>
-			<uib-tab heading="Manage Users">
-				<div ng-include="'/static/templates/listOfUsersTable.html'"></div>
+			<uib-tab heading="Details">
+				<div ng-include="'/static/templates/userForm.html'"></div>
 			</uib-tab>
-			<uib-tab heading="Pending Approvals">
-			<div ng-include="'/static/templates/listOfDisabledUsers.html'"></div>
+			<uib-tab heading="Change Password">
+			<div ng-include="'/static/templates/changePassword.html'"></div>
 			</uib-tab>
 		</uib-tabset>
 	</div>
-	
 </div>
