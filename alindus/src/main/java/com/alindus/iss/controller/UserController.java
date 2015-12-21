@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
 import com.alindus.iss.service.UserService;
+import com.alindus.iss.utils.SpringUtils;
 
 @RestController
 @RequestMapping(value = "/secure/user", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,7 +31,6 @@ public class UserController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public User addUser(@RequestBody User user) {
-		System.out.println(user);
 		try {
 			this.userService.add(user);
 			return user;
@@ -52,13 +53,9 @@ public class UserController {
 
 	@RequestMapping(value = "/{email}/find", method = RequestMethod.GET)
 	public User findUserByEmail(@PathVariable String email) {
-//		HttpHeaders header = new HttpHeaders();
-//		header.add("Content-Type", "application/json; charset=utf-8");
 
 		try {
-			System.out.println("reqyested email: " + email);
-//			return new ResponseEntity<User>(this.userService.findUserByEmail(email), header, HttpStatus.OK);
-			 return this.userService.findUserByEmail(email);
+			return this.userService.findUserByEmail(email);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
@@ -74,7 +71,7 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/enablefalse", method = RequestMethod.GET)
 	public List<User> getAllEnableFalseUsers() {
 		try {
@@ -84,7 +81,7 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/enabletrue", method = RequestMethod.GET)
 	public List<User> getAllEnableTrueUsers() {
 		try {
@@ -103,5 +100,23 @@ public class UserController {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
+	}
+
+	@RequestMapping(value = "/mydetail", method = RequestMethod.GET)
+	public User myDetail() {
+		System.out.println(SpringUtils.getUserName());
+		if (SpringUtils.getUserName() == null) {
+			throw new IllegalArgumentException("User is not login.");
+		}
+		try {
+			return this.userService.findUserByEmail(SpringUtils.getUserName());
+		} catch (IllegalArgumentException ex) {
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
+
+	@RequestMapping(value = "/all/roles", method = RequestMethod.GET)
+	public Role[] getAllRoles() {
+		return Role.values();
 	}
 }

@@ -6,7 +6,9 @@
 				<uib-tab heading="Manage Users">
 					<div ng-include="'/static/templates/listOfUsersTable.html'"></div>
 				</uib-tab>
-				<uib-tab heading="Pending Approvals">Pending Approvals</uib-tab>
+				<uib-tab heading="Pending Approvals">
+				<div ng-include="'/static/templates/listOfDisabledUsers.html'"></div>
+				</uib-tab>
 			</uib-tabset>
 		</div>
 	</div>

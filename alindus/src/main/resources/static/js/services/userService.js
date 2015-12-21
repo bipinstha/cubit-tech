@@ -12,7 +12,7 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
 		getAllUser : function() {
 			return  $http({
 				  method: 'GET',
-				  url: '/secure/user/all',
+				  url: '/secure/user/enabletrue',
 				  data: '',
 				  headers: {
 					  'Accept':'application/json; charset=utf-8',
@@ -42,20 +42,62 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
 				return response.data;
 			},function (errResponse) {
 				console.log('Error while fetching users by email..'+email);
-				console.log(errResponse);
+		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
+				return $q.reject(errResponse);
+			})
+		},
+		getUnApprovedUsers: function () {
+			return $http({
+				  method: 'GET',
+				  url: '/secure/user/enablefalse',
+				  data: '',
+				  headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				}).then (function (response) {
+				return response;
+			},function (errResponse) {
+				console.log('Error while fetching un approved users..');
+		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
+				return $q.reject(errResponse);
+			})
+		},
+		currentUser: function () {
+			return $http({
+				  method: 'GET',
+				  url: '/secure/user/mydetail',
+				  data: '',
+				  headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				}).then (function (response) {
+					console.log(response);
+					return response;
+			},function (errResponse) {
+				console.log('Error while fetching current user..');
 		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
 				return $q.reject(errResponse);
 			})
 		},
 		updateUser: function (user) {
-			return $http.put('/secure/user/update', user)
-            .then(
+			return $http({
+				  method: 'POST',
+				  url: '/secure/user/update',
+				  data: user,
+				  headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				}).then(
                     function(response){
-                        return response.data;
+                        return response;
                     }, 
                     function(errResponse){
-                        console.error('Error while updating user..'+user);
-                        return $q.reject(errResponse);
+                    	console.log('Error while updating current user..');
+        		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
+        				return $q.reject(errResponse);
                     }
             )
 		},

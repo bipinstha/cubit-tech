@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	ng-app="cubicApp"
+	>
 <head>
 <title>Cubic Report App</title>
 <link rel="stylesheet" type="text/css"
@@ -16,16 +18,22 @@
 <script src="../static/js/app.js"></script>
 <script src="../static/js/controllers.js"></script>
 <script src="../static/js/services/userService.js"></script>
+<script src="../static/js/controller/dashboardCtrl.js"></script>
 <script src="../static/js/controller/adminCtrl.js"></script>
 <script src="../static/js/controller/userCtrl.js"></script>
+<script src="../static/js/controller/profileCtrl.js"></script>
 <style type="text/css">
 
 #logo {
     padding: 15px 0px;
 }
+
+.username {
+	color: #D4001C;
+}
 </style>
 </head>
-<body ng-app="cubicApp">
+<body ng-controller="DashboardCtrl">
 	<header>
 		<div class="container">
 			<div id="logo">
@@ -37,7 +45,7 @@
 					<li><a href="#reports">Reports</a></li>
 					<li><a href="#manage">Manage</a></li>
 					<li><a href="#admin">Admin</a></li>
-					<li><a href="/logout">logout</a></li>
+					<li class="pull-right"><a href="#profile" class="username">Welcome <strong>{{currentUser.firstName}}</strong> !</a> | <a href="/logout">Logout</a></li>
 				</ul>
 			</nav>
 		</div>

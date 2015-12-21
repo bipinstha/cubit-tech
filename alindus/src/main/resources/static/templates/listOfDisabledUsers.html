@@ -10,13 +10,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="user in users">
+		<tr ng-repeat="user in unApprovedUsers">
 			<td>{{user.firstName+" "+user.lastName}}</td>
 			<td>{{user.email}}</td>
 			<td>{{user.address.city+", "+user.address.state}}</td>
 			<td>{{user.phone.areacode+""+user.phone.prefixValue+""+user.phone.number}}</td>
 			<td>{{user.role}}</td>
-			<td><a href="#user/{{user.email}}">Detail</a> | <a href="#">Disable</a> | <a
+			<td><a href="#user/{{user.email}}">Detail</a> | <a href="#">Approve</a> | <a
 				href="#">Delete</a></td>
 		</tr>
 	</tbody>

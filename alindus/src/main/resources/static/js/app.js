@@ -21,6 +21,10 @@ myApp.config([ '$routeProvider', function($routeProvider) {
 		templateUrl: 'static/pages/user.html',
 		controller : 'UserCtrl'
 	}).
+	when('/profile',{
+		templateUrl: 'static/pages/profile.html',
+		controller : 'ProfileCtrl'
+	}).
 	otherwise({
 		redirectTo : '/'
 	})

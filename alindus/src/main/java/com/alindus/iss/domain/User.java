@@ -17,8 +17,10 @@ public class User extends Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	//@JsonIgnore
 	private String password;
 	@Transient
+	//@JsonIgnore
 	private String rePassword;
 	// @Column()
 	private Boolean enable;

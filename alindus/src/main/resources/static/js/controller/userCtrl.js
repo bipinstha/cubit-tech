@@ -5,4 +5,10 @@ myApp.controller('UserCtrl',['$scope','$routeParams','UserService',function ($sc
 	UserService.findUserByEmail($scope.email).then(function (response) {
 		$scope.user = response;
 	})
+	
+	function updateUser(user) {
+		UserService.updateUser(user).then(function (response){
+			$routeParams.currentUser = response;
+		})
+	}
 }])
