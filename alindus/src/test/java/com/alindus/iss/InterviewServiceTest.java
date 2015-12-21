@@ -41,7 +41,7 @@ public class InterviewServiceTest extends BaseTest {
 	@Autowired
 	private CandidateService candidateService;
 
-	@Test
+	//@Test
 	public void testA() {
 		User user = new User(MARKETING_EMAIL, "prabin@123", "prabin@123", Role.ROLE_MARKETING);
 		user.setEnable(true);
@@ -55,7 +55,7 @@ public class InterviewServiceTest extends BaseTest {
 		this.candidateService.add(candidate);
 	}
 
-	@Test
+	//@Test
 	public void testBaddInterviewTest() {
 		User vc = this.userService.findUserByEmail(VC_EMAIL);
 		User marketing = this.userService.findUserByEmail(MARKETING_EMAIL);
@@ -79,7 +79,7 @@ public class InterviewServiceTest extends BaseTest {
 		System.out.println(i.getTechnology());
 	}
 
-	@Test
+	//@Test
 	public void testCupdateInterviewTest() {
 		Interview interview = this.interviewService.findOne(1L);
 		System.out.println(interview.getInterviewRound().size());
@@ -101,11 +101,21 @@ public class InterviewServiceTest extends BaseTest {
 	}
 
 	@Test
-	public void testDupdateInterviewTound() {
-
+	public void testDupdateInterviewRund() {
+		Interview interview = this.interviewService.findOne(1L);
+		InterviewRound interviewRound = null;
+		for(InterviewRound ir :  interview.getInterviewRound()){
+			if(ir.getRound().getName().equals("First")){
+				ir.setStatus(InterviewStatus.APPROVED);
+				interviewRound = ir;
+				break;
+			}
+			
+		}
+		this.interviewService.updateInterviewRound(interviewRound);
 	}
 
-	@Test
+	//@Test
 	public void testCAutoCompleteMethods() {
 		for (Client v : this.interviewService.findClientsByNameLike("M")) {
 			System.out.println("Client: " + v.getId() + " " + v.getName());
