@@ -1,27 +1,23 @@
 package com.alindus.iss.utils;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public class SpringUtils {
 
 	public static String getUserName(){
-		User user = SpringUtils.getPrinciple();
+		UserDetails user = SpringUtils.getPrinciple();
 		if(user != null){
-			return user.getName();
+			return user.getUsername();
 		}
 		return "";
 	}
 	
-	public static User getPrinciple() {
-        User user = null;
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            Object principal = auth.getPrincipal();
-            if (principal instanceof User) {
-                user = (User) principal;
-            }
+	public static UserDetails getPrinciple() {
+		UserDetails user = null;
+        Object auth = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (auth != null && auth instanceof UserDetails) {
+                user = (UserDetails) auth;
         }
         return user;
     }
