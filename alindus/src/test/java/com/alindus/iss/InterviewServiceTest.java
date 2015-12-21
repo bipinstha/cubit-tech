@@ -25,6 +25,7 @@ import com.alindus.iss.service.CandidateService;
 import com.alindus.iss.service.InterviewService;
 import com.alindus.iss.service.UserService;
 
+
 import static org.junit.Assert.*;
 
 @org.junit.FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -132,6 +133,7 @@ public class InterviewServiceTest extends BaseTest {
 		for (Round v : this.interviewService.findRoundsByNameLike("F")) {
 			System.out.println("Round: " + v.getId() + " " + v.getName());
 		}
+
 	}
 
 	// @After

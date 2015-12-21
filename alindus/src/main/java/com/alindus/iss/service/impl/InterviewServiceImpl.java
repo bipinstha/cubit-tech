@@ -119,8 +119,8 @@ public class InterviewServiceImpl implements InterviewService {
 					break;
 				}
 			}
-			newIR = new InterviewRound(iRound.getRound(), iRound.getStatus(), iRound.getInterviewType(),
-					iRound.getInterviewDate(), oldIR.getInterview(), iRound.getInterviewer());
+			newIR = new InterviewRound(iRound.getRound(), iRound.getStatus(), iRound.getInterviewType(), iRound.getInterviewDate(),
+					oldIR.getInterview(), iRound.getInterviewer());
 			InterviewType interviewType = this.interviewRepository
 					.findInterviewTypeByType(iRound.getInterviewType().getType());
 			if (interviewType != null)

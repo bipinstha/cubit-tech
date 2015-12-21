@@ -146,11 +146,12 @@ public class InterviewRound implements Serializable {
 		return true;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "InterviewRound [id=" + id + ", round=" + round + ", status=" + status + ", interviewType="
-//				+ interviewType + ", interview=" + interview + ", interviewer="
-//				+ interviewer + "]";
-//	}
-	
+	// @Override
+	// public String toString() {
+	// return "InterviewRound [id=" + id + ", round=" + round + ", status=" +
+	// status + ", interviewType="
+	// + interviewType + ", interview=" + interview + ", interviewer="
+	// + interviewer + "]";
+	// }
+
 }
