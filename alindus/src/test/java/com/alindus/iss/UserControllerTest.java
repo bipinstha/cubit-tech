@@ -25,9 +25,9 @@ import com.google.gson.reflect.TypeToken;
 
 public class UserControllerTest extends BaseTest {
 
-	private static final String FIRST_NAME = "Bipin";
-	private static final String LAST_NAME = "Shrestha";
-	private static final String EMAIL = "aakee.stha@gmail.com";
+	private static final String FIRST_NAME = "Binod";
+	private static final String LAST_NAME = "Gurung";
+	private static final String EMAIL = "gurung.binod@gmail.com";
 	private static final Integer AREA_CODE = 469;
 	private static final Integer PREFIX_VALUE = 346;
 	private static final Integer NUMBER = 1618;

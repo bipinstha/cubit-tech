@@ -1,6 +1,8 @@
 package com.alindus.iss.utils;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SpringUtils {
 
@@ -14,13 +16,13 @@ public class SpringUtils {
 	
 	public static User getPrinciple() {
         User user = null;
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        if (auth != null) {
-//            Object principal = auth.getPrincipal();
-//            if (principal instanceof User) {
-//                user = (User) principal;
-//            }
-//        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            Object principal = auth.getPrincipal();
+            if (principal instanceof User) {
+                user = (User) principal;
+            }
+        }
         return user;
     }
 }

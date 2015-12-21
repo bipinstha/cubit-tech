@@ -1,37 +1,55 @@
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav, .pagination, .carousel, .panel-title a {
+	cursor: pointer;
+}
 
 nav ul li a {
-    padding: 5px 10px;
-    margin: 0px 5px;
-    text-decoration: none !important;
-    display: inline-block;
+	padding: 5px 10px;
+	margin: 0px 5px;
+	text-decoration: none !important;
+	display: inline-block;
 }
 
 nav ul li {
-    float: left;
-    display: inline-block;
+	float: left;
+	display: inline-block;
 }
+
 nav ul {
-    list-style: outside none none;
-    display: block;
-    height: 30px;
-    padding: 0px;
+	list-style: outside none none;
+	display: block;
+	height: 30px;
+	padding: 0px;
 }
 
 header {
-    background: #E6E6E6;
+	background: #E6E6E6;
 }
+
 nav {
-    background: #eee;
+	background: #eee;
 }
 
 #content {
-    min-height: 500px;
-    padding: 50px 0px;
+	min-height: 500px;
+	padding: 50px 0px;
 }
 
+
+
 footer {
-    background: #ddd;
-    padding: 15px 0px;
-    color: #666;
+	background: #ddd;
+	padding: 15px 0px;
+	color: #666;
+}
+
+.page-head {
+	font-size: 25px;
+	color: #888;
+	margin-bottom: 50px;
+}
+
+.tab-content {
+    padding: 30px 0px;
+}
+
 }
