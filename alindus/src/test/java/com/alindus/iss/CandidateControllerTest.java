@@ -29,6 +29,8 @@ import com.google.gson.reflect.TypeToken;
 import com.sun.org.apache.xml.internal.resolver.readers.TextCatalogReader;
 
 public class CandidateControllerTest extends BaseTest {
+	
+	private static final Long CANDIDATE_ID = (long) 3;
 
 	private MockMvc mvc;
 	@Autowired
@@ -40,13 +42,13 @@ public class CandidateControllerTest extends BaseTest {
 		mvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 
-	//@Test
+	@Test
 	public void addCandidateTest() throws Exception {
 		
 		Phone phone = new Phone(641,345,1212);
 		Phone phone1 = new Phone(641,345,1212);
-		SocialSecurityNumber ssn = new SocialSecurityNumber(123,34,1234);
-		Address address = new Address("1000 N 4th street", "FF", "IA", "52557");
+		SocialSecurityNumber ssn = new SocialSecurityNumber(777,34,6666);
+		Address address = new Address("1010 N 4th street", "FF", "IA", "23456");
 		
 		Candidate candidate = new Candidate("amul", "sapkota", "amulsapkota@gmail.com", address, phone,
 				ssn, "skypeId", Candidate.CandidateStatus.MARKETING);
@@ -60,7 +62,7 @@ public class CandidateControllerTest extends BaseTest {
 		Gson gson = new Gson();
 		String json = gson.toJson(candidate);
 		//System.out.println("json obj: " + json);
-//		MvcResult result =
+		MvcResult result =
 				mvc
 				.perform(MockMvcRequestBuilders.post("/secure/candidate/add")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -78,37 +80,24 @@ public class CandidateControllerTest extends BaseTest {
 		
 		Gson gson = new Gson();
 		MvcResult result = mvc
-				.perform(MockMvcRequestBuilders.get("/secure/candidate/findone/18")
-						.contentType(MediaType.APPLICATION_JSON_VALUE)
-						.accept(MediaType.APPLICATION_JSON_VALUE))
+				.perform(MockMvcRequestBuilders.get("/secure/candidate/findone/{candidateId}",CANDIDATE_ID)
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
 		
-		/*MvcResult result = mvc.
-				perform(MockMvcRequestBuilders.get("/secure/candidate/findone/{id}", "18")
-						.contentType(MediaType.APPLICATION_JSON))
-						.andExpect(status().isOk())
-						.andExpect(content().contentTypeCompatibleWith("application/json"))
-        .andReturn();*/
-		
-		
-		System.out.println("response Candidate1 >>>>> " + result.getResponse().getContentAsString());
 		Candidate can1 = gson.fromJson(result.getResponse().getContentAsString(), Candidate.class);
-		System.out.println("response Candidate2 >>>>> " + can1);
-		System.out.println("response ssn "+can1.getSsn());
 		can1.setFirstName("Edited Amul");
 		can1.setSkypeId("Edited Skype Id");
 		Phone phone = new Phone(111,111,2222);
 		Phone phone1 = new Phone(222,222,2222);
 		SocialSecurityNumber ssn = new SocialSecurityNumber(111,11,1111);
-		Address address = new Address("4146 N Belt Line", "Irvin", "Dallas", "75038");
-		System.out.println("can1 p1 >>>>>>>>>>>>"+can1);		
+		Address address = new Address("4146 N Belt Line", "Irvin", "Dallas", "75038");		
 		can1.setSsn(ssn);
 		can1.setPhone(phone);
 		can1.setAddress(address);
 		can1.setPhone1(phone1);
-		
-		System.out.println("can1 p2 >>>>>>>>>>>>"+can1);
 		
 		mvc.perform(MockMvcRequestBuilders.post("/secure/candidate/update")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -118,17 +107,26 @@ public class CandidateControllerTest extends BaseTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
 	}
-	/*
+	
 	@Test
-	public void viewAllTest() throws Exception {
-		Gson gson = new Gson();
-		MvcResult result = mvc
-				.perform(MockMvcRequestBuilders.get("/secure/user/all").contentType(MediaType.APPLICATION_JSON_VALUE)
-						.accept(MediaType.APPLICATION_JSON_VALUE))
+	public void findAllCandidateTest() throws Exception {	
+		
+				mvc
+				.perform(MockMvcRequestBuilders.post("/secure/candidate/remove/{candidateID}",CANDIDATE_ID)
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-		List<User> list = gson.fromJson(result.getResponse().getContentAsString(), new TypeToken<List<User>>() {
-		}.getType());
-		System.out.println("user list: " + list.toString());
-	}*/
+				.andReturn();
+	}
+	
+	@Test
+	public void removeCandidateTest() throws Exception {	
+		
+				mvc
+				.perform(MockMvcRequestBuilders.delete("/secure/candidate/remove/{candidateID}",CANDIDATE_ID)
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.accept(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk())
+				.andReturn();
+	}
 }

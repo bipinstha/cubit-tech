@@ -22,7 +22,7 @@ import com.alindus.iss.service.CandidateService;
 
 
 @RestController
-@RequestMapping(value = "/secure/candidate", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/secure/candidate", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 @ResponseStatus(HttpStatus.OK)
 public class CandidateController {
 	
@@ -32,7 +32,7 @@ public class CandidateController {
 	private CandidateService candidateService;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(@Valid @RequestBody Candidate candidate, BindingResult result) {
+	public Candidate add(@Valid @RequestBody Candidate candidate, BindingResult result) {
 		logger.error(candidate.getEmail());
 		if(result.hasErrors()){
 			logger.error(result.getAllErrors());
@@ -40,6 +40,8 @@ public class CandidateController {
 		}
 		try {
 			candidateService.add(candidate);
+			return candidate;
+			
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
@@ -48,18 +50,19 @@ public class CandidateController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void update(@RequestBody Candidate candidate) {
+	public Candidate update(@RequestBody Candidate candidate) {
 		System.out.println("candidate in controller"+candidate);
 		try {
 			candidateService.update(candidate);
+			return candidate;
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
 	
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public void remove(@RequestBody Long candidateId) {
+	@RequestMapping(value = "/remove/{candidateId}", method = RequestMethod.DELETE)
+	public void remove(@PathVariable Long candidateId) {
 		
 		try {
 			candidateService.remove(candidateId);
@@ -70,11 +73,11 @@ public class CandidateController {
 	}
 	
 	@RequestMapping(value = "/findone/{candidateId}", method = RequestMethod.GET)	
-	@ResponseBody
 	public Candidate findOne(@PathVariable Long candidateId) {
 		
 		try {
 			return candidateService.findOne(candidateId);
+			
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
