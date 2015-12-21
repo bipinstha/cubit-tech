@@ -22,12 +22,11 @@ import com.alindus.iss.service.InterviewService;
 public class InterviewServiceImpl implements InterviewService {
 
 	@Autowired
-	InterviewRepository interviewRepository;
+	private InterviewRepository interviewRepository;
 
 	@Override
 	@Transactional
 	public void add(Interview t) {
-		// TODO add more validation
 		if (t.getId() != null) {
 			throw new IllegalArgumentException("Invalid interview data.");
 		}
@@ -56,7 +55,6 @@ public class InterviewServiceImpl implements InterviewService {
 	@Override
 	@Transactional
 	public void update(Interview t) {
-		// TODO more service validation
 		if (t.getId() == null) {
 			throw new IllegalArgumentException("Invalid interview data.");
 		}
@@ -149,7 +147,6 @@ public class InterviewServiceImpl implements InterviewService {
 	@Override
 	@Transactional
 	public void remove(Long obj) {
-		// TODO Auto-generated method stub
 		if (obj == null) {
 			throw new IllegalArgumentException("Invalid primary key.");
 		}
@@ -159,7 +156,6 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	public Interview findOne(Long obj) {
-		// TODO Auto-generated method stub
 		if (obj == null) {
 			throw new IllegalArgumentException("Invalid primary key.");
 		}
@@ -168,13 +164,11 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	public List<Interview> findAll() {
-		// TODO Auto-generated method stub
 		return this.interviewRepository.findAll();
 	}
 
 	@Override
 	public List<Client> findClientsByNameLike(String name) {
-		// TODO Auto-generated method stub
 		if (name == null) {
 			throw new IllegalArgumentException("Invalid data.");
 		}
@@ -183,7 +177,6 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	public List<Vendor> findVendorsByNameLike(String name) {
-		// TODO Auto-generated method stub
 		if (name == null) {
 			throw new IllegalArgumentException("Invalid data.");
 		}
@@ -192,7 +185,6 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	public List<Technology> findTechnologiesByNameLike(String name) {
-		// TODO Auto-generated method stub
 		if (name == null) {
 			throw new IllegalArgumentException("Invalid data.");
 		}
@@ -201,7 +193,6 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	public List<Round> findRoundsByNameLike(String name) {
-		// TODO Auto-generated method stub
 		if (name == null) {
 			throw new IllegalArgumentException("Invalid data.");
 		}
@@ -215,11 +206,21 @@ public class InterviewServiceImpl implements InterviewService {
 
 	@Override
 	public List<InterviewType> findInterviewsTypeByTypeLike(String type) {
-		// TODO Auto-generated method stub
 		if (type == null) {
 			throw new IllegalArgumentException("Invalid data.");
 		}
 		return this.interviewRepository.findInterviewsTypeByTypeLike(type);
+	}
+
+	@Override
+	@Transactional
+	public void updateInterviewRound(InterviewRound interviewRound) {
+		if (interviewRound.getId() == null || interviewRound.getInterview() == null) {
+			throw new IllegalArgumentException("Invalid data.");
+		}
+		this.interviewRepository.updateInterviewRound(interviewRound.getId(), interviewRound.getRound(),
+				interviewRound.getStatus(), interviewRound.getInterviewType(), interviewRound.getInterviewDate(),
+				interviewRound.getInterview(), interviewRound.getInterviewer());
 	}
 
 }

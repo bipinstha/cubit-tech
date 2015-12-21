@@ -43,7 +43,7 @@ public class InterviewRound implements Serializable {
 	@Column(name = "interview_date")
 	private Date interviewDate;
 	// TODO ignore circular dependency
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties
 	private Interview interview;
 	private String interviewer;
@@ -146,11 +146,12 @@ public class InterviewRound implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "InterviewRound [id=" + id + ", round=" + round + ", status=" + status + ", interviewType="
-				+ interviewType + ", interview=" + interview + ", interviewer="
-				+ interviewer + "]";
-	}
-	
+	// @Override
+	// public String toString() {
+	// return "InterviewRound [id=" + id + ", round=" + round + ", status=" +
+	// status + ", interviewType="
+	// + interviewType + ", interview=" + interview + ", interviewer="
+	// + interviewer + "]";
+	// }
+
 }

@@ -25,6 +25,9 @@ import com.alindus.iss.service.CandidateService;
 import com.alindus.iss.service.InterviewService;
 import com.alindus.iss.service.UserService;
 
+
+import static org.junit.Assert.*;
+
 @org.junit.FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InterviewServiceTest extends BaseTest {
 
@@ -39,8 +42,8 @@ public class InterviewServiceTest extends BaseTest {
 	@Autowired
 	private CandidateService candidateService;
 
-	// @Test
-	public void ainsertValues() {
+	//@Test
+	public void testA() {
 		User user = new User(MARKETING_EMAIL, "prabin@123", "prabin@123", Role.ROLE_MARKETING);
 		user.setEnable(true);
 		this.userService.add(user);
@@ -53,9 +56,8 @@ public class InterviewServiceTest extends BaseTest {
 		this.candidateService.add(candidate);
 	}
 
-	@Test
-	public void baddInterviewTest() {
-
+	//@Test
+	public void testBaddInterviewTest() {
 		User vc = this.userService.findUserByEmail(VC_EMAIL);
 		User marketing = this.userService.findUserByEmail(MARKETING_EMAIL);
 		Candidate candidate = this.candidateService.findCandidateByEmail(CANDIDATE_EMAIL);
@@ -74,29 +76,64 @@ public class InterviewServiceTest extends BaseTest {
 		interview.setInterviewRound(list);
 		interviewService.add(interview);
 		Interview i = this.interviewService.findOne(1L);
+		assertEquals(i.getTechnology().getName(), "JAVA");
 		System.out.println(i.getTechnology());
-		System.out.println(i.getCandidate());
-		System.out.println(i.getClient());
-		System.out.println(i.getMarketing());
-		System.out.println(i.getStatus());
-		System.out.println(i.getVc());
-		System.out.println(i.getVendor());
-		for (InterviewRound ir : i.getInterviewRound()) {
-			System.out.println(ir.getInterviewer());
-			// System.out.println(ir.getInterview());
-			System.out.println(ir.getInterviewDate());
-			System.out.println(ir.getInterviewType());
-			System.out.println(ir.getRound());
+	}
+
+	//@Test
+	public void testCupdateInterviewTest() {
+		Interview interview = this.interviewService.findOne(1L);
+		System.out.println(interview.getInterviewRound().size());
+		for (InterviewRound ir : interview.getInterviewRound()) {
+			if (ir.getRound().getName().equals("Second")) {
+				ir.setStatus(InterviewStatus.APPROVED);
+			}
+		}
+		InterviewRound interviewRound = new InterviewRound(new Round("Third"), InterviewStatus.PENDING,
+				new InterviewType("Skype"), new Date(), interview, "Rakesh  Aryal");
+		interview.addInterviewRound(interviewRound);
+		for (InterviewRound ir : interview.getInterviewRound()) {
 			System.out.println(ir.getStatus());
 		}
+		this.interviewService.update(interview);
+		Interview interview1 = this.interviewService.findOne(1L);
 
+		assertEquals(interview1.getInterviewRound().size(), 2);
 	}
 
 	@Test
-	public void testVendors() {
-		for (Round v : this.interviewService.findRoundsByNameLike("F")) {
-			System.out.println(v.getId() + " " + v.getName());
+	public void testDupdateInterviewRund() {
+		Interview interview = this.interviewService.findOne(1L);
+		InterviewRound interviewRound = null;
+		for(InterviewRound ir :  interview.getInterviewRound()){
+			if(ir.getRound().getName().equals("First")){
+				ir.setStatus(InterviewStatus.APPROVED);
+				interviewRound = ir;
+				break;
+			}
+			
 		}
+		this.interviewService.updateInterviewRound(interviewRound);
+	}
+
+	//@Test
+	public void testCAutoCompleteMethods() {
+		for (Client v : this.interviewService.findClientsByNameLike("M")) {
+			System.out.println("Client: " + v.getId() + " " + v.getName());
+		}
+		for (Vendor v : this.interviewService.findVendorsByNameLike("I")) {
+			System.out.println("Vendor: " + v.getId() + " " + v.getName());
+		}
+		for (Technology v : this.interviewService.findTechnologiesByNameLike("j")) {
+			System.out.println("Technology: " + v.getId() + " " + v.getName());
+		}
+		for (InterviewType v : this.interviewService.findInterviewsTypeByTypeLike("p")) {
+			System.out.println("Interview Type: " + v.getId() + " " + v.getType());
+		}
+		for (Round v : this.interviewService.findRoundsByNameLike("F")) {
+			System.out.println("Round: " + v.getId() + " " + v.getName());
+		}
+
 	}
 
 	// @After

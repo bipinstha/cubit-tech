@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.alindus.iss.domain.Client;
 import com.alindus.iss.domain.Interview;
+import com.alindus.iss.domain.InterviewRound;
 import com.alindus.iss.domain.InterviewType;
 import com.alindus.iss.domain.Round;
 import com.alindus.iss.domain.Technology;
@@ -20,5 +21,7 @@ public interface InterviewService extends AbstractService<Interview, Long>{
 	public List<Round> findRoundsByNameLike(String name);
 	
 	public List<InterviewType> findInterviewsTypeByTypeLike(String type);
+	
+	public void updateInterviewRound(InterviewRound interviewRound);
 
 }
