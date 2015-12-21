@@ -63,7 +63,7 @@ public class UserServiceTest extends BaseTest {
 		this.userService.updatePassword(cp);
 
 		// test for disable user
-		this.userService.disableUserByEmal(EMAIL);
+		this.userService.disableUserByEmail(EMAIL);
 		User disabledUser = this.userService.findUserByEmail(EMAIL);
 		Assert.assertFalse(disabledUser.getEnable());
 

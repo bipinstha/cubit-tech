@@ -1,5 +1,7 @@
 package com.alindus.iss.service;
 
+import java.util.List;
+
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
 
@@ -13,6 +15,10 @@ public interface UserService extends AbstractService<User, Long>{
 	
 	public void enableUserByEmail(String email);
 	
-	public void disableUserByEmal(String email);
-
+	public void disableUserByEmail(String email);
+	
+	public List<User> findByEnableFalse();
+	
+	public List<User> findByEnableTrue();
+		
 }

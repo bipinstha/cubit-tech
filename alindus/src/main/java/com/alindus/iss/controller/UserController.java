@@ -74,6 +74,26 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
+	
+	@RequestMapping(value = "/enablefalse", method = RequestMethod.GET)
+	public List<User> getAllEnableFalseUsers() {
+		try {
+			return this.userService.findByEnableFalse();
+		} catch (IllegalArgumentException ex) {
+			this.logger.error(ex.getMessage());
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/enabletrue", method = RequestMethod.GET)
+	public List<User> getAllEnableTrueUsers() {
+		try {
+			return this.userService.findByEnableTrue();
+		} catch (IllegalArgumentException ex) {
+			this.logger.error(ex.getMessage());
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
 
 	@RequestMapping(value = "/password/change", method = RequestMethod.POST)
 	public void changePassword(@RequestBody ChangePassword changePassword) {
