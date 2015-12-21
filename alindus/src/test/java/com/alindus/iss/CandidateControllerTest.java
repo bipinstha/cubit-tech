@@ -3,10 +3,9 @@ package com.alindus.iss;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,15 +18,11 @@ import org.springframework.web.context.WebApplicationContext;
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.domain.Phone;
-import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.SocialSecurityNumber;
 import com.alindus.iss.domain.Technology;
-import com.alindus.iss.domain.User;
-import com.alindus.iss.domain.Candidate.CandidateStatus;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.sun.org.apache.xml.internal.resolver.readers.TextCatalogReader;
 
+@org.junit.FixMethodOrder(MethodSorters.DEFAULT)
 public class CandidateControllerTest extends BaseTest {
 
 	private MockMvc mvc;
@@ -40,7 +35,7 @@ public class CandidateControllerTest extends BaseTest {
 		mvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 
-	//@Test
+	@Test
 	public void addCandidateTest() throws Exception {
 		
 		Phone phone = new Phone(641,345,1212);
