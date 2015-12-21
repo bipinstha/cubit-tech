@@ -110,6 +110,7 @@ public class UserController {
 
 	@RequestMapping(value = "/mydetail", method = RequestMethod.GET)
 	public User myDetail() {
+		System.out.println(SpringUtils.getUserName());
 		if (SpringUtils.getUserName() == null) {
 			throw new IllegalArgumentException("User is not login.");
 		}

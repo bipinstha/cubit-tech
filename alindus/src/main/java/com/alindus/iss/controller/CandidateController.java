@@ -22,7 +22,7 @@ import com.alindus.iss.service.CandidateService;
 
 
 @RestController
-@RequestMapping(value = "/secure/candidate", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/secure/candidate", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 @ResponseStatus(HttpStatus.OK)
 public class CandidateController {
 	
