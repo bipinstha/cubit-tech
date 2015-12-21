@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "users")
 public class User extends Person {
@@ -19,10 +17,10 @@ public class User extends Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@JsonIgnore
+	//@JsonIgnore
 	private String password;
 	@Transient
-	@JsonIgnore
+	//@JsonIgnore
 	private String rePassword;
 	// @Column()
 	private Boolean enable;
