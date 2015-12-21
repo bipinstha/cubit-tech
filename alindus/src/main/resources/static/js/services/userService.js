@@ -73,6 +73,7 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
 					  'Content-Type':'application/json; charset=utf-8'
 				  }
 				}).then (function (response) {
+					console.log(response);
 					return response;
 			},function (errResponse) {
 				console.log('Error while fetching current user..');
