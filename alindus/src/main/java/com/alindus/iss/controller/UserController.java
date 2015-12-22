@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
 import com.alindus.iss.service.UserService;
@@ -30,7 +31,6 @@ public class UserController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public User addUser(@RequestBody User user) {
-		System.out.println(user);
 		try {
 			this.userService.add(user);
 			return user;
@@ -53,14 +53,8 @@ public class UserController {
 
 	@RequestMapping(value = "/{email}/find", method = RequestMethod.GET)
 	public User findUserByEmail(@PathVariable String email) {
-		// HttpHeaders header = new HttpHeaders();
-		// header.add("Content-Type", "application/json; charset=utf-8");
 
 		try {
-			System.out.println("reqyested email: " + email);
-			// return new
-			// ResponseEntity<User>(this.userService.findUserByEmail(email),
-			// header, HttpStatus.OK);
 			return this.userService.findUserByEmail(email);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
@@ -119,5 +113,10 @@ public class UserController {
 		} catch (IllegalArgumentException ex) {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
+	}
+
+	@RequestMapping(value = "/all/roles", method = RequestMethod.GET)
+	public Role[] getAllRoles() {
+		return Role.values();
 	}
 }

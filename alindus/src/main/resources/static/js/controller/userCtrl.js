@@ -6,4 +6,5 @@ myApp.controller('UserCtrl',['$scope','$routeParams','UserService',function ($sc
 		$scope.user = response;
 		console.log($scope.user);
 	})
+	
 }])
