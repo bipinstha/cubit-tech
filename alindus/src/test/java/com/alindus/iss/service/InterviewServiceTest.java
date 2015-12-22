@@ -102,7 +102,7 @@ public class InterviewServiceTest extends BaseTest {
 		assertEquals(interview1.getInterviewRound().size(), 2);
 	}
 
-	@Test
+	//@Test
 	public void testDupdateInterviewRund() {
 		Interview interview = this.interviewService.findOne(1L);
 		InterviewRound interviewRound = null;
