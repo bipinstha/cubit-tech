@@ -3,8 +3,6 @@ package com.alindus.iss;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -19,14 +17,9 @@ import org.springframework.web.context.WebApplicationContext;
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.domain.Phone;
-import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.SocialSecurityNumber;
 import com.alindus.iss.domain.Technology;
-import com.alindus.iss.domain.User;
-import com.alindus.iss.domain.Candidate.CandidateStatus;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.sun.org.apache.xml.internal.resolver.readers.TextCatalogReader;
 
 public class CandidateControllerTest extends BaseTest {
 	
@@ -52,16 +45,16 @@ public class CandidateControllerTest extends BaseTest {
 		
 		Candidate candidate = new Candidate("amul", "sapkota", "amulsapkota@gmail.com", address, phone,
 				ssn, "skypeId", Candidate.CandidateStatus.MARKETING);
-		candidate.setSsn(ssn);
-		candidate.setPhone(phone);
-		candidate.setPhone1(phone1);
-		candidate.setEmail1("amul@gmail.com");
-		candidate.setSkypeId1("skypeId1");
-		candidate.setTechnology(new Technology("JAVA"));
+			candidate.setSsn(ssn);
+			candidate.setPhone(phone);
+			candidate.setPhone1(phone1);
+			candidate.setEmail1("amul@gmail.com");
+			candidate.setSkypeId1("skypeId1");
+			candidate.setTechnology(new Technology("JAVA"));
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(candidate);
-		//System.out.println("json obj: " + json);
+		
 		MvcResult result =
 				mvc
 				.perform(MockMvcRequestBuilders.post("/secure/candidate/add")
@@ -70,9 +63,6 @@ public class CandidateControllerTest extends BaseTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
-//		System.out.println(result.getResponse().getContentAsString());
-//		Candidate can1 = gson.fromJson(result.getResponse().getContentAsString(), Candidate.class);
-//		System.out.println("obj: " + can1.getEmail());
 	}
 	
 	@Test
@@ -87,17 +77,18 @@ public class CandidateControllerTest extends BaseTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
 		
-		Candidate can1 = gson.fromJson(result.getResponse().getContentAsString(), Candidate.class);
-		can1.setFirstName("Edited Amul");
-		can1.setSkypeId("Edited Skype Id");
 		Phone phone = new Phone(111,111,2222);
 		Phone phone1 = new Phone(222,222,2222);
 		SocialSecurityNumber ssn = new SocialSecurityNumber(111,11,1111);
 		Address address = new Address("4146 N Belt Line", "Irvin", "Dallas", "75038");		
-		can1.setSsn(ssn);
-		can1.setPhone(phone);
-		can1.setAddress(address);
-		can1.setPhone1(phone1);
+		
+		Candidate can1 = gson.fromJson(result.getResponse().getContentAsString(), Candidate.class);
+			can1.setFirstName("Edited Amul");
+			can1.setSkypeId("Edited Skype Id");
+			can1.setSsn(ssn);
+			can1.setPhone(phone);
+			can1.setAddress(address);
+			can1.setPhone1(phone1);
 		
 		mvc.perform(MockMvcRequestBuilders.post("/secure/candidate/update")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -107,26 +98,15 @@ public class CandidateControllerTest extends BaseTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
 	}
-	
-	@Test
-	public void findAllCandidateTest() throws Exception {	
-		
-				mvc
-				.perform(MockMvcRequestBuilders.post("/secure/candidate/remove/{candidateID}",CANDIDATE_ID)
-				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.accept(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(status().isOk())
-				.andReturn();
-	}
+
 	
 	@Test
 	public void removeCandidateTest() throws Exception {	
 		
-				mvc
-				.perform(MockMvcRequestBuilders.delete("/secure/candidate/remove/{candidateID}",CANDIDATE_ID)
-				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.accept(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(status().isOk())
-				.andReturn();
+		mvc.perform(MockMvcRequestBuilders.delete("/secure/candidate/remove/{candidateID}",CANDIDATE_ID)
+			.contentType(MediaType.APPLICATION_JSON_VALUE)
+			.accept(MediaType.APPLICATION_JSON_VALUE))
+			.andExpect(status().isOk())
+			.andReturn();
 	}
 }
