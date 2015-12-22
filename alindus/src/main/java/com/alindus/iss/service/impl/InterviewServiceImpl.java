@@ -47,6 +47,7 @@ public class InterviewServiceImpl implements InterviewService {
 			Round round = this.interviewRepository.findRoundByName(ir.getRound().getName());
 			if (round != null)
 				ir.setRound(round);
+			ir.setInterview(t);
 		}
 		this.interviewRepository.save(t);
 
@@ -151,7 +152,6 @@ public class InterviewServiceImpl implements InterviewService {
 			throw new IllegalArgumentException("Invalid primary key.");
 		}
 		this.interviewRepository.delete(obj);
-
 	}
 
 	@Override

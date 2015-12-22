@@ -1,4 +1,4 @@
-package com.alindus.iss;
+package com.alindus.iss.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.alindus.iss.BaseTest;
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.Role;

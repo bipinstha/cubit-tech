@@ -1,4 +1,4 @@
-package com.alindus.iss;
+package com.alindus.iss.service;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.alindus.iss.BaseTest;
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.Role;
@@ -17,7 +18,7 @@ public class UserServiceTest extends BaseTest {
 	private static final String FIRST_NAME = "Binod";
 	private static final String LAST_NAME = "Gurung";
 	private static final String MIDDLE_NAME = "Babu";
-	private static final String EMAIL = "gurung.binod@gmail.com";
+	private static final String EMAIL = "gurung1.binod@gmail.com";
 	private static final Integer AREA_CODE = 641;
 	private static final Integer PREFIX_VALUE = 451;
 	private static final Integer NUMBER = 4568;
