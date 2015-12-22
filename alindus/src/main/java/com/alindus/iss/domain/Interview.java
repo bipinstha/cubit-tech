@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.alindus.iss.domain.InterviewRound.InterviewStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "interviews")
@@ -55,6 +56,7 @@ public class Interview implements Serializable {
 	// inverseJoinColumns={@JoinColumn(name="interview_round_id",
 	// referencedColumnName="id")})
 	// @JsonIgnore
+	@JsonManagedReference
 	private List<InterviewRound> interviewRound;
 	@Enumerated(EnumType.STRING)
 	private InterviewStatus status;
