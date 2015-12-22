@@ -114,16 +114,25 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
             );
 		},
 		changePassword: function (changePassword) {
-			return $http.put('/secure/user/password/change', changePassword)
-            .then(
+			console.log(changePassword);
+			return $http({
+				  method: 'POST',
+				  url: '/secure/user/password/change',
+				  data: changePassword,
+				  headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				}).then(
                     function(response){
-                        return response.data;
+                        return response;
                     }, 
                     function(errResponse){
-                        console.error('Error while changing password '+changePassword);
-                        return $q.reject(errResponse);
+                    	console.log('Error while changing password..');
+        		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
+        				return $q.reject(errResponse);
                     }
-            );
+            )
 		}
 	}
 

@@ -6,9 +6,4 @@ myApp.controller('UserCtrl',['$scope','$routeParams','UserService',function ($sc
 		$scope.user = response;
 	})
 	
-	function updateUser(user) {
-		UserService.updateUser(user).then(function (response){
-			$routeParams.currentUser = response;
-		})
-	}
 }])
