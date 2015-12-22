@@ -1,4 +1,4 @@
-package com.alindus.iss;
+package com.alindus.iss.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.alindus.iss.BaseTest;
 import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.domain.Candidate.CandidateStatus;
 import com.alindus.iss.domain.Client;
@@ -42,7 +43,7 @@ public class InterviewServiceTest extends BaseTest {
 	@Autowired
 	private CandidateService candidateService;
 
-	//@Test
+	@Test
 	public void testA() {
 		User user = new User(MARKETING_EMAIL, "prabin@123", "prabin@123", Role.ROLE_MARKETING);
 		user.setEnable(true);
@@ -56,7 +57,7 @@ public class InterviewServiceTest extends BaseTest {
 		this.candidateService.add(candidate);
 	}
 
-	//@Test
+	@Test
 	public void testBaddInterviewTest() {
 		User vc = this.userService.findUserByEmail(VC_EMAIL);
 		User marketing = this.userService.findUserByEmail(MARKETING_EMAIL);
@@ -75,12 +76,12 @@ public class InterviewServiceTest extends BaseTest {
 		list.add(iRound);
 		interview.setInterviewRound(list);
 		interviewService.add(interview);
-		Interview i = this.interviewService.findOne(1L);
+		Interview i = this.interviewService.findAll().get(0);
 		assertEquals(i.getTechnology().getName(), "JAVA");
 		System.out.println(i.getTechnology());
 	}
 
-	//@Test
+	@Test
 	public void testCupdateInterviewTest() {
 		Interview interview = this.interviewService.findOne(1L);
 		System.out.println(interview.getInterviewRound().size());
@@ -116,8 +117,8 @@ public class InterviewServiceTest extends BaseTest {
 		this.interviewService.updateInterviewRound(interviewRound);
 	}
 
-	//@Test
-	public void testCAutoCompleteMethods() {
+	@Test
+	public void testEAutoCompleteMethods() {
 		for (Client v : this.interviewService.findClientsByNameLike("M")) {
 			System.out.println("Client: " + v.getId() + " " + v.getName());
 		}
@@ -136,8 +137,9 @@ public class InterviewServiceTest extends BaseTest {
 
 	}
 
-	// @After
-	public void cremoveDataTest() {
+	@Test
+	public void testZremoveData() {
+		this.interviewService.remove(1L);
 		this.userService.removeByEmail(MARKETING_EMAIL);
 		this.userService.removeByEmail(VC_EMAIL);
 		this.candidateService.removeCandidate(CANDIDATE_EMAIL);

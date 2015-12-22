@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "interview_rounds")
@@ -44,7 +44,7 @@ public class InterviewRound implements Serializable {
 	private Date interviewDate;
 	// TODO ignore circular dependency
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties
+	@JsonBackReference
 	private Interview interview;
 	private String interviewer;
 
@@ -146,12 +146,10 @@ public class InterviewRound implements Serializable {
 		return true;
 	}
 
-	// @Override
-	// public String toString() {
-	// return "InterviewRound [id=" + id + ", round=" + round + ", status=" +
-	// status + ", interviewType="
-	// + interviewType + ", interview=" + interview + ", interviewer="
-	// + interviewer + "]";
-	// }
+	@Override
+	public String toString() {
+		return "InterviewRound [id=" + id + ", round=" + round + ", status=" + status + ", interviewType="
+				+ interviewType + ", interview=" + interview + ", interviewer=" + interviewer + "]";
+	}
 
 }

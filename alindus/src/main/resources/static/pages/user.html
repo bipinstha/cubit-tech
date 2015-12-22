@@ -1,8 +1,42 @@
 <h1 class="page-head">User Detail</h1>
 <div class="row">
+
 	<div class="col-sm-12">
-		User Name: {{email}} {{user.firstName}}
-		
+
+
+		<div class="row">
+			<div class="col-sm-5">
+				<H3>Personal Info</H3>
+				<table class="table">
+					<tr>
+						<td>Name</td>
+						<td>{{user.firstName}} {{user.middleName}} {{user.lastName}}</td>
+
+					</tr>
+					<tr>
+						<td>Email</td>
+
+						<td>{{user.email}}</td>
+					</tr>
+					<tr>
+						<td>Role</td>
+
+						<td>{{user.role}}</td>
+					</tr>
+				</table>
+
+			</div>
+			<div class="col-sm-6 col-sm-offset-1">
+				<h3>Address</h3>
+				<p class="addtess">
+					{{user.address.address}} <br> {{user.address.address1}} <br>
+					{{user.address.city}} {{user.address.state}}
+					{{user.address.zipCode}} <br> {{user.address.country}}
+
+				</p>
+			</div>
+		</div>
 	</div>
-	
+
+
 </div>
