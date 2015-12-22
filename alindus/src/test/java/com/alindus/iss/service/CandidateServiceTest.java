@@ -1,4 +1,4 @@
-package com.alindus.iss;
+package com.alindus.iss.service;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.alindus.iss.BaseTest;
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.domain.Candidate.CandidateStatus;
