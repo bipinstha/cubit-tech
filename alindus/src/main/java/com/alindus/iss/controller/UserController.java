@@ -61,6 +61,16 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
+	
+	@RequestMapping(value = "/{email}/remove", method = RequestMethod.DELETE)
+	public void removeUserByEmail(@PathVariable String email) {
+		try {
+			 this.userService.removeByEmail(email);
+		} catch (IllegalArgumentException ex) {
+			this.logger.error(ex.getMessage());
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<User> getAllUser() {
