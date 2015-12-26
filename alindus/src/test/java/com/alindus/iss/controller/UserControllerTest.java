@@ -26,16 +26,16 @@ import com.google.gson.reflect.TypeToken;
 
 public class UserControllerTest extends BaseTest {
 
-	private static final String FIRST_NAME = "Binod";
-	private static final String LAST_NAME = "Gurung";
-	private static final String EMAIL = "gurung.binod@gmail.com";
+	private static final String FIRST_NAME = "Chandni";
+	private static final String LAST_NAME = "Sharma";
+	private static final String EMAIL = "chandni@cubicit.net";
 	private static final Integer AREA_CODE = 469;
 	private static final Integer PREFIX_VALUE = 346;
 	private static final Integer NUMBER = 1618;
 
 	private static final String PASSWORD = "password";
 	private static final String RE_PASSWORD = "password";
-	private static final Role ROLE = Role.ROLE_ADMIN;
+	private static final Role ROLE = Role.ROLE_VC;
 
 	private static final String ADDRESS = "1000 N 4th St";
 	private static final String CITY = "fairfield";

@@ -113,6 +113,18 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
                     }
             );
 		},
+		removeUserByEmail: function (email){
+			return $http.post('/secure/user/'+email+'/remove')
+            .then(
+                    function(response){
+                        return response.data;
+                    }, 
+                    function(errResponse){
+                        console.error('Error while creating user');
+                        return $q.reject(errResponse);
+                    }
+            );
+		}
 		changePassword: function (changePassword) {
 			console.log(changePassword);
 			return $http({

@@ -1,9 +1,14 @@
 'use strict';
-myApp.controller('DashboardCtrl',['$scope','$routeParams','UserService','$rootScope',function ($scope, $routeParams, UserService, $rootScope) {
+myApp.controller('DashboardCtrl',['$scope','$routeParams','UserService','$rootScope','$cookies',function ($scope, $routeParams, UserService, $rootScope,$cookies) {
+	console.log("LOADED******Dashboard  Controller");
+	
 	$scope.email = $routeParams.email;
+	
 	
 	$scope.user = {};
 	UserService.currentUser().then(function (response) {
-		$scope.currentUser = response.data;
+		$rootScope.currentUser = response.data;
+		$cookies.put('currentUser', response.data);
 	})
+	
 }])
