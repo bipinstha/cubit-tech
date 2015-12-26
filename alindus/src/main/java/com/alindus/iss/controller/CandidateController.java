@@ -20,59 +20,58 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.service.CandidateService;
 
-
 @RestController
-@RequestMapping(value = "/secure/candidate", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/secure/candidate", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
+		MediaType.APPLICATION_JSON_VALUE })
 @ResponseStatus(HttpStatus.OK)
 public class CandidateController {
-	
+
 	Logger logger = Logger.getLogger(CandidateController.class);
 
 	@Autowired
 	private CandidateService candidateService;
-	
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(@Valid @RequestBody Candidate candidate, BindingResult result) {
+	public Candidate add(@Valid @RequestBody Candidate candidate, BindingResult result) {
 		logger.error(candidate.getEmail());
-		if(result.hasErrors()){
+		if (result.hasErrors()) {
 			logger.error(result.getAllErrors());
 			throw new IllegalArgumentException(result.getAllErrors().toString());
 		}
 		try {
 			candidateService.add(candidate);
+			return candidate;
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
-		
+
 	}
-	
+
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void update(@RequestBody Candidate candidate) {
-		System.out.println("candidate in controller"+candidate);
+	public Candidate update(@RequestBody Candidate candidate) {
 		try {
 			candidateService.update(candidate);
+			return candidate;
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public void remove(@RequestBody Long candidateId) {
-		
+
+	@RequestMapping(value = "/{id}/remove", method = RequestMethod.GET)
+	public void remove(@PathVariable Long id) {
 		try {
-			candidateService.remove(candidateId);
+			candidateService.remove(id);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
-	@RequestMapping(value = "/findone/{candidateId}", method = RequestMethod.GET)	
+
+	@RequestMapping(value = "/findone/{candidateId}", method = RequestMethod.GET)
 	@ResponseBody
 	public Candidate findOne(@PathVariable Long candidateId) {
-		
 		try {
 			return candidateService.findOne(candidateId);
 		} catch (IllegalArgumentException ex) {
@@ -80,10 +79,9 @@ public class CandidateController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/findall", method = RequestMethod.GET)
-	public List<Candidate> findAll(){
-		
+	public List<Candidate> findAll() {
 		try {
 			return candidateService.findAll();
 		} catch (IllegalArgumentException ex) {
@@ -91,11 +89,9 @@ public class CandidateController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
-	
-	@RequestMapping(value = "/findbyssn", method = RequestMethod.POST)
-	public Candidate findCandidateBySSN(@RequestBody Integer ssn) {
-		
+
+	@RequestMapping(value = "/{ssn}/findbyssn", method = RequestMethod.GET)
+	public Candidate findCandidateBySSN(@PathVariable Integer ssn) {
 		try {
 			return candidateService.findCandidateBySSN(ssn);
 		} catch (IllegalArgumentException ex) {
@@ -103,41 +99,35 @@ public class CandidateController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
-	@RequestMapping(value = "/findbyemail", method = RequestMethod.POST)
-	public Candidate findCandidateByEmail(@RequestBody String email) {
-		
+
+	@RequestMapping(value = "/{email}/find", method = RequestMethod.GET)
+	public Candidate findCandidateByEmail(@PathVariable String email) {
 		try {
 			return candidateService.findCandidateByEmail(email);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
-	}	
-	
-	@RequestMapping(value = "/findbylike", method = RequestMethod.POST)
-	public List<Candidate> searchCandidateLike(@RequestBody String searchStr) {
-		
+	}
+
+	@RequestMapping(value = "/{searchStr}/findbylike", method = RequestMethod.GET)
+	public List<Candidate> searchCandidateLike(@PathVariable String searchStr) {
 		try {
 			return candidateService.searchCandidateLike(searchStr);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
-		
 	}
-	
-	@RequestMapping(value = "/{email}/remove", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/{email}/remove", method = RequestMethod.DELETE)
 	public void removeCandidate(@PathVariable String email) {
-		
 		try {
 			candidateService.removeCandidate(email);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
-		
 	}
 
-	
 }
