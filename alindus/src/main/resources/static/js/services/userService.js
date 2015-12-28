@@ -1,13 +1,7 @@
 'use strict';
 
 myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
-	var config = {
-			headers: {
-				  'Accept':'application/json; charset=utf-8',
-				  'Content-Type':'application/json; charset=utf-8'
-			  }
-	};
-	var deferObject;
+
 	return {
 		getAllUser : function() {
 			return  $http({
@@ -49,6 +43,25 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
 		getUnApprovedUsers: function () {
 			return $http({
 				  method: 'GET',
+				  url: '/secure/user/unapproved',
+				  data: '',
+				  headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				}).then (function (response) {
+					console.log("UnApproved Users::");
+					console.log(response);
+				return response;
+			},function (errResponse) {
+				console.log('Error while fetching un approved users..');
+		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
+				return $q.reject(errResponse);
+			})
+		},
+		getDisabledUsers: function () {
+			return $http({
+				  method: 'GET',
 				  url: '/secure/user/enablefalse',
 				  data: '',
 				  headers: {
@@ -56,9 +69,11 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
 					  'Content-Type':'application/json; charset=utf-8'
 				  }
 				}).then (function (response) {
+					console.log("Disabled Users::");
+					console.log(response);
 				return response;
 			},function (errResponse) {
-				console.log('Error while fetching un approved users..');
+				console.log('Error while fetching disabled users..');
 		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
 				return $q.reject(errResponse);
 			})
@@ -124,7 +139,7 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
                         return $q.reject(errResponse);
                     }
             );
-		}
+		},
 		changePassword: function (changePassword) {
 			console.log(changePassword);
 			return $http({
@@ -145,6 +160,52 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
         				return $q.reject(errResponse);
                     }
             )
+		},
+		getListOfRoles: function (){
+			console.log("Getting list of Roles::");
+			return $http({
+				  method: 'GET',
+				  url: '/secure/user/all/roles',
+				  data:'',
+				  headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				}).then(
+                  function(response){
+                	  console.log("ROles:");
+                	  console.log(response);
+                      return response;
+                  }, 
+                  function(errResponse){
+                  	console.log('Error while fetching list of Roles..');
+      		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
+      				return $q.reject(errResponse);
+                  }
+          )
+		},
+		approveUser: function (user) {
+			console.log("Approving User");
+			console.log(user);
+			return $http({
+				  method: 'POST',
+				  url: '/secure/user/approve/'+user.role+'/'+user.email,
+				  data:'',
+				  headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				}).then(
+                function(response){
+              	  console.log(response);
+                    return response;
+                }, 
+                function(errResponse){
+                	console.log('Error while approving user..');
+    		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
+    				return $q.reject(errResponse);
+                }
+        )
 		}
 	}
 

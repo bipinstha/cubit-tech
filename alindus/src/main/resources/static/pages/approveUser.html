@@ -1,0 +1,30 @@
+<h1 class="page-head">Admin Page / Approve User</h1>
+<div class="row">
+	<div class="col-sm-6">
+		<table class="table">
+			<tr>
+				<td>Name</td>
+				<td>{{user.firstName}} {{user.middleName}} {{user.lastName}}</td>
+
+			</tr>
+			<tr>
+				<td>Email</td>
+
+				<td>{{user.email}}</td>
+			</tr>
+			<tr>
+				<td>Role</td>
+
+				<td><select class="form-control" ng-model="user.role" ng-options="role for role in listOfRoles"><option>{{role}}</option></select></td>
+			</tr>
+			<tr>
+				<td></td>
+
+				<td><input type="button" class="btn btn-primary" 
+				ng-really-message="Are you sure to approve this user?"
+				ng-really-click="approveUser(user)" value="Approve" /></td>
+			</tr>
+		</table>
+	</div>
+
+</div>

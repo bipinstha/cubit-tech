@@ -9,6 +9,7 @@ myApp.controller('DashboardCtrl',['$scope','$routeParams','UserService','$rootSc
 	UserService.currentUser().then(function (response) {
 		$rootScope.currentUser = response.data;
 		$cookies.put('currentUser', response.data);
+		$scope.roleAdmin = ($rootScope.currentUser.role=='ROLE_ADMIN')?true:false;
 	})
 	
 }])

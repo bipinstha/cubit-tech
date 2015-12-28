@@ -223,4 +223,17 @@ public class InterviewServiceImpl implements InterviewService {
 				interviewRound.getInterview(), interviewRound.getInterviewer());
 	}
 
+	@Override
+	public List<InterviewRound> getInterviewRounds() {
+		return this.interviewRepository.getInterviewRounds();
+	}
+
+	@Override
+	public List<InterviewRound> getInterviewRoundsByInterviewId(Long id) {
+		Interview interview = this.interviewRepository.findOne(id);
+		return this.interviewRepository.getInterviewRoundsByInterviewId(interview);
+	}
+	
+	
+
 }

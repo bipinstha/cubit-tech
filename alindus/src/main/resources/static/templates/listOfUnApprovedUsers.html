@@ -1,0 +1,44 @@
+<form>
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">
+						<i class="fa fa-search"></i>
+					</div>
+					<input type="text" class="form-control" placeholder="Search Users"
+						ng-model="searchFilterUnApprovedUsers">
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<table class="table table-border table-hover">
+	<thead>
+		<tr>
+			<th><a
+				ng-click="sortType = 'firstName'; sortReverse = !sortReverse">Name</a>
+				<span ng-show="sortType == 'firstName' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'firstName' && sortReverse"
+				class="fa fa-caret-up"></span></th>
+			<th><a ng-click="sortType = 'email'; sortReverse = !sortReverse">Email</a>
+				<span ng-show="sortType == 'email' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th>Manage</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr
+			ng-repeat="user in unApprovedUsers | orderBy:sortType:sortReverse | filter:searchFilterUnApprovedUsers">
+			<td>{{user.firstName+" "+user.lastName}}</td>
+			<td>{{user.email}}</td>
+			<td><a href="#user/{{user.email}}">Detail</a> | <a href="#approve/user/{{user.email}}"
+				ng-really-message="Are you sure to enable this user?" >Approve</a> | <a
+				href="" ng-really-message="Are you sure to delete this user?"
+				ng-really-click="deleteUser(user)" item="user">Delete</a></td>
+		</tr>
+	</tbody>
+</table>

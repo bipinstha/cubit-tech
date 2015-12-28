@@ -23,5 +23,9 @@ public interface InterviewService extends AbstractService<Interview, Long>{
 	public List<InterviewType> findInterviewsTypeByTypeLike(String type);
 	
 	public void updateInterviewRound(InterviewRound interviewRound);
+	
+	public List<InterviewRound> getInterviewRounds();
+	
+	public List<InterviewRound> getInterviewRoundsByInterviewId(Long id);
 
 }

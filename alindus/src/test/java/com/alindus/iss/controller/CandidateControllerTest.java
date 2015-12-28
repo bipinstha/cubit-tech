@@ -79,8 +79,8 @@ public class CandidateControllerTest extends BaseTest {
 		SocialSecurityNumber ssn = new SocialSecurityNumber(111, 11, 1111);
 		Address address = new Address("4146 N Belt Line", "Irvin", "Dallas", "75038");
 		Candidate can1 = gson.fromJson(result.getResponse().getContentAsString(), Candidate.class);
-		can1.setFirstName("Edited Amul");
-		can1.setSkypeId("Edited Skype Id");
+		can1.setFirstName("Binod");
+		can1.setSkypeId("Skype Id");
 		can1.setSsn(ssn);
 		can1.setPhone(phone);
 		can1.setAddress(address);

@@ -20,8 +20,9 @@ public class HomeController {
 	public String pageNotFound() {
 		return "404";
 	}
-	/*@RequestMapping(value="/dashboard")
-	public String dashboard() {
-		return "dashboard";
-	}*/
+	
+	@RequestMapping(value="/signup")
+	public String signUpPage (){
+		return "signup";
+	}
 }

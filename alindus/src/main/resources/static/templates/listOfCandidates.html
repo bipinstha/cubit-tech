@@ -1,0 +1,65 @@
+<div class="CandidateListCtrl">
+	<form>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-search"></i>
+						</div>
+						<input type="text" class="form-control" placeholder="Search Candidates"
+							ng-model="searchFilter">
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<a href="#add_candidate" class="btn btn-primary">Add Candidate</a>
+				</div>
+			</div>
+		</div>
+	</form>
+	<table class="table table-border table-hover">
+		<thead>
+			<tr>
+				<th><a
+					ng-click="sortType = 'firstName'; sortReverse = !sortReverse">Name</a>
+					<span ng-show="sortType == 'firstName' && !sortReverse"
+					class="fa fa-caret-down"></span> <span
+					ng-show="sortType == 'firstName' && sortReverse"
+					class="fa fa-caret-up"></span></th>
+				<th><a
+					ng-click="sortType = 'email'; sortReverse = !sortReverse">Email</a>
+					<span ng-show="sortType == 'email' && !sortReverse"
+					class="fa fa-caret-down"></span> <span
+					ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+				</th>
+				<th><a
+					ng-click="sortType = 'address.city'; sortReverse = !sortReverse">Address</a>
+					<span ng-show="sortType == 'address.city' && !sortReverse"
+					class="fa fa-caret-down"></span> <span
+					ng-show="sortType == 'address.city' && sortReverse"
+					class="fa fa-caret-up"></span></th>
+				<th><a
+					ng-click="sortType = 'phone.areacode'; sortReverse = !sortReverse">Phone</a>
+					<span ng-show="sortType == 'phone.areacode' && !sortReverse"
+					class="fa fa-caret-down"></span> <span
+					ng-show="sortType == 'phone.areacode' && sortReverse"
+					class="fa fa-caret-up"></span></th>
+				<th>Manage</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr
+				ng-repeat="candidate in candidates | orderBy:sortType:sortReverse | filter:searchFilter">
+				<td>{{candidate.firstName+" "+candidate.lastName}}</td>
+				<td>{{candidate.email}}</td>
+				<td>{{candidate.address.city+", "+candidate.address.state}}</td>
+				<td>{{candidate.phone.areacode+""+candidate.phone.prefixValue+""+user.phone.number}}</td>
+				<td><a href="#candidate/{{candidate.email}}">Detail</a> | <a href="#candidate/update/{{candidate.email}}">Update</a> | <a href=""
+					ng-really-message="Are you sure to disable this user?"
+					ng-really-click="" item="candidate">Disable</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

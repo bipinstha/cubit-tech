@@ -1,6 +1,9 @@
 <div class="col-sm-6">
 	<form class="form-horizontal">
-		<uib-alert class="alert alert-success" dismiss-on-timeout="100" ng-show="success" type="success" close="closeAlert()">Info Updated Successfully!</uib-alert>
+		<uib-alert class="alert alert-success" dismiss-on-timeout="100"
+			ng-show="success" type="success" close="closeAlert()">Info
+		Updated Successfully!</uib-alert>
+		<h3>Personal Detail:</h3>
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">First Name</label>
 			<div class="col-sm-7">
@@ -25,8 +28,78 @@
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">Email</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control" ng-model="user.email"
+				<input type="email" class="form-control" ng-model="user.email"
 					placeholder="Last Name" value="{{user.email}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="" class="col-sm-5 control-label">Phone Number</label>
+			<div class="col-sm-7 row">
+
+				<div class="col-sm-4">
+					<input type="text" class="form-control"
+						ng-model="user.phone.areaCode" placeholder=""
+						value="{{user.phone.areaCode}}">
+
+				</div>
+				<div class="col-sm-4">
+					<input type="text" class="form-control"
+						ng-model="user.phone.prefixValue" placeholder=""
+						value="{{user.phone.prefixValue}}">
+				</div>
+				<div class="col-sm-4">
+					<input type="text" class="form-control"
+						ng-model="user.phone.number" placeholder=""
+						value="{{user.phone.number}}">
+				</div>
+			</div>
+		</div>
+		<h3>Address:</h3>
+		<div class="form-group">
+			<label for="" class="col-sm-5 control-label">Address Line 1</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control"
+					ng-model="user.address.address" placeholder="Address Line 1"
+					value="{{user.address.address}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="" class="col-sm-5 control-label">Address Line 2</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control"
+					ng-model="user.address.address1" placeholder="Address Line 2"
+					value="{{user.address.address1}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-5 control-label"> City</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control" ng-model="user.address.city"
+					placeholder="City" value="{{user.address.city}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-5 control-label"> State</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control"
+					ng-model="user.address.state" placeholder="State"
+					value="{{user.address.state}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="" class="col-sm-5 control-label">Zip Code</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control"
+					ng-model="user.address.zipCode" placeholder="Zip Code"
+					value="{{user.address.zipCode}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="" class="col-sm-5 control-label">Country</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control"
+					ng-model="user.address.country" placeholder="Country"
+					value="{{user.address.country}}">
 			</div>
 		</div>
 		<div class="form-group">

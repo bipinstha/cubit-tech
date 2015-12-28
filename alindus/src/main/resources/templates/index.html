@@ -20,10 +20,16 @@
 <script src="../static/js/app.js"></script>
 <script src="../static/js/controllers.js"></script>
 <script src="../static/js/services/userService.js"></script>
+<script src="../static/js/services/candidateService.js"></script>
+<script src="../static/js/services/interviewService.js"></script>
 <script src="../static/js/controller/dashboardCtrl.js"></script>
 <script src="../static/js/controller/adminCtrl.js"></script>
 <script src="../static/js/controller/userCtrl.js"></script>
 <script src="../static/js/controller/profileCtrl.js"></script>
+<script src="../static/js/controller/approveUserCtrl.js"></script>
+<script src="../static/js/controller/candidateCtrl.js"></script>
+<script src="../static/js/controller/manageCtrl.js"></script>
+<script src="../static/js/controller/reportCtrl.js"></script>
 <script type="text/javascript">
 </script>
 <style type="text/css">
@@ -48,8 +54,8 @@
 					<li><a href="#dashboard">Dashboard</a></li>
 					<li><a href="#reports">Reports</a></li>
 					<li><a href="#manage">Manage</a></li>
-					<li><a href="#admin">Admin</a></li>
-					<li class="pull-right"><a href="#profile" class="username">Welcome <strong>{{currentUser.firstName}}</strong> !</a> | <a href="/logout">Logout</a></li>
+					<li ng-show="roleAdmin"><a href="#admin">Admin</a></li>
+					<li class="pull-right"><span class="username">Welcome <strong>{{currentUser.firstName}}</strong> !</span> <a href="#profile">Profile</a> | <a href="/logout">Logout</a></li>
 				</ul>
 			</nav>
 		</div>

@@ -131,4 +131,23 @@ public class InterviewController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
+
+	@RequestMapping(value="/ir/all", method=RequestMethod.GET)
+	public List<InterviewRound> getInterviewRounds() {
+		try {
+			return this.interviewService.getInterviewRounds();
+		} catch (IllegalArgumentException ex) {
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
+	
+	@RequestMapping(value="/ir/all/{id}", method=RequestMethod.GET)
+	public List<InterviewRound> getInterviewRoundsByInterviewId(@PathVariable Long id) {
+		try {
+			return this.interviewService.getInterviewRoundsByInterviewId(id);
+		} catch (IllegalArgumentException ex) {
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
+	
 }

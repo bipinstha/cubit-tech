@@ -1,0 +1,92 @@
+<form>
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">
+						<i class="fa fa-search"></i>
+					</div>
+					<input type="text" class="form-control" placeholder="Search Interviews"
+						ng-model="searchFilter">
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<table class="table table-border table-hover">
+	<thead>
+		<tr>
+			<th><a
+				ng-click="sortType = 'vc.firstName'; sortReverse = !sortReverse">VC</a>
+				<span ng-show="sortType == 'vc.firstName' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'vc.firstName' && sortReverse"
+				class="fa fa-caret-up"></span></th>
+			<th><a ng-click="sortType = 'marketing.firstName'; sortReverse = !sortReverse">Marketing</a>
+				<span ng-show="sortType == 'marketing.firstName' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'marketing.firstName' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th><a
+				ng-click="sortType = 'candidate.firstName'; sortReverse = !sortReverse">Candidate</a>
+				<span ng-show="sortType == 'candidate.firstName' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'candidate.firstName' && sortReverse"
+				class="fa fa-caret-up"></span></th>
+			<th><a
+				ng-click="sortType = 'client.name'; sortReverse = !sortReverse">Client</a>
+				<span ng-show="sortType == 'client.name' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'client.name' && sortReverse"
+				class="fa fa-caret-up"></span></th>
+			<th><a ng-click="sortType = 'vendor.name'; sortReverse = !sortReverse">Vendor</a>
+				<span ng-show="sortType == 'vendor.name' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'vendor.name' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th><a ng-click="sortType = 'technology.name'; sortReverse = !sortReverse">Technology</a>
+				<span ng-show="sortType == 'technology.name' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'technology.name' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th><a ng-click="sortType = 'interviewRound.round.name'; sortReverse = !sortReverse">Round</a>
+				<span ng-show="sortType == 'interviewRound.round.name' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'interviewRound.round.name' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th><a ng-click="sortType = 'interviewRound.interviewRound.type'; sortReverse = !sortReverse">Type</a>
+				<span ng-show="sortType == 'interviewRound.interviewType.type' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'interviewRound.interviewType.type' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th><a ng-click="sortType = 'interviewRound.interviewDate; sortReverse = !sortReverse">Date</a>
+				<span ng-show="sortType == 'interviewRound.interviewDate;' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'interviewRound.interviewDate;' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th><a ng-click="sortType = 'interviewRound.status'; sortReverse = !sortReverse">Status</a>
+				<span ng-show="sortType == 'interviewRound.status' && !sortReverse"
+				class="fa fa-caret-down"></span> <span
+				ng-show="sortType == 'interviewRound.status' && sortReverse" class="fa fa-caret-up"></span>
+			</th>
+			<th>Manage</th>
+		</tr>
+	</thead>
+	<tbody ng-repeat="interview in interviews | orderBy:sortType:sortReverse | filter:searchFilter"">
+		<tr ng-repeat="ir in interview.interviewRound | orderBy:sortType:sortReverse | filter:searchFilter">
+			<td>{{interview.vc.firstName+" "+interview.vc.lastName}}</td>
+			<td>{{interview.marketing.firstName+" "+interview.marketing.lastName}}</td>
+			<td>{{interview.candidate.firstName+" "+interview.candidate.lastName}}</td>
+			<td>{{interview.client.name}}</td>
+			<td>{{interview.vendor.name}}</td>
+			<td>{{interview.technology.name}}</td>
+			<td>{{ir.round.name}}</td>
+			<td>{{ir.interviewType.type}}</td>
+			<td>{{ir.interviewDate}}</td>
+			<td>{{ir.status}}</td>
+			<td><a href="#interview/{{ir.id}}">Detail</a> | <a href=""
+				ng-really-message="Are you sure to delete this interview?"
+				ng-really-click="deleteInterview(interview)" item="interview">Delete</a></td>
+		</tr>
+	</tbody>
+</table>

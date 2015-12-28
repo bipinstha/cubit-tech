@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up | Cubic Report App</title>
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous" />
+<script src="../static/js/bower_components/angular/angular.min.js"></script>
+<script
+	src="../static/js/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script
+	src="../static/js/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="../static/js/signUp.js"></script>
+<style type="text/css">
+.loginform {
+	width: 350px;
+	margin: 50px auto;
+	padding: 25px 30px;
+	font-family: sans-serif;
+	color: #333;
+}
+
+.loginform h1 {
+	margin: 0px 0px 20px 0px;
+	font-size: 27px;
+}
+
+.loginform .btn-primary, .loginform .btn-success {
+	width: 100%;
+	color: #fff;
+	padding: 10px;
+	margin: 5px 0px;
+}
+
+.loginform .btn-primary {
+	background: #D4001C;
+	border: 1px solid #D4001C;
+}
+
+#logo {
+	padding-bottom: 15px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 30px;
+}
+
+.loginform p {
+	color: #666;
+	margin-bottom: 15px;
+}
+</style>
+</head>
+<body ng-app="cubicAppSignUp">
+	<div class="loginform">
+		<div id="logo">
+			<img src="../static/images/logo.png" alt="Cubic App" />
+		</div>
+		<p>Sign Up</p>
+		<form method="post" ng-controller="SignUpController">
+			<uib-alert ng-show="success" type="success"
+				close="closeSuccessAlert()">Account created successfully. Your account is under review and will be approved by Admin soon.</uib-alert>
+			<uib-alert ng-show="error" type="danger"
+				close="closeErrorAlert()">{{errMessage}}</uib-alert>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="First Name"
+					ng-model="user.firstName" />
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Middle Name"
+					ng-model="user.middleName" />
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Last Name"
+					ng-model="user.lastName" />
+			</div>
+			<div class="form-group">
+				<input type="email" class="form-control" placeholder="Email"
+					ng-model="user.email" />
+			</div>
+			<div class="form-group">
+				<input type="password" ng-model="user.password" class="form-control"
+					placeholder="Password" />
+			</div>
+			<div class="form-group">
+				<input type="password" ng-model="user.rePassword"
+					class="form-control" placeholder="Retype Password" />
+			</div>
+			<button type="button" class="btn btn-primary"
+				ng-click="createUser(user)">Sign Up</button>
+			<a href="/login" class="btn btn-success">Login</a>
+		</form>
+	</div>
+</body>
+</html>

@@ -11,7 +11,7 @@ myApp.config([ '$routeProvider', function($routeProvider) {
 	}).
 	when('/reports', {
 		templateUrl : '/static/pages/reports.html',
-		controller : 'reportCtrl'
+		controller : 'ReportCtrl'
 	}).
 	when('/admin',{
 		templateUrl : '/static/pages/admin.html',
@@ -25,6 +25,14 @@ myApp.config([ '$routeProvider', function($routeProvider) {
 		templateUrl: 'static/pages/profile.html',
 		controller : 'ProfileCtrl'
 	}).
+	when('/approve/user/:email',{
+		templateUrl: 'static/pages/approveUser.html',
+		controller : 'ApproveUserCtrl'
+	}).
+	when('/manage',{
+		templateUrl: 'static/pages/manage.html',
+		controller : 'ManageCtrl'
+	}).
 	otherwise({
 		redirectTo : '/'
 	})
@@ -32,16 +40,16 @@ myApp.config([ '$routeProvider', function($routeProvider) {
 
 
 angular.module('ngReallyClickModule', ['ui.bootstrap'])
-  .directive('ngReallyClick', ['$modal',
-    function($modal) {
+  .directive('ngReallyClick', ['$uibModal',
+    function($uibModal) {
 
-      var ModalInstanceCtrl = function($scope, $modalInstance) {
+      var ModalInstanceCtrl = function($scope, $uibModalInstance) {
         $scope.ok = function() {
-          $modalInstance.close();
+        	$uibModalInstance.close();
         };
 
         $scope.cancel = function() {
-          $modalInstance.dismiss('cancel');
+        	$uibModalInstance.dismiss('cancel');
         };
       };
 
@@ -58,7 +66,7 @@ angular.module('ngReallyClickModule', ['ui.bootstrap'])
             var modalHtml = '<div class="modal-body">' + message + '</div>';
             modalHtml += '<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">Yes</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>';
 
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
               template: modalHtml,
               controller: ModalInstanceCtrl
             });

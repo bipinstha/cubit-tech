@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.alindus.iss.domain.Client;
 import com.alindus.iss.domain.Interview;
+import com.alindus.iss.domain.InterviewRound;
 import com.alindus.iss.domain.InterviewRound.InterviewStatus;
 import com.alindus.iss.domain.InterviewType;
 import com.alindus.iss.domain.Round;
@@ -54,5 +55,11 @@ public interface InterviewRepository extends JpaRepository<Interview, Long>{
 	
 	@Query("select it from InterviewType it where it.type like %?1%")
 	public List<InterviewType> findInterviewsTypeByTypeLike(String type);
+	
+	@Query("select ir from InterviewRound ir")
+	public List<InterviewRound> getInterviewRounds();
+	
+	@Query(value="select ir from InterviewRound ir where ir.interview = ?1")
+	public List<InterviewRound> getInterviewRoundsByInterviewId(Interview interview);
 	
 }
