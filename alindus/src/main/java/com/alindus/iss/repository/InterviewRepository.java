@@ -14,6 +14,7 @@ import com.alindus.iss.domain.InterviewRound.InterviewStatus;
 import com.alindus.iss.domain.InterviewType;
 import com.alindus.iss.domain.Round;
 import com.alindus.iss.domain.Technology;
+import com.alindus.iss.domain.User;
 import com.alindus.iss.domain.Vendor;
 
 public interface InterviewRepository extends JpaRepository<Interview, Long>{
@@ -23,8 +24,8 @@ public interface InterviewRepository extends JpaRepository<Interview, Long>{
 	public void removeInterviewRound(Long id);
 	
 	@Modifying
-	@Query("update InterviewRound ir set ir.round=?2, ir.status=?3, ir.interviewType=?4, ir.interviewDate=?5, ir.interview=?6, ir.interviewer=?7 where ir.id=?1")
-	public void updateInterviewRound(Long id, Round round, InterviewStatus interviewStatus, InterviewType interviewType, Date interviewDate, Interview interview, String inerviewer);
+	@Query("update InterviewRound ir set ir.round=?2, ir.status=?3, ir.interviewType=?4, ir.interviewDate=?5, ir.interview=?6, ir.callTaker=?7 where ir.id=?1")
+	public void updateInterviewRound(Long id, Round round, InterviewStatus interviewStatus, InterviewType interviewType, Date interviewDate, Interview interview, User callTaker);
 	
 	@Query("select c from Client c where c.name=?1")
 	public Client findClientByName(String name);

@@ -16,7 +16,7 @@ public class Startup {
 	private static final String PASSWORD = "admin@123";
 	private static final String RE_PASSWORD = "admin@123";
 	private static final Role ROLE = Role.ROLE_ADMIN;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -26,9 +26,11 @@ public class Startup {
 	}
 
 	private void addAdminUser() {
-		User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
-		user.setEnable(true);
-		userService.add(user);
+		if (this.userService.findUserByEmail(EMAIL) != null) {
+			User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
+			user.setEnable(true);
+			userService.add(user);
+		}
 	}
 
 }
