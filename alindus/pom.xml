@@ -42,15 +42,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-		</dependency>
+		<!-- for OAuth 2.0a -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.security.oauth</groupId> -->
+		<!-- <artifactId>spring-security-oauth2</artifactId> -->
+		<!-- </dependency> -->
 		<!-- for OAuth 1.0a -->
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth</artifactId>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.security.oauth</groupId> -->
+		<!-- <artifactId>spring-security-oauth</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- GSON dependency -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -101,6 +104,24 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- Ecache  -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+
+		<!-- Spring caching framework inside this -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<!-- Support for Ehcache and others -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 		</dependency>
 	</dependencies>
 
