@@ -1,6 +1,5 @@
 'use strict';
 
-
 var myApp = angular.module('cubicApp', [ 'ngRoute', 'ui.bootstrap','ngCookies','ngReallyClickModule']);
 
 myApp.config([ '$routeProvider', function($routeProvider) {
@@ -32,6 +31,10 @@ myApp.config([ '$routeProvider', function($routeProvider) {
 	when('/manage',{
 		templateUrl: 'static/pages/manage.html',
 		controller : 'ManageCtrl'
+	}).
+	when('/interview/:id',{
+		templateUrl: 'static/pages/interview.html',
+		controller : 'InterviewCtrl'
 	}).
 	otherwise({
 		redirectTo : '/'

@@ -22,6 +22,7 @@ myApp.factory('InterviewService', [ '$http', '$q', function($http, $q) {
 			})
 		},
 		findInterviewById: function (id) {
+			console.log("find interview by id");
 			return $http({
 				  method: 'GET',
 				  url: '/secure/interview/'+id,
@@ -31,7 +32,7 @@ myApp.factory('InterviewService', [ '$http', '$q', function($http, $q) {
 					  'Content-Type':'application/json; charset=utf-8'
 				  }
 				}).then (function (response) {
-				return response.data;
+				return response;
 			},function (errResponse) {
 				console.log('Error while fetching interview by id..'+email);
 		        console.log({ message: errResponse.data.message, status: errResponse.data.status}); 
