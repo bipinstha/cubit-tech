@@ -26,7 +26,7 @@ public class Startup {
 	}
 
 	private void addAdminUser() {
-		if (this.userService.findUserByEmail(EMAIL) != null) {
+		if (this.userService.findUserByEmail(EMAIL) == null) {
 			User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
 			user.setEnable(true);
 			userService.add(user);
