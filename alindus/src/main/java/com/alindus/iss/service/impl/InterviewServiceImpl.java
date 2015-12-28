@@ -121,7 +121,7 @@ public class InterviewServiceImpl implements InterviewService {
 				}
 			}
 			newIR = new InterviewRound(iRound.getRound(), iRound.getStatus(), iRound.getInterviewType(), iRound.getInterviewDate(),
-					oldIR.getInterview(), iRound.getInterviewer());
+					oldIR.getInterview(), iRound.getCallTaker());
 			InterviewType interviewType = this.interviewRepository
 					.findInterviewTypeByType(iRound.getInterviewType().getType());
 			if (interviewType != null)
@@ -220,7 +220,7 @@ public class InterviewServiceImpl implements InterviewService {
 		}
 		this.interviewRepository.updateInterviewRound(interviewRound.getId(), interviewRound.getRound(),
 				interviewRound.getStatus(), interviewRound.getInterviewType(), interviewRound.getInterviewDate(),
-				interviewRound.getInterview(), interviewRound.getInterviewer());
+				interviewRound.getInterview(), interviewRound.getCallTaker());
 	}
 
 	@Override

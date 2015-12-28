@@ -46,19 +46,21 @@ public class InterviewRound implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonBackReference
 	private Interview interview;
-	private String interviewer;
+	@OneToOne
+	@JoinColumn
+	private User callTaker;
 
 	public InterviewRound() {
 	}
 
 	public InterviewRound(Round round, InterviewStatus status, InterviewType interviewType, Date interviewDate,
-			Interview interview, String interviewer) {
+			Interview interview, User callTaker) {
 		this.round = round;
 		this.status = status;
 		this.interviewType = interviewType;
 		this.interviewDate = interviewDate;
 		this.interview = interview;
-		this.interviewer = interviewer;
+		this.callTaker = callTaker;
 	}
 
 	public Long getId() {
@@ -109,12 +111,12 @@ public class InterviewRound implements Serializable {
 		this.interview = interview;
 	}
 
-	public String getInterviewer() {
-		return interviewer;
+	public User getCallTaker() {
+		return callTaker;
 	}
 
-	public void setInterviewer(String interviewer) {
-		this.interviewer = interviewer;
+	public void setCallTaker(User callTaker) {
+		this.callTaker = callTaker;
 	}
 
 	public enum InterviewStatus {
@@ -149,7 +151,7 @@ public class InterviewRound implements Serializable {
 	@Override
 	public String toString() {
 		return "InterviewRound [id=" + id + ", round=" + round + ", status=" + status + ", interviewType="
-				+ interviewType + ", interview=" + interview + ", interviewer=" + interviewer + "]";
+				+ interviewType + ", interview=" + interview + ", callTaker=" + callTaker + "]";
 	}
 
 }
