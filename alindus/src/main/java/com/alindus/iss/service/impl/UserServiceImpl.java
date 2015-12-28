@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Phone;
-import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
 import com.alindus.iss.repository.UserRepository;
@@ -34,6 +33,7 @@ public class UserServiceImpl implements UserService {
 		t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
 		this.userRepository.save(t);
 	}
+
 	@Override
 	@Transactional
 	public void update(User t) {
@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findByEnableFalse() {	
+	public List<User> findByEnableFalse() {
 		return this.userRepository.findByEnableFalse();
 	}
 
@@ -153,9 +153,16 @@ public class UserServiceImpl implements UserService {
 	public List<User> findUnApprovedUsers() {
 		return this.userRepository.findUnApprovedUsers();
 	}
+
 	@Override
 	@Transactional
-	public void approveUser(Role role, String email) {
-		this.userRepository.approveUser(role, email);
+	public void approveUser(User user) {
+		User u = this.userRepository.findByEmail(user.getEmail());
+		if (u == null) {
+			throw new IllegalArgumentException("User not found.");
+		}
+		u.setEnable(true);
+		u.setRole(user.getRole());
+		this.userRepository.save(u);
 	}
 }

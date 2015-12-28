@@ -50,8 +50,7 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
-	
+
 	@RequestMapping(value = "/{email}/find", method = RequestMethod.GET)
 	public User findUserByEmail(@PathVariable String email) {
 
@@ -62,11 +61,11 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/{email}/remove", method = RequestMethod.DELETE)
 	public void removeUserByEmail(@PathVariable String email) {
 		try {
-			 this.userService.removeByEmail(email);
+			this.userService.removeByEmail(email);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
@@ -130,8 +129,8 @@ public class UserController {
 	public Role[] getAllRoles() {
 		return Role.values();
 	}
-	
-	@RequestMapping(value="/unapproved", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/unapproved", method = RequestMethod.GET)
 	public List<User> findUnApprovedUsers() {
 		try {
 			return this.userService.findUnApprovedUsers();
@@ -140,10 +139,11 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	@RequestMapping(value="/approve/{role}/{email}", method = RequestMethod.POST)
-	public void approveUser(@PathVariable Role role, @PathVariable String email) {
+
+	@RequestMapping(value = "/approve", method = RequestMethod.POST)
+	public void approveUser(@RequestBody User user) {
 		try {
-			this.userService.approveUser(role, email);
+			this.userService.approveUser(user);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
