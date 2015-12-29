@@ -6,7 +6,7 @@ import com.alindus.iss.domain.Candidate;
 
 public interface CandidateService extends AbstractService<Candidate, Long> {
 
-	public Candidate findCandidateBySSN(Integer ssn);
+	public Candidate findCandidateBySSN(String ssnThirdVal);
 
 	public Candidate findCandidateByEmail(String email);
 

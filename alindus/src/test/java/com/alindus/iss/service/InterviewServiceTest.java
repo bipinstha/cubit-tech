@@ -50,7 +50,7 @@ public class InterviewServiceTest extends BaseTest {
 		User user2 = new User(CAL_TAKER, "rajib@123", "rajib@123", Role.ROLE_CALLTAKER);
 		user2.setEnable(true);
 		this.userService.add(user2);
-		SocialSecurityNumber ssn = new SocialSecurityNumber(4567);
+		SocialSecurityNumber ssn = new SocialSecurityNumber("4567");
 		Candidate candidate = new Candidate(CANDIDATE_EMAIL, "Thapa", CANDIDATE_EMAIL, null, null, ssn, "bharat.thapa",
 				CandidateStatus.MARKETING);
 		this.candidateService.add(candidate);

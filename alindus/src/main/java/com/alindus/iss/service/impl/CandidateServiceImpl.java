@@ -96,7 +96,7 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
-	public Candidate findCandidateBySSN(Integer ssn) {
+	public Candidate findCandidateBySSN(String ssn) {
 		if (ssn == null) {
 			throw new IllegalArgumentException("Invalid ssn to search candidate");
 		}

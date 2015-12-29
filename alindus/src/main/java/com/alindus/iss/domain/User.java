@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "users")
 public class User extends Person {
@@ -18,9 +20,11 @@ public class User extends Person {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	//@JsonIgnore
+	@NotEmpty(message = "Password cannot be null")
 	private String password;
 	@Transient
 	//@JsonIgnore
+	@NotEmpty(message = "RePassword cannot be null")
 	private String rePassword;
 	// @Column()
 	private Boolean enable;

@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import com.alindus.iss.domain.InterviewRound.InterviewStatus;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,9 +34,11 @@ public class Interview implements Serializable {
 
 	@OneToOne
 	@JoinColumn
+	@Valid
 	private Candidate candidate;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "client_id")
+	@Valid
 	private Client client;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "vendor_id")

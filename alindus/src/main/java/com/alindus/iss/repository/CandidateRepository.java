@@ -10,7 +10,7 @@ import com.alindus.iss.domain.Candidate;
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
 	@Query("select c from Candidate c inner join c.ssn s where s.lastValue = ?1")
-	public Candidate findBySsn(Integer ssn);
+	public Candidate findBySsn(String ssn);
 	
 	public Candidate findByEmail(String email);
 	

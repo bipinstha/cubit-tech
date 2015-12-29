@@ -30,9 +30,9 @@ public class UserControllerTest extends BaseTest {
 	private static final String LAST_NAME = "Sharma";
 	private static final String EMAIL = "chandni@cubicit.net";
 
-	private static final Integer AREA_CODE = 469;
-	private static final Integer PREFIX_VALUE = 346;
-	private static final Integer NUMBER = 1618;
+	private static final String AREA_CODE = "469";
+	private static final String PREFIX_VALUE = "346";
+	private static final String NUMBER = "1618";
 
 	private static final String PASSWORD = "password";
 	private static final String RE_PASSWORD = "password";

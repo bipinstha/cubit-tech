@@ -39,9 +39,9 @@ public class CandidateControllerTest extends BaseTest {
 	@Test
 	public void addCandidateTest() throws Exception {
 
-		Phone phone = new Phone(641, 345, 1212);
-		Phone phone1 = new Phone(641, 345, 1212);
-		SocialSecurityNumber ssn = new SocialSecurityNumber(777, 34, 6666);
+		Phone phone = new Phone("641", "345", "1212");
+		Phone phone1 = new Phone("641", "345", "1212");
+		SocialSecurityNumber ssn = new SocialSecurityNumber("777", "34", "6666");
 		Address address = new Address("1010 N 4th street", "FF", "IA", "23456");
 
 		Candidate candidate = new Candidate("amul", "sapkota", CANDIDATE_EMAIL, address, phone, ssn, "skypeId",
@@ -74,9 +74,10 @@ public class CandidateControllerTest extends BaseTest {
 						.contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
-		Phone phone = new Phone(111, 111, 2222);
-		Phone phone1 = new Phone(222, 222, 2222);
-		SocialSecurityNumber ssn = new SocialSecurityNumber(111, 11, 1111);
+		
+		Phone phone = new Phone("111", "111", "2222");
+		Phone phone1 = new Phone("222", "222", "222");
+		SocialSecurityNumber ssn = new SocialSecurityNumber("111", "11", "1111");
 		Address address = new Address("4146 N Belt Line", "Irvin", "Dallas", "75038");
 		Candidate can1 = gson.fromJson(result.getResponse().getContentAsString(), Candidate.class);
 		can1.setFirstName("Binod");
