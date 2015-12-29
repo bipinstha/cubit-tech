@@ -6,6 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.alindus.iss.domain.Address;
@@ -20,6 +22,7 @@ import com.alindus.iss.service.CandidateService;
 @Service
 public class CandidateServiceImpl implements CandidateService {
 
+	private static final String CACHE_NAME = "Candidates";
 	@Autowired
 	private CandidateRepository candidateRepository;
 	@Autowired
@@ -27,6 +30,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void add(Candidate t) {
 		if (t.getId() != null) {
 			throw new IllegalArgumentException("Invalid candidate.");
@@ -47,6 +51,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void update(Candidate t) {
 		if (t.getId() == null) {
 			throw new IllegalArgumentException("Invalid candidate.");
@@ -87,6 +92,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void remove(Long obj) {
 		if (obj == null) {
 			throw new IllegalArgumentException("Invalid id");
@@ -94,6 +100,7 @@ public class CandidateServiceImpl implements CandidateService {
 		this.candidateRepository.delete(obj);
 	}
 	@Override
+	@Cacheable(value = CACHE_NAME, key = "#id")
 	public Candidate findOne(Long obj) {
 		if (obj == null) {
 			throw new IllegalArgumentException("Invalid id.");
@@ -102,11 +109,13 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
+	@Cacheable(value = CACHE_NAME)
 	public List<Candidate> findAll() {
 		return this.candidateRepository.findAll();
 	}
 
 	@Override
+	@Cacheable(value = CACHE_NAME, key = "#ssn")
 	public Candidate findCandidateBySSN(String ssn) {
 		if (ssn == null) {
 			throw new IllegalArgumentException("Invalid ssn to search candidate");
@@ -115,6 +124,7 @@ public class CandidateServiceImpl implements CandidateService {
 	}
 
 	@Override
+	@Cacheable(value = CACHE_NAME, key = "#email")
 	public Candidate findCandidateByEmail(String email) {
 		if (email == null) {
 			throw new IllegalArgumentException("Invalid data.");
@@ -132,6 +142,7 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void removeCandidate(String email) {
 		if (email == null) {
 			throw new IllegalArgumentException("Invalid email");
