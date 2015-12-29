@@ -1,12 +1,15 @@
 package com.alindus.iss.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 @MappedSuperclass
@@ -29,6 +32,10 @@ public abstract class Person implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "phone_id")
 	private Phone phone;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedDate;
 
 	public Person() {
 	}
@@ -93,16 +100,26 @@ public abstract class Person implements Serializable {
 		this.phone = phone;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Person [firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", email="
 				+ email + ", phone=" + phone + "]";
-	}
-
-	public String toJson() {
-		return "{\"firstName\":\"" + firstName + "\", \"middleName\":\"" + middleName + "\", \"lastName\":\"" + lastName
-				+ "\", \"email\":\"" + email + "\",\"address\":" + address.toJson() + ", \"phone\":" + phone.toJson()
-				+ "}";
 	}
 
 }

@@ -15,5 +15,10 @@
 		maxEntriesLocalDisk="1000">
 		<persistence strategy="localTempSwap" />
 	</cache>
+	
+	<cache name="Candidates" maxEntriesLocalHeap="10000"
+		maxEntriesLocalDisk="1000">
+		<persistence strategy="localTempSwap" />
+	</cache>
 
 </ehcache>
