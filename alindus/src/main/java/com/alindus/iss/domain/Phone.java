@@ -16,15 +16,18 @@ public class Phone implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(name = "area_code")
-	// @Pattern(regexp="[0-9]{3}", message="Invalid area code.")
+	
+	//@Pattern(regexp = "[0-9]{3}", message = "invalid area code")
 	private Integer areaCode;
+	//@Pattern(regexp="[0-9]{3}", message="Invalid prefix of phone number")
 	@Column(name = "prefix_value")
 	private Integer prefixValue;
+	//@Pattern(regexp="[0-9]{4}", message="Invalid prefix of phone number")
 	private Integer number;
 
+	
 	public Phone() {
 	}
-
 	public Phone(Integer areaCode, Integer prefixValue, Integer number) {
 		this.areaCode = areaCode;
 		this.prefixValue = prefixValue;

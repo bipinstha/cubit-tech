@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity(name = "ssns")
 public class SocialSecurityNumber implements Serializable {
@@ -15,9 +18,12 @@ public class SocialSecurityNumber implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Pattern(regexp = "[0-9]{min=0,max=3}", message="first two digits of social security is not valid")
 	private Integer initValue;
+	@Pattern(regexp = "[0-9]{min=0,max=2}", message="mid value of social security is not valid")
 	private Integer midValue;
 	@Column(unique = true)
+	@Pattern(regexp = "[0-9]{4}", message = "last four digits of valid social security is required")
 	private Integer lastValue;
 
 	public SocialSecurityNumber() {
