@@ -75,7 +75,6 @@ public class UserController {
 
 	@RequestMapping(value = "/{email}/find", method = RequestMethod.GET)
 	public User findUserByEmail(@PathVariable String email) {
-
 		try {
 			return this.userService.findUserByEmail(email);
 		} catch (IllegalArgumentException ex) {
@@ -117,7 +116,7 @@ public class UserController {
 	@RequestMapping(value = "/enabletrue", method = RequestMethod.GET)
 	public List<User> getAllEnableTrueUsers() {
 		try {
-			return this.userService.findByEnableTrue();
+			return this.userService.findByEnableTrue(SpringUtils.getUserName());
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
@@ -147,11 +146,6 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/all/roles", method = RequestMethod.GET)
-	public Role[] getAllRoles() {
-		return Role.values();
-	}
-
 	@RequestMapping(value = "/unapproved", method = RequestMethod.GET)
 	public List<User> findUnApprovedUsers() {
 		try {
@@ -170,5 +164,19 @@ public class UserController {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
 		}
+	}
+
+	@RequestMapping(value = "/role/{role}", method = RequestMethod.GET)
+	public List<User> findUsersByRole(@PathVariable Role role) {
+		try {
+			return this.userService.findUserByRole(role);
+		} catch (IllegalArgumentException ex) {
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/all/roles", method = RequestMethod.GET)
+	public Role[] getAllRoles() {
+		return Role.values();
 	}
 }

@@ -120,8 +120,8 @@ public class InterviewServiceImpl implements InterviewService {
 					break;
 				}
 			}
-			newIR = new InterviewRound(iRound.getRound(), iRound.getStatus(), iRound.getInterviewType(), iRound.getInterviewDate(),
-					oldIR.getInterview(), iRound.getCallTaker());
+			newIR = new InterviewRound(iRound.getRound(), iRound.getStatus(), iRound.getInterviewType(),
+					iRound.getInterviewDate(), oldIR.getInterview(), iRound.getCallTaker());
 			InterviewType interviewType = this.interviewRepository
 					.findInterviewTypeByType(iRound.getInterviewType().getType());
 			if (interviewType != null)
@@ -168,11 +168,21 @@ public class InterviewServiceImpl implements InterviewService {
 	}
 
 	@Override
+	public List<Client> findAllClients() {
+		return this.interviewRepository.findAllClient();
+	}
+
+	@Override
 	public List<Client> findClientsByNameLike(String name) {
 		if (name == null) {
 			throw new IllegalArgumentException("Invalid data.");
 		}
 		return this.interviewRepository.findClientsByNameLike(name);
+	}
+
+	@Override
+	public List<Vendor> findAllVendors() {
+		return this.interviewRepository.findAllVendor();
 	}
 
 	@Override
@@ -184,11 +194,21 @@ public class InterviewServiceImpl implements InterviewService {
 	}
 
 	@Override
+	public List<Technology> findAllTechnologies() {
+		return this.interviewRepository.findAllTechnology();
+	}
+
+	@Override
 	public List<Technology> findTechnologiesByNameLike(String name) {
 		if (name == null) {
 			throw new IllegalArgumentException("Invalid data.");
 		}
 		return this.interviewRepository.findTechnologiesByNameLike(name);
+	}
+
+	@Override
+	public List<Round> findAllRounds() {
+		return this.interviewRepository.findAllRound();
 	}
 
 	@Override
@@ -202,6 +222,11 @@ public class InterviewServiceImpl implements InterviewService {
 		// list.add(round);
 		// });
 		return this.interviewRepository.findRoundByNameLike(name);
+	}
+
+	@Override
+	public List<InterviewType> findAllInterviewTypes() {
+		return this.interviewRepository.findAllInterviewType();
 	}
 
 	@Override
@@ -224,16 +249,14 @@ public class InterviewServiceImpl implements InterviewService {
 	}
 
 	@Override
-	public List<InterviewRound> getInterviewRounds() {
+	public List<InterviewRound> findInterviewRounds() {
 		return this.interviewRepository.getInterviewRounds();
 	}
 
 	@Override
-	public List<InterviewRound> getInterviewRoundsByInterviewId(Long id) {
+	public List<InterviewRound> findInterviewRoundsByInterviewId(Long id) {
 		Interview interview = this.interviewRepository.findOne(id);
 		return this.interviewRepository.getInterviewRoundsByInterviewId(interview);
 	}
-	
-	
 
 }

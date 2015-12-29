@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Phone;
+import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
 import com.alindus.iss.repository.UserRepository;
@@ -152,19 +153,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Cacheable(value = CACHE_NAME)
+	// @Cacheable(value = CACHE_NAME)
 	public List<User> findByEnableFalse() {
 		return this.userRepository.findByEnableFalse();
 	}
 
 	@Override
-	@Cacheable(value = CACHE_NAME)
-	public List<User> findByEnableTrue() {
-		return this.userRepository.findByEnableTrue();
+	// @Cacheable(value = CACHE_NAME)
+	public List<User> findByEnableTrue(String email) {
+		return this.userRepository.findByEmailNotAndEnableTrue(email);
 	}
 
 	@Override
-	@Cacheable(value = CACHE_NAME)
+	// @Cacheable(value = CACHE_NAME)
 	public List<User> findUnApprovedUsers() {
 		return this.userRepository.findUnApprovedUsers();
 	}
@@ -180,5 +181,11 @@ public class UserServiceImpl implements UserService {
 		u.setEnable(true);
 		u.setRole(user.getRole());
 		this.userRepository.save(u);
+	}
+
+	@Override
+	@Cacheable(value = CACHE_NAME, key = "#role")
+	public List<User> findUserByRole(Role role) {
+		return this.userRepository.findByRole(role);
 	}
 }
