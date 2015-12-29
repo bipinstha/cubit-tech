@@ -43,11 +43,11 @@ public class Candidate extends Person {
 	private String skypeId1;
 	@Enumerated(EnumType.STRING)
 	
-	@NotNull(message="status of candidate is required")
 	private CandidateStatus status = CandidateStatus.MARKETING;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "technology_id")
-	@NotNull(message="status of candidate is required")
+	
 	private Technology technology;
 
 	public Candidate() {

@@ -12,17 +12,8 @@
 						<td><span ng-show="!updateFlag"><a
 								href="#candidate/{{interview.candidate.id}}">{{interview.candidate.firstName+"
 									"+interview.candidate.lastName}}</a></span>
-							<div ng-show="updateFlag">
-
-								<div class="col-sm-6">
-									<input type="text" class="form-control" ng-model="interview.candidate.firstName" ng-show="updateFlag"
-										value="{{interview.candidate.firstName}}" />
-
-								</div>
-								<div class="col-sm-6">
-									<input type="text" class="form-control" ng-model="interview.candidate.lastName" ng-show="updateFlag"
-										value="{{interview.candidate.lastName}}" />
-								</div>
+							<div ng-show="updateFlag" class="col-sm">
+								<select class="form-control" ng-model="interviewDTO.candidate" ng-options="(c.firstName+' '+c.lastName) for c in listOfCandidates"><option></option></select>
 							</div></td>
 					</tr>
 					<tr>
