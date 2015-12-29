@@ -3,6 +3,8 @@
 		<uib-alert class="alert alert-success" dismiss-on-timeout="100"
 			ng-show="success" type="success" close="closeAlert()">Info
 		Updated Successfully!</uib-alert>
+		<uib-alert dismiss-on-timeout="100"
+			ng-show="error" type="danger" close="closeAlert()">{{errMessage}}</uib-alert>
 		<h3>Personal Detail:</h3>
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">First Name</label>

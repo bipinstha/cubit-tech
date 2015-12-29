@@ -36,7 +36,7 @@ public class CandidateController {
 		logger.error(candidate.getEmail());
 		if (result.hasErrors()) {
 			logger.error(result.getAllErrors());
-			throw new IllegalArgumentException(result.getAllErrors().toString());
+			throw new IllegalArgumentException("result.getAllErrors().toString()");
 		}
 		try {
 			candidateService.add(candidate);

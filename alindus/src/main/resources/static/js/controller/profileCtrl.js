@@ -11,6 +11,9 @@ myApp.controller('ProfileCtrl',['$scope','UserService','$rootScope','$cookies',f
 			$rootScope.currentUser = response.data;
 			$cookies.put('currentUser', response.data);
 			$scope.success = true;
+		},function (errResponse){
+			$scope.errMessage = errResponse.data.message;
+			$scope.error = true;
 		})
 	}
 	
