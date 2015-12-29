@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "interview_types")
 public class InterviewType implements Serializable {
@@ -17,6 +19,8 @@ public class InterviewType implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@NotEmpty(message = "Interview type is required")
 	private String type;
 
 	public InterviewType() {

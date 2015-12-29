@@ -1,5 +1,6 @@
 package com.alindus.iss.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,18 +34,28 @@ public class CandidateController {
 	private CandidateService candidateService;
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Candidate add(@Valid @RequestBody Candidate candidate, BindingResult result) {
+	public Candidate add(@Valid @RequestBody Candidate candidate, BindingResult bindingResult) {
 		logger.error(candidate.getEmail());
-		if (result.hasErrors()) {
-			logger.error(result.getAllErrors());
-			throw new IllegalArgumentException("result.getAllErrors().toString()");
-		}
-		try {
-			candidateService.add(candidate);
-			return candidate;
-		} catch (IllegalArgumentException ex) {
-			this.logger.error(ex.getMessage());
-			throw new IllegalArgumentException(ex.getMessage());
+
+		if (bindingResult.hasErrors()) {
+			List<String> errorLsit = new ArrayList<String>();
+			for (Object object : bindingResult.getAllErrors()) {
+				if (object instanceof FieldError) {
+					FieldError fieldError = (FieldError) object;
+					errorLsit.add(fieldError.getDefaultMessage());
+				}
+
+			}
+			throw new IllegalArgumentException(errorLsit.toString());
+		} else {
+
+			try {
+				candidateService.add(candidate);
+				return candidate;
+			} catch (IllegalArgumentException ex) {
+				this.logger.error(ex.getMessage());
+				throw new IllegalArgumentException(ex.getMessage());
+			}
 		}
 
 	}
@@ -91,7 +103,7 @@ public class CandidateController {
 	}
 
 	@RequestMapping(value = "/{ssn}/findbyssn", method = RequestMethod.GET)
-	public Candidate findCandidateBySSN(@PathVariable Integer ssn) {
+	public Candidate findCandidateBySSN(@PathVariable String ssn) {
 		try {
 			return candidateService.findCandidateBySSN(ssn);
 		} catch (IllegalArgumentException ex) {

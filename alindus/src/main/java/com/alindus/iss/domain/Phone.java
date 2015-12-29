@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
 
 @Entity(name = "phones")
 public class Phone implements Serializable {
@@ -17,18 +18,19 @@ public class Phone implements Serializable {
 	private Long id;
 	@Column(name = "area_code")
 	
-	//@Pattern(regexp = "[0-9]{3}", message = "invalid area code")
-	private Integer areaCode;
-	//@Pattern(regexp="[0-9]{3}", message="Invalid prefix of phone number")
+	@Pattern(regexp = "[0-9]{3}", message = "invalid area code")
+	private String areaCode;
+	@Pattern(regexp="[0-9]{3}", message="Invalid prefix of phone number")
 	@Column(name = "prefix_value")
-	private Integer prefixValue;
-	//@Pattern(regexp="[0-9]{4}", message="Invalid prefix of phone number")
-	private Integer number;
+	private String prefixValue;
+	
+	@Pattern(regexp="[0-9]{4}", message="Invalid suffix of phone number")
+	private String number;
 
 	
 	public Phone() {
 	}
-	public Phone(Integer areaCode, Integer prefixValue, Integer number) {
+	public Phone(String areaCode, String prefixValue, String number) {
 		this.areaCode = areaCode;
 		this.prefixValue = prefixValue;
 		this.number = number;
@@ -42,27 +44,27 @@ public class Phone implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getAreaCode() {
+	public String getAreaCode() {
 		return areaCode;
 	}
 
-	public void setAreaCode(Integer areaCode) {
+	public void setAreaCode(String areaCode) {
 		this.areaCode = areaCode;
 	}
 
-	public Integer getPrefixValue() {
+	public String getPrefixValue() {
 		return prefixValue;
 	}
 
-	public void setPrefixValue(Integer prefixValue) {
+	public void setPrefixValue(String prefixValue) {
 		this.prefixValue = prefixValue;
 	}
 
-	public Integer getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 

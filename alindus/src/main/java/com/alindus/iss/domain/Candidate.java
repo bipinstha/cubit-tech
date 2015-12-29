@@ -11,10 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "candidates")
@@ -43,11 +41,11 @@ public class Candidate extends Person {
 	private String skypeId1;
 	@Enumerated(EnumType.STRING)
 	
-	@NotNull(message="status of candidate is required")
+	
 	private CandidateStatus status = CandidateStatus.MARKETING;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "technology_id")
-	@NotNull(message="status of candidate is required")
+	@Valid
 	private Technology technology;
 
 	public Candidate() {

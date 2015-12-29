@@ -54,7 +54,7 @@ public class UserController {
 				if (object instanceof FieldError) {
 					FieldError fieldError = (FieldError) object;
 					errorLsit.add(fieldError.getDefaultMessage());
-					System.out.println("nepal" + fieldError.getDefaultMessage());
+					System.out.println("errors from user controller update method" + fieldError.getDefaultMessage());
 				}
 
 			}

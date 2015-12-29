@@ -17,10 +17,10 @@ public class User extends Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	//@JsonIgnore
+
 	private String password;
 	@Transient
-	//@JsonIgnore
+
 	private String rePassword;
 	// @Column()
 	private Boolean enable;
@@ -30,14 +30,12 @@ public class User extends Person {
 	public User() {
 	}
 
-
 	public User(String email, String password, String rePassword, Role role) {
 		super(email);
 		this.password = password;
 		this.rePassword = rePassword;
 		this.role = role;
 	}
-
 
 	public User(String firstName, String lastName, String email, Address address, Phone phone, String password,
 			String rePassword, Role role) {

@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "vendors")
@@ -17,7 +20,9 @@ public class Vendor implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@NotEmpty(message="name is required")
 	private String name;
+	@Size(min = 5, max = 25, message = "Descriptions should be between 0 - 255 characters.")
 	private String description;
 
 	public Vendor() {
