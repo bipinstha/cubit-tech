@@ -76,7 +76,7 @@ public class CandidateControllerTest extends BaseTest {
 				.andReturn();
 		
 		Phone phone = new Phone("111", "111", "2222");
-		Phone phone1 = new Phone("222", "222", "222");
+		Phone phone1 = new Phone("222", "222", "2222");
 		SocialSecurityNumber ssn = new SocialSecurityNumber("111", "11", "1111");
 		Address address = new Address("4146 N Belt Line", "Irvin", "Dallas", "75038");
 		Candidate can1 = gson.fromJson(result.getResponse().getContentAsString(), Candidate.class);
@@ -86,6 +86,7 @@ public class CandidateControllerTest extends BaseTest {
 		can1.setPhone(phone);
 		can1.setAddress(address);
 		can1.setPhone1(phone1);
+		can1.setTechnology(new Technology("JAVA"));
 		MvcResult result1 = mvc
 				.perform(MockMvcRequestBuilders.post("/secure/candidate/update")
 						.contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE)

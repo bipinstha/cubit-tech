@@ -11,7 +11,9 @@ import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.SocialSecurityNumber;
+import com.alindus.iss.domain.Technology;
 import com.alindus.iss.repository.CandidateRepository;
+import com.alindus.iss.repository.InterviewRepository;
 import com.alindus.iss.service.CandidateService;
 
 @Service
@@ -19,6 +21,8 @@ public class CandidateServiceImpl implements CandidateService {
 
 	@Autowired
 	private CandidateRepository candidateRepository;
+	@Autowired
+	private InterviewRepository interviewRepository;
 
 	@Override
 	@Transactional
@@ -32,8 +36,11 @@ public class CandidateServiceImpl implements CandidateService {
 		if (this.candidateRepository.findBySsn(t.getSsn().getLastValue()) != null) {
 			throw new IllegalArgumentException("Candidate ssn already exist.");
 		}
+		Technology technology = this.interviewRepository.findTechnologyByName(t.getTechnology().getName());
+		if (technology != null) {
+			t.setTechnology(technology);
+		}
 		this.candidateRepository.save(t);
-
 	}
 
 	@Override
@@ -61,9 +68,11 @@ public class CandidateServiceImpl implements CandidateService {
 		SocialSecurityNumber ssn = new SocialSecurityNumber(t.getSsn().getInitValue(), t.getSsn().getMidValue(),
 				t.getSsn().getLastValue());
 		ssn.setId(c.getSsn().getId());
-
 		Candidate can = new Candidate(t.getFirstName(), t.getLastName(), t.getEmail(), address, phone, ssn,
 				t.getSkypeId(), t.getStatus());
+		Technology technology = this.interviewRepository.findTechnologyByName(t.getTechnology().getName());
+		if (technology != null) can.setTechnology(technology);
+		else can.setTechnology(t.getTechnology());
 		can.setId(c.getId());
 		can.setMiddleName(t.getMiddleName());
 		can.setEmail1(t.getEmail1());
@@ -81,7 +90,6 @@ public class CandidateServiceImpl implements CandidateService {
 		}
 		this.candidateRepository.delete(obj);
 	}
-
 	@Override
 	public Candidate findOne(Long obj) {
 		if (obj == null) {

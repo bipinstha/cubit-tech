@@ -23,7 +23,8 @@ public class Phone implements Serializable {
 	@Pattern(regexp="[0-9]{3}", message="Invalid prefix of phone number")
 	@Column(name = "prefix_value")
 	private String prefixValue;
-	@Pattern(regexp="[0-9]{4}", message="Invalid prefix of phone number")
+	
+	@Pattern(regexp="[0-9]{4}", message="Invalid suffix of phone number")
 	private String number;
 
 	

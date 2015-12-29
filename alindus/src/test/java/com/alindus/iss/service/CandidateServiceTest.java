@@ -12,6 +12,7 @@ import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.domain.Candidate.CandidateStatus;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.SocialSecurityNumber;
+import com.alindus.iss.domain.Technology;
 import com.alindus.iss.service.CandidateService;
 
 public class CandidateServiceTest extends BaseTest {
@@ -32,9 +33,9 @@ public class CandidateServiceTest extends BaseTest {
 	private static final String STATE = "IA";
 	private static final String ZIP_CODE = "52557";
 
-	private static final String SSN_FIRST_VAL = "432";
+	private static final String SSN_FIRST_VAL = "123";
 	private static final String SSN_SECOND_VAL = "12";
-	private static final String SSN_THIRD_VAL = "4327";
+	private static final String SSN_THIRD_VAL = "1234";
 
 	@Autowired
 	private CandidateService candidateService;
@@ -45,6 +46,8 @@ public class CandidateServiceTest extends BaseTest {
 		Phone phone = new Phone(AREA_CODE, PREFIX_VALUE, NUMBER);
 		SocialSecurityNumber ssn = new SocialSecurityNumber(SSN_FIRST_VAL, SSN_SECOND_VAL, SSN_THIRD_VAL);
 		Candidate candidate = new Candidate(FIRST_NAME, LAST_NAME, EMAIL, address, phone, ssn, SKYPE_ID, STATUS);
+		candidate.setTechnology(new Technology("JAVA"));
+		System.out.println("candidate =================="+ candidate);
 		this.candidateService.add(candidate);
 		Candidate c1 = this.candidateService.findCandidateByEmail(EMAIL);
 		Candidate c2 = this.candidateService.findCandidateBySSN(SSN_THIRD_VAL);
