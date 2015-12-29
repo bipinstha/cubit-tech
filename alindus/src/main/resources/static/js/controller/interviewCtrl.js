@@ -18,5 +18,20 @@ myApp.controller('InterviewCtrl', [ '$scope', '$http','$routeParams', 'UserServi
 			$scope.searchFilter = '';
 
 			$scope.searchFilter = '';
+			
+			$scope.updateFlag = false;
+			
+			$scope.updateSave = function () {
+				if ($scope.updateFlag) {
+					/*InterviewService.updateInterview($scope.interview).then(function(response){
+						console.log("Update Response::");
+						console.log(response);
+					})*/
+					$scope.updateFlag = !$scope.updateFlag;
+				} else {
+					$scope.updateFlag = !$scope.updateFlag;
+				}
+				
+			}
 
 		} ]);

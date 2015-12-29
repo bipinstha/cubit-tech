@@ -79,18 +79,18 @@
 	</thead>
 	<tbody ng-repeat="interview in interviews | orderBy:sortType:sortReverse | filter:searchFilter"">
 		<tr ng-repeat="ir in interview.interviewRound | orderBy:sortType:sortReverse | filter:searchFilter">
-			<td>{{interview.vc.firstName+" "+interview.vc.lastName}}</td>
-			<td>{{interview.marketing.firstName+" "+interview.marketing.lastName}}</td>
-			<td>{{interview.candidate.firstName+" "+interview.candidate.lastName}}</td>
+			<td><a href="#user/{{interview.vc.email}}">{{interview.vc.firstName+" "+interview.vc.lastName}}</a></td>
+			<td><a href="#user/{{interview.marketing.email}}">{{interview.marketing.firstName+" "+interview.marketing.lastName}}</a></td>
+			<td><a href="#candidate/{{interview.candidate.id}}">{{interview.candidate.firstName+" "+interview.candidate.lastName}}</a></td>
 			<td>{{interview.client.name}}</td>
 			<td>{{interview.vendor.name}}</td>
 			<td>{{interview.technology.name}}</td>
 			<td>{{ir.round.name}}</td>
 			<td>{{ir.interviewType.type}}</td>
-			<td>{{ir.callTaker.firstName+" "+ir.callTaker.lastName}}</td>
+			<td><a href="#user/{{ir.callTaker.email}}">{{ir.callTaker.firstName+" "+ir.callTaker.lastName}}</a></td>
 			<td>{{ir.interviewDate}}</td>
 			<td>{{ir.status}}</td>
-			<td><a href="#interview/{{ir.id}}">Detail</a> | <a href=""
+			<td><a href="#interview/{{interview.id}}">Detail</a> | <a href=""
 				ng-really-message="Are you sure to delete this interview?"
 				ng-really-click="deleteInterview(interview)" item="interview">Delete</a></td>
 		</tr>

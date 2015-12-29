@@ -12,4 +12,5 @@ myApp.controller('DashboardCtrl',['$scope','$routeParams','UserService','$rootSc
 		$scope.roleAdmin = ($rootScope.currentUser.role=='ROLE_ADMIN')?true:false;
 	})
 	
+	//List of Clients
 }])
