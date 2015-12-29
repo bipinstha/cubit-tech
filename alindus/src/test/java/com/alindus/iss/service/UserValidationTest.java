@@ -19,9 +19,9 @@ public class UserValidationTest extends BaseTest {
 	private static final String LAST_NAME = "Gurung";
 	private static final String MIDDLE_NAME = "Babu";
 	private static final String EMAIL = "abc@gmail.com";
-	private static final Integer AREA_CODE = 641;
-	private static final Integer PREFIX_VALUE = 451;
-	private static final Integer NUMBER = 4568;
+	private static final String AREA_CODE = "641";
+	private static final String PREFIX_VALUE = "451";
+	private static final String NUMBER = "4568";
 
 	private static final String PASSWORD = "binod@123";
 	private static final String RE_PASSWORD = "binod@123";
@@ -36,14 +36,14 @@ public class UserValidationTest extends BaseTest {
 	@Autowired
 	private UserService userService;
 
-//	@Test
-//	public void addUserTest() {
-//		User us = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
-//		this.userService.add(us);
-//		System.out.println("user add");
-//		User user1 = this.userService.findUserByEmail(EMAIL);
-//		Assert.assertEquals(ROLE, user1.getRole());
-//	}
+	 @Test
+	 public void addUserTest() {
+	 User us = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
+	 this.userService.add(us);
+	 System.out.println("user add");
+	 User user1 = this.userService.findUserByEmail(EMAIL);
+	 Assert.assertEquals(ROLE, user1.getRole());
+	 }
 
 	@Test
 	public void updateUserTest() {

@@ -62,7 +62,7 @@ public class InterviewControllerTest extends BaseTest {
 		this.userService.add(vc);
 		User marketing = new User(MARKETING_EMAIL, "1234", "1234", Role.ROLE_MARKETING);
 		this.userService.add(marketing);
-		Candidate candidate = new Candidate("Raju", "Lama", CANDIDATE_EMAIL, null, null, new SocialSecurityNumber(9876),
+		Candidate candidate = new Candidate("Raju", "Lama", CANDIDATE_EMAIL, null, null, new SocialSecurityNumber("9876"),
 				"hari", CandidateStatus.MARKETING);
 		this.candidateService.add(candidate);
 	}

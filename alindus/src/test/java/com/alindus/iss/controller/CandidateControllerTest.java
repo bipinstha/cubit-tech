@@ -20,6 +20,7 @@ import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.SocialSecurityNumber;
 import com.alindus.iss.domain.Technology;
+import com.alindus.iss.utils.CustomGsonBuilder;
 import com.google.gson.Gson;
 
 public class CandidateControllerTest extends BaseTest {
@@ -39,9 +40,9 @@ public class CandidateControllerTest extends BaseTest {
 	@Test
 	public void addCandidateTest() throws Exception {
 
-		Phone phone = new Phone(641, 345, 1212);
-		Phone phone1 = new Phone(641, 345, 1212);
-		SocialSecurityNumber ssn = new SocialSecurityNumber(777, 34, 6666);
+		Phone phone = new Phone("641", "345", "1212");
+		Phone phone1 = new Phone("641", "345", "1212");
+		SocialSecurityNumber ssn = new SocialSecurityNumber("777", "34", "6666");
 		Address address = new Address("1010 N 4th street", "FF", "IA", "23456");
 
 		Candidate candidate = new Candidate("amul", "sapkota", CANDIDATE_EMAIL, address, phone, ssn, "skypeId",
@@ -53,7 +54,7 @@ public class CandidateControllerTest extends BaseTest {
 		candidate.setSkypeId1("skypeId1");
 		candidate.setTechnology(new Technology("JAVA"));
 
-		Gson gson = new Gson();
+		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		String json = gson.toJson(candidate);
 
 		MvcResult result = mvc
@@ -68,15 +69,16 @@ public class CandidateControllerTest extends BaseTest {
 
 	@Test
 	public void updateCandidateTest() throws Exception {
-		Gson gson = new Gson();
+		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		MvcResult result = mvc
 				.perform(MockMvcRequestBuilders.get("/secure/candidate/{email}/find", CANDIDATE_EMAIL)
 						.contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andReturn();
-		Phone phone = new Phone(111, 111, 2222);
-		Phone phone1 = new Phone(222, 222, 2222);
-		SocialSecurityNumber ssn = new SocialSecurityNumber(111, 11, 1111);
+		
+		Phone phone = new Phone("111", "111", "2222");
+		Phone phone1 = new Phone("222", "222", "2222");
+		SocialSecurityNumber ssn = new SocialSecurityNumber("111", "11", "1111");
 		Address address = new Address("4146 N Belt Line", "Irvin", "Dallas", "75038");
 		Candidate can1 = gson.fromJson(result.getResponse().getContentAsString(), Candidate.class);
 		can1.setFirstName("Binod");
@@ -85,6 +87,7 @@ public class CandidateControllerTest extends BaseTest {
 		can1.setPhone(phone);
 		can1.setAddress(address);
 		can1.setPhone1(phone1);
+		can1.setTechnology(new Technology("JAVA"));
 		MvcResult result1 = mvc
 				.perform(MockMvcRequestBuilders.post("/secure/candidate/update")
 						.contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE)
