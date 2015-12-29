@@ -5,12 +5,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Phone;
-import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
 import com.alindus.iss.repository.UserRepository;
@@ -21,9 +22,11 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	private static final String CACHE_NAME = "Users";
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void add(User t) {
 		if (t.getId() != null) {
 			throw new IllegalArgumentException("User already exist.");
@@ -34,8 +37,10 @@ public class UserServiceImpl implements UserService {
 		t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
 		this.userRepository.save(t);
 	}
+
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void update(User t) {
 		User u = this.userRepository.findByEmail(t.getEmail());
 		if (u == null) {
@@ -61,6 +66,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void remove(Long obj) {
 		if (obj == null) {
 			throw new IllegalArgumentException("Invalid id.");
@@ -69,17 +75,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Cacheable(value = CACHE_NAME, key = "#id")
 	public User findOne(Long obj) {
 		return this.userRepository.findOne(obj);
 	}
 
 	@Override
+	@Cacheable(value = CACHE_NAME)
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
 		return this.userRepository.findAll();
 	}
 
 	@Override
+	@Cacheable(value = CACHE_NAME, key = "#email")
 	public User findUserByEmail(String email) {
 		if (email == null) {
 			throw new IllegalArgumentException("Email not valid.");
@@ -89,6 +97,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void updatePassword(ChangePassword changePassword) {
 		// TODO Auto-generated method stub
 		// TODO encrypt the password before compare
@@ -111,6 +120,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void removeByEmail(String email) {
 		User user = this.userRepository.findByEmail(email);
 		if (user == null) {
@@ -121,6 +131,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void enableUserByEmail(String email) {
 		User user = this.userRepository.findByEmail(email);
 		if (user == null) {
@@ -131,6 +142,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
 	public void disableUserByEmail(String email) {
 		User user = this.userRepository.findByEmail(email);
 		if (user == null) {
@@ -140,22 +152,33 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findByEnableFalse() {	
+	@Cacheable(value = CACHE_NAME)
+	public List<User> findByEnableFalse() {
 		return this.userRepository.findByEnableFalse();
 	}
 
 	@Override
+	@Cacheable(value = CACHE_NAME)
 	public List<User> findByEnableTrue() {
 		return this.userRepository.findByEnableTrue();
 	}
 
 	@Override
+	@Cacheable(value = CACHE_NAME)
 	public List<User> findUnApprovedUsers() {
 		return this.userRepository.findUnApprovedUsers();
 	}
+
 	@Override
 	@Transactional
-	public void approveUser(Role role, String email) {
-		this.userRepository.approveUser(role, email);
+	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
+	public void approveUser(User user) {
+		User u = this.userRepository.findByEmail(user.getEmail());
+		if (u == null) {
+			throw new IllegalArgumentException("User not found.");
+		}
+		u.setEnable(true);
+		u.setRole(user.getRole());
+		this.userRepository.save(u);
 	}
 }

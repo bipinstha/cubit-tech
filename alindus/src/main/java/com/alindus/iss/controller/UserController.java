@@ -162,10 +162,10 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value = "/approve/{role}/{email}", method = RequestMethod.POST)
-	public void approveUser(@PathVariable Role role, @PathVariable String email) {
+	@RequestMapping(value = "/approve", method = RequestMethod.POST)
+	public void approveUser(@RequestBody User user) {
 		try {
-			this.userService.approveUser(role, email);
+			this.userService.approveUser(user);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());

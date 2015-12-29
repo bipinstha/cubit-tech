@@ -189,8 +189,8 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
 			console.log(user);
 			return $http({
 				  method: 'POST',
-				  url: '/secure/user/approve/'+user.role+'/'+user.email,
-				  data:'',
+				  url: '/secure/user/approve/',
+				  data: user,
 				  headers: {
 					  'Accept':'application/json; charset=utf-8',
 					  'Content-Type':'application/json; charset=utf-8'

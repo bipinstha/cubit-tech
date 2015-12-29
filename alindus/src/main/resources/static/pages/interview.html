@@ -1,0 +1,64 @@
+<h1 class="page-head"><a href="#reports">Progress Report</a> / Interview Detail</h1>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="row">
+			<div class="col-sm-6">
+				<h3>Interview Detail:</h3>
+				<table class="table table-striped table-hover">
+					<tr>
+						<td>Candidate:</td>
+						<td><a href="#candidate/{{interview.candidate.id}}">{{interview.candidate.firstName+" "+interview.candidate.lastName}}</a></td>
+					</tr>
+					<tr>
+						<td>Client:</td>
+						<td>{{interview.client.name}}</td>
+					</tr>
+					<tr>
+						<td>Vendor:</td>
+						<td>{{interview.vendor.name}}</td>
+					</tr>
+					<tr>
+						<td>Vendor Call Taker:</td>
+						<td><a href="#user/{{interview.vc.email}}">{{interview.vc.firstName+" "+interview.vc.lastName}}</a></td>
+					</tr>
+					<tr>
+						<td>Marketing:</td>
+						<td><a href="#user/{{interview.marketing.email}}">{{interview.marketing.firstName+" "+interview.marketing.lastName}}</a></td>
+					</tr>
+					<tr>
+						<td>Technology:</td>
+						<td>{{interview.technology.name}}</td>
+					</tr>
+					<tr>
+						<td>Status:</td>
+						<td>{{interview.status}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-sm-6">
+				<h3>Interview Rounds:</h3>
+				<div ng-repeat="ir in interview.interviewRound">
+					<h4>{{ir.round.name}}</h4>
+					<table class="table interview-round {{ir.status}}">
+						<tr>
+							<td>Type</td>
+							<td>{{ir.interviewType.type}}</td>
+						</tr>
+						<tr>
+							<td>Call Taker</td>
+							<td>{{ir.callTaker.firstName+" "+ir.callTaker.lastName}}</td>
+						</tr>
+						<tr>
+							<td>Interview Date</td>
+							<td>{{ir.interviewDate}}</td>
+						</tr>
+						<tr>
+							<td>Status</td>
+							<td>{{ir.status}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

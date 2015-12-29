@@ -1,5 +1,7 @@
 package com.alindus.iss.service;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,12 +24,6 @@ import com.alindus.iss.domain.SocialSecurityNumber;
 import com.alindus.iss.domain.Technology;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.domain.Vendor;
-import com.alindus.iss.service.CandidateService;
-import com.alindus.iss.service.InterviewService;
-import com.alindus.iss.service.UserService;
-
-
-import static org.junit.Assert.*;
 
 @org.junit.FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InterviewServiceTest extends BaseTest {
@@ -35,7 +31,7 @@ public class InterviewServiceTest extends BaseTest {
 	private static final String VC_EMAIL = "amul.shapkota@gmail.com";
 	private static final String MARKETING_EMAIL = "prabin.adhikari@gmail.com";
 	private static final String CANDIDATE_EMAIL = "bharat.thapa@gmail.com";
-	private static final String INTERVIEWER = "Rajib Gandi";
+	private static final String CAL_TAKER = "rajib.gandi@gmail.com";
 	@Autowired
 	private InterviewService interviewService;
 	@Autowired
@@ -51,6 +47,9 @@ public class InterviewServiceTest extends BaseTest {
 		User user1 = new User(VC_EMAIL, "amul@123", "amul@123", Role.ROLE_VC);
 		user1.setEnable(true);
 		this.userService.add(user1);
+		User user2 = new User(CAL_TAKER, "rajib@123", "rajib@123", Role.ROLE_CALLTAKER);
+		user2.setEnable(true);
+		this.userService.add(user2);
 		SocialSecurityNumber ssn = new SocialSecurityNumber(4567);
 		Candidate candidate = new Candidate(CANDIDATE_EMAIL, "Thapa", CANDIDATE_EMAIL, null, null, ssn, "bharat.thapa",
 				CandidateStatus.MARKETING);
@@ -61,6 +60,7 @@ public class InterviewServiceTest extends BaseTest {
 	public void testBaddInterviewTest() {
 		User vc = this.userService.findUserByEmail(VC_EMAIL);
 		User marketing = this.userService.findUserByEmail(MARKETING_EMAIL);
+		User callTaker = this.userService.findUserByEmail(CAL_TAKER);
 		Candidate candidate = this.candidateService.findCandidateByEmail(CANDIDATE_EMAIL);
 		Client client = new Client("Microsoft");
 		Vendor vendor = new Vendor("Infosys");
@@ -71,7 +71,7 @@ public class InterviewServiceTest extends BaseTest {
 				InterviewStatus.PENDING);
 
 		InterviewRound iRound = new InterviewRound(round, InterviewStatus.PENDING, interviewType, new Date(), interview,
-				INTERVIEWER);
+				callTaker);
 		List<InterviewRound> list = new ArrayList<>();
 		list.add(iRound);
 		interview.setInterviewRound(list);
@@ -85,13 +85,14 @@ public class InterviewServiceTest extends BaseTest {
 	public void testCupdateInterviewTest() {
 		Interview interview = this.interviewService.findOne(1L);
 		System.out.println(interview.getInterviewRound().size());
+		User callTaker = this.userService.findUserByEmail(CAL_TAKER);
 		for (InterviewRound ir : interview.getInterviewRound()) {
 			if (ir.getRound().getName().equals("Second")) {
 				ir.setStatus(InterviewStatus.APPROVED);
 			}
 		}
 		InterviewRound interviewRound = new InterviewRound(new Round("Third"), InterviewStatus.PENDING,
-				new InterviewType("Skype"), new Date(), interview, "Rakesh  Aryal");
+				new InterviewType("Skype"), new Date(), interview, callTaker);
 		interview.addInterviewRound(interviewRound);
 		for (InterviewRound ir : interview.getInterviewRound()) {
 			System.out.println(ir.getStatus());
@@ -142,6 +143,7 @@ public class InterviewServiceTest extends BaseTest {
 		this.interviewService.remove(1L);
 		this.userService.removeByEmail(MARKETING_EMAIL);
 		this.userService.removeByEmail(VC_EMAIL);
+		this.userService.removeByEmail(CAL_TAKER);
 		this.candidateService.removeCandidate(CANDIDATE_EMAIL);
 	}
 }

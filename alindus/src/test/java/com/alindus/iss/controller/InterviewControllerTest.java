@@ -41,7 +41,6 @@ public class InterviewControllerTest extends BaseTest {
 	private static final String VC_EMAIL = "ram@gmail.com";
 	private static final String MARKETING_EMAIL = "shyam@gmail.com";
 	private static final String CANDIDATE_EMAIL = "hari@gmail.com";
-	private static final String INTERVIEWER = "Guggle";
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -78,7 +77,7 @@ public class InterviewControllerTest extends BaseTest {
 				new Technology("JAVA"), null, InterviewStatus.PENDING);
 		List<InterviewRound> list = new ArrayList<>();
 		InterviewRound interviewRound = new InterviewRound(new Round("First"), InterviewStatus.PENDING,
-				new InterviewType("phone"), null, null, INTERVIEWER);
+				new InterviewType("phone"), null, null, vc);
 		list.add(interviewRound);
 		interview.setInterviewRound(list);
 		MvcResult result = mvc
@@ -93,6 +92,7 @@ public class InterviewControllerTest extends BaseTest {
 
 	//@Test
 	public void testDupdateInterview() throws Exception {
+		User vc = this.userService.findUserByEmail(VC_EMAIL);
 		Gson gson = new Gson();
 		MvcResult result = mvc
 				.perform(MockMvcRequestBuilders.get("/secure/interview/all")
@@ -108,7 +108,7 @@ public class InterviewControllerTest extends BaseTest {
 
 			System.out.println(interview);
 			InterviewRound round = new InterviewRound(new Round("Second"), InterviewStatus.PENDING,
-					new InterviewType("Skype"), null, null, "Rakesh");
+					new InterviewType("Skype"), null, null, vc);
 			interview.addInterviewRound(round);
 			for (InterviewRound ir : interview.getInterviewRound()) {
 				if (ir.getRound().getName().equals("First"))

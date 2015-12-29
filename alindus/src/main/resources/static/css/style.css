@@ -53,4 +53,13 @@ footer {
     padding: 30px 0px;
 }
 
+.interview-round {
+    background: #eaeaea;
+}
+
+.interview-round.PENDING {
+	background: #fffcb6;
+}
+.interview-round.APPROVED {
+	background: #dcffdc;
 }

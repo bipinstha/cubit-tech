@@ -3,7 +3,12 @@ myApp.controller('ApproveUserCtrl', [ '$scope', '$http', 'UserService',
 
 			console.log("LOADED******Approve User Controller");
 			$scope.email = $routeParams.email;
-
+			
+			$scope.success = false;
+			$scope.closeAlert = function () {
+				$scope.success = false;
+			}
+			
 			UserService.findUserByEmail($scope.email).then(function(response) {
 				$scope.user = response;
 				console.log("User to be approved::");
@@ -14,11 +19,10 @@ myApp.controller('ApproveUserCtrl', [ '$scope', '$http', 'UserService',
 				$scope.listOfRoles = response.data;
 				console.log($scope.listOfRoles);
 			})
-
+			
 			$scope.approveUser = function(user) {
 				console.log(user);
 				if (user.role != "") {
-					user.enable = true;
 					UserService.approveUser(user).then(function(response) {
 						$scope.success = true;
 					})
