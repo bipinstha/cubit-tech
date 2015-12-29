@@ -12,13 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alindus.iss.domain.Client;
 import com.alindus.iss.domain.Interview;
 import com.alindus.iss.domain.InterviewRound;
-import com.alindus.iss.domain.InterviewType;
-import com.alindus.iss.domain.Round;
-import com.alindus.iss.domain.Technology;
-import com.alindus.iss.domain.Vendor;
 import com.alindus.iss.service.InterviewService;
 
 @RestController
@@ -77,51 +72,6 @@ public class InterviewController {
 		}
 	}
 
-	@RequestMapping(value = "/client/like/{name}", method = RequestMethod.GET)
-	public List<Client> findClientLike(@PathVariable String name) {
-		try {
-			return interviewService.findClientsByNameLike(name);
-		} catch (IllegalArgumentException ex) {
-			throw new IllegalArgumentException(ex.getMessage());
-		}
-	}
-
-	@RequestMapping(value = "/vendor/like/{name}", method = RequestMethod.GET)
-	public List<Vendor> findVendorLike(@PathVariable String name) {
-		try {
-			return interviewService.findVendorsByNameLike(name);
-		} catch (IllegalArgumentException ex) {
-			throw new IllegalArgumentException(ex.getMessage());
-		}
-	}
-
-	@RequestMapping(value = "/technology/like/{name}", method = RequestMethod.GET)
-	public List<Technology> findTechnologiesLike(@PathVariable String name) {
-		try {
-			return interviewService.findTechnologiesByNameLike(name);
-		} catch (IllegalArgumentException ex) {
-			throw new IllegalArgumentException(ex.getMessage());
-		}
-	}
-
-	@RequestMapping(value = "/round/like/{name}", method = RequestMethod.GET)
-	public List<Round> findRoundsLike(@PathVariable String name) {
-		try {
-			return interviewService.findRoundsByNameLike(name);
-		} catch (IllegalArgumentException ex) {
-			throw new IllegalArgumentException(ex.getMessage());
-		}
-	}
-
-	@RequestMapping(value = "/interviewtype/like/{name}", method = RequestMethod.GET)
-	public List<InterviewType> findInterviewTypeLike(@PathVariable String type) {
-		try {
-			return interviewService.findInterviewsTypeByTypeLike(type);
-		} catch (IllegalArgumentException ex) {
-			throw new IllegalArgumentException(ex.getMessage());
-		}
-	}
-
 	@RequestMapping(value = "/update/interviewround", method = RequestMethod.POST)
 	public InterviewRound updateInterviewRound(@RequestBody InterviewRound interviewRound) {
 		try {
@@ -135,7 +85,7 @@ public class InterviewController {
 	@RequestMapping(value="/ir/all", method=RequestMethod.GET)
 	public List<InterviewRound> getInterviewRounds() {
 		try {
-			return this.interviewService.getInterviewRounds();
+			return this.interviewService.findInterviewRounds();
 		} catch (IllegalArgumentException ex) {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
@@ -144,7 +94,7 @@ public class InterviewController {
 	@RequestMapping(value="/ir/all/{id}", method=RequestMethod.GET)
 	public List<InterviewRound> getInterviewRoundsByInterviewId(@PathVariable Long id) {
 		try {
-			return this.interviewService.getInterviewRoundsByInterviewId(id);
+			return this.interviewService.findInterviewRoundsByInterviewId(id);
 		} catch (IllegalArgumentException ex) {
 			throw new IllegalArgumentException(ex.getMessage());
 		}

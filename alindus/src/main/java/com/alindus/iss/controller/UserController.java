@@ -53,7 +53,6 @@ public class UserController {
 
 	@RequestMapping(value = "/{email}/find", method = RequestMethod.GET)
 	public User findUserByEmail(@PathVariable String email) {
-
 		try {
 			return this.userService.findUserByEmail(email);
 		} catch (IllegalArgumentException ex) {
