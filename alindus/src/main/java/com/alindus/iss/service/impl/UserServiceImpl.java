@@ -160,8 +160,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	// @Cacheable(value = CACHE_NAME)
-	public List<User> findByEnableTrue() {
-		return this.userRepository.findByEnableTrue();
+	public List<User> findByEnableTrue(String email) {
+		return this.userRepository.findByEmailNotAndEnableTrue(email);
 	}
 
 	@Override

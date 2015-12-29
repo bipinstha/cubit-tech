@@ -20,7 +20,7 @@ public interface UserService extends AbstractService<User, Long> {
 
 	public List<User> findByEnableFalse();
 
-	public List<User> findByEnableTrue();
+	public List<User> findByEnableTrue(String email);
 
 	public List<User> findUnApprovedUsers();
 
