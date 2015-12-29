@@ -12,17 +12,13 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "users")
 public class User extends Person {
-
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
 	private String password;
 	@Transient
-
 	private String rePassword;
-	// @Column()
 	private Boolean enable;
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -98,5 +94,4 @@ public class User extends Person {
 				+ super.getEmail() + "\",\"address\":" + super.getAddress().toJson() + ", \"phone\":"
 				+ super.getPhone().toJson() + "}";
 	}
-
 }
