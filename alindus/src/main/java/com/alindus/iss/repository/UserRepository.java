@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
@@ -33,8 +32,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Query("from User u where u.enable is NULL")
 	public List<User> findUnApprovedUsers();
 	
-	@Modifying
-	@Query("update User u set u.enable = true, u.role = :role where u.email = :email")
-	public void approveUser(@Param(value="role") Role role,@Param(value="email") String email);
+	public List<User> findByRole(Role role);
 	
 }

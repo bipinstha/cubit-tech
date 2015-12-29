@@ -170,4 +170,13 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
+
+	@RequestMapping(value = "/role/{role}", method = RequestMethod.GET)
+	public List<User> findUsersByRole(@PathVariable Role role) {
+		try {
+			return this.userService.findUserByRole(role);
+		} catch (IllegalArgumentException ex) {
+			throw new IllegalArgumentException(ex.getMessage());
+		}
+	}
 }
