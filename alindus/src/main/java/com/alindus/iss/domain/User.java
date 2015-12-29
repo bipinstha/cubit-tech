@@ -86,12 +86,4 @@ public class User extends Person {
 		return "User [id=" + id + ", password=" + password + ", rePassword=" + rePassword + ", role=" + role + "]";
 	}
 
-	@Override
-	public String toJson() {
-		return "{\"id\":" + id + ", \"password\":\"" + password + "\", \"rePassword\":\"" + rePassword
-				+ "\", \"role\":\"" + role + "\"," + "\"firstName\":\"" + super.getFirstName() + "\", \"middleName\":\""
-				+ super.getMiddleName() + "\", \"lastName\":\"" + super.getLastName() + "\", \"email\":\""
-				+ super.getEmail() + "\",\"address\":" + super.getAddress().toJson() + ", \"phone\":"
-				+ super.getPhone().toJson() + "}";
-	}
 }

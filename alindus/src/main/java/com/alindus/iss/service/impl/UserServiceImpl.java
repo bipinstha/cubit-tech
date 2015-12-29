@@ -1,5 +1,6 @@
 package com.alindus.iss.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -36,6 +37,7 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("Password does not match with repassword");
 		}
 		t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
+		t.setCreatedDate(new Date());
 		this.userRepository.save(t);
 	}
 
@@ -62,6 +64,8 @@ public class UserServiceImpl implements UserService {
 		updateUser.setId(u.getId());
 		updateUser.setMiddleName(t.getMiddleName());
 		updateUser.setEnable(t.getEnable());
+		updateUser.setCreatedDate(u.getCreatedDate());
+		updateUser.setUpdatedDate(new Date());
 		this.userRepository.save(updateUser);
 	}
 
@@ -180,6 +184,7 @@ public class UserServiceImpl implements UserService {
 		}
 		u.setEnable(true);
 		u.setRole(user.getRole());
+		u.setUpdatedDate(new Date());
 		this.userRepository.save(u);
 	}
 

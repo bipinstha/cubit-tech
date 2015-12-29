@@ -20,6 +20,7 @@ import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.SocialSecurityNumber;
 import com.alindus.iss.domain.Technology;
+import com.alindus.iss.utils.CustomGsonBuilder;
 import com.google.gson.Gson;
 
 public class CandidateControllerTest extends BaseTest {
@@ -53,7 +54,7 @@ public class CandidateControllerTest extends BaseTest {
 		candidate.setSkypeId1("skypeId1");
 		candidate.setTechnology(new Technology("JAVA"));
 
-		Gson gson = new Gson();
+		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		String json = gson.toJson(candidate);
 
 		MvcResult result = mvc
@@ -68,7 +69,7 @@ public class CandidateControllerTest extends BaseTest {
 
 	@Test
 	public void updateCandidateTest() throws Exception {
-		Gson gson = new Gson();
+		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		MvcResult result = mvc
 				.perform(MockMvcRequestBuilders.get("/secure/candidate/{email}/find", CANDIDATE_EMAIL)
 						.contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
