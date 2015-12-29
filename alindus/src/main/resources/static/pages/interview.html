@@ -1,4 +1,6 @@
-<h1 class="page-head"><a href="#reports">Progress Report</a> / Interview Detail</h1>
+<h1 class="page-head">
+	<a href="#reports">Progress Report</a> / Interview Detail
+</h1>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="row">
@@ -7,33 +9,96 @@
 				<table class="table table-striped table-hover">
 					<tr>
 						<td>Candidate:</td>
-						<td><a href="#candidate/{{interview.candidate.id}}">{{interview.candidate.firstName+" "+interview.candidate.lastName}}</a></td>
+						<td><span ng-show="!updateFlag"><a
+								href="#candidate/{{interview.candidate.id}}">{{interview.candidate.firstName+"
+									"+interview.candidate.lastName}}</a></span>
+							<div ng-show="updateFlag" class="col-sm">
+								<select class="form-control" ng-model="interviewDTO.candidate" ng-options="(c.firstName+' '+c.lastName) for c in listOfCandidates"><option></option></select>
+							</div></td>
 					</tr>
 					<tr>
 						<td>Client:</td>
-						<td>{{interview.client.name}}</td>
+						<td><span ng-show="!updateFlag">{{interview.client.name}}</span>
+							<div class="col-sm-12">
+								<input type="text" class="form-control"
+							ng-show="updateFlag" ng-model="interview.client.name" value="{{interview.client.name}}" />
+							</div> </td>
 					</tr>
 					<tr>
 						<td>Vendor:</td>
-						<td>{{interview.vendor.name}}</td>
+						<td>
+						<span ng-show="!updateFlag">{{interview.vendor.name}}</span>
+							<div class="col-sm-12">
+								<input type="text" class="form-control"
+							ng-show="updateFlag" ng-model="interview.vendor.name" value="{{interview.vendor.name}}" />
+							</div> 
+						
+						</td>
 					</tr>
 					<tr>
 						<td>Vendor Call Taker:</td>
-						<td><a href="#user/{{interview.vc.email}}">{{interview.vc.firstName+" "+interview.vc.lastName}}</a></td>
+						<td>
+						<span ng-show="!updateFlag"><a href="#user/{{interview.vc.email}}">{{interview.vc.firstName+"
+								"+interview.vc.lastName}}</a></span>
+							<div ng-show="updateFlag">
+
+								<div class="col-sm-6">
+									<input type="text" class="form-control" ng-model="interview.vc.firstName" ng-show="updateFlag"
+										value="{{interview.vc.firstName}}" />
+
+								</div>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" ng-model="interview.vc.lastName" ng-show="updateFlag"
+										value="{{interview.vc.lastName}}" />
+								</div>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td>Marketing:</td>
-						<td><a href="#user/{{interview.marketing.email}}">{{interview.marketing.firstName+" "+interview.marketing.lastName}}</a></td>
+						<td>
+						
+						<span ng-show="!updateFlag"><a href="#user/{{interview.marketing.email}}">{{interview.marketing.firstName+"
+								"+interview.marketing.lastName}}</a></span>
+							<div ng-show="updateFlag">
+
+								<div class="col-sm-6">
+									<input type="text" class="form-control" ng-model="interview.marketing.firstName" ng-show="updateFlag"
+										value="{{interview.marketing.firstName}}" />
+
+								</div>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" ng-model="interview.marketing.lastName" ng-show="updateFlag"
+										value="{{interview.marketing.lastName}}" />
+								</div>
+							</div>		
+						</td>
 					</tr>
 					<tr>
 						<td>Technology:</td>
-						<td>{{interview.technology.name}}</td>
+						<td>
+						<span ng-show="!updateFlag">{{interview.technology.name}}</span>
+							<div class="col-sm-12">
+								<input type="text" class="form-control"
+							ng-show="updateFlag" ng-model="interview.technology.name" value="{{interview.technology.name}}" />
+							</div> 
+						</td>
 					</tr>
 					<tr>
 						<td>Status:</td>
-						<td>{{interview.status}}</td>
+						<td>
+						<span ng-show="!updateFlag">{{interview.status}}</span>
+							<div class="col-sm-12">
+								<input type="text" class="form-control"
+							ng-show="updateFlag" ng-model="interview.status" value="{{interview.status}}" />
+							</div> 
+						</td>
 					</tr>
 				</table>
+				<button type="button" class="btn btn-primary"
+					ng-click="updateSave(interview)">
+					<span ng-show="!updateFlag">Update</span><span ng-show="updateFlag">Save</span>
+				</button>
 			</div>
 			<div class="col-sm-6">
 				<h3>Interview Rounds:</h3>
@@ -58,6 +123,7 @@
 						</tr>
 					</table>
 				</div>
+				<a class="btn btn-primary">Add Round</a>
 			</div>
 		</div>
 	</div>
