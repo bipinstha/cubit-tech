@@ -152,19 +152,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Cacheable(value = CACHE_NAME)
+	//@Cacheable(value = CACHE_NAME)
 	public List<User> findByEnableFalse() {
 		return this.userRepository.findByEnableFalse();
 	}
 
 	@Override
-	@Cacheable(value = CACHE_NAME)
+	//@Cacheable(value = CACHE_NAME)
 	public List<User> findByEnableTrue() {
 		return this.userRepository.findByEnableTrue();
 	}
 
 	@Override
-	@Cacheable(value = CACHE_NAME)
+	//@Cacheable(value = CACHE_NAME)
 	public List<User> findUnApprovedUsers() {
 		return this.userRepository.findUnApprovedUsers();
 	}

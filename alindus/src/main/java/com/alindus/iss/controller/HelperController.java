@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alindus.iss.domain.Client;
+import com.alindus.iss.domain.InterviewRound.InterviewStatus;
 import com.alindus.iss.domain.InterviewType;
 import com.alindus.iss.domain.Round;
 import com.alindus.iss.domain.Technology;
@@ -27,7 +28,7 @@ public class HelperController {
 	@Autowired
 	private InterviewService interviewService;
 	
-	@RequestMapping(value = "/clients", method = RequestMethod.GET)
+	@RequestMapping(value = "/client/all", method = RequestMethod.GET)
 	public List<Client> findAllClients() {
 		try {
 			return interviewService.findAllClients();
@@ -45,7 +46,7 @@ public class HelperController {
 		}
 	}
 
-	@RequestMapping(value = "/vendors", method = RequestMethod.GET)
+	@RequestMapping(value = "/vendor/all", method = RequestMethod.GET)
 	public List<Vendor> findAllVendor() {
 		try {
 			return interviewService.findAllVendors();
@@ -64,7 +65,7 @@ public class HelperController {
 	}
 
 	
-	@RequestMapping(value = "/technologies", method = RequestMethod.GET)
+	@RequestMapping(value = "/technologie/all", method = RequestMethod.GET)
 	public List<Technology> findAllTechnologies() {
 		try {
 			return interviewService.findAllTechnologies();
@@ -81,7 +82,7 @@ public class HelperController {
 		}
 	}
 
-	@RequestMapping(value = "/rounds", method = RequestMethod.GET)
+	@RequestMapping(value = "/round/all", method = RequestMethod.GET)
 	public List<Round> findAllRounds() {
 		try {
 			return interviewService.findAllRounds();
@@ -99,7 +100,7 @@ public class HelperController {
 		}
 	}
 
-	@RequestMapping(value = "/interviewtypes", method = RequestMethod.GET)
+	@RequestMapping(value = "/interviewtype/all", method = RequestMethod.GET)
 	public List<InterviewType> findAllInterviewTypes() {
 		try {
 			return interviewService.findAllInterviewTypes();
@@ -114,5 +115,10 @@ public class HelperController {
 		} catch (IllegalArgumentException ex) {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
+	}
+	
+	@RequestMapping(value = "/all/status", method = RequestMethod.GET)
+	public InterviewStatus[] getAllInterviewStatus() {
+		return InterviewStatus.values();
 	}
 }
