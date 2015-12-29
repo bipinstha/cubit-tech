@@ -1,11 +1,16 @@
 package com.alindus.iss.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,17 +46,33 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public User updateUser(@RequestBody User user) {
-		try {
-			this.userService.update(user);
-			return user;
-		} catch (IllegalArgumentException ex) {
-			this.logger.error(ex.getMessage());
-			throw new IllegalArgumentException(ex.getMessage());
+	public User updateUser(@Valid @RequestBody User user, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			List<String> errorLsit = new ArrayList<String>();
+			for (Object object : bindingResult.getAllErrors()) {
+				if (object instanceof FieldError) {
+					FieldError fieldError = (FieldError) object;
+					errorLsit.add(fieldError.getDefaultMessage());
+					System.out.println("nepal" + fieldError.getDefaultMessage());
+				}
+
+			}
+			throw new IllegalArgumentException(errorLsit.toString());
+		} else {
+			try {
+				this.userService.update(user);
+				return user;
+
+			} catch (IllegalArgumentException ex) {
+				this.logger.error(ex.getMessage());
+				throw new IllegalArgumentException(ex.getMessage());
+			}
+
 		}
+
 	}
-	
-	
+
 	@RequestMapping(value = "/{email}/find", method = RequestMethod.GET)
 	public User findUserByEmail(@PathVariable String email) {
 
@@ -62,11 +83,11 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/{email}/remove", method = RequestMethod.DELETE)
 	public void removeUserByEmail(@PathVariable String email) {
 		try {
-			 this.userService.removeByEmail(email);
+			this.userService.removeByEmail(email);
 		} catch (IllegalArgumentException ex) {
 			this.logger.error(ex.getMessage());
 			throw new IllegalArgumentException(ex.getMessage());
@@ -130,8 +151,8 @@ public class UserController {
 	public Role[] getAllRoles() {
 		return Role.values();
 	}
-	
-	@RequestMapping(value="/unapproved", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/unapproved", method = RequestMethod.GET)
 	public List<User> findUnApprovedUsers() {
 		try {
 			return this.userService.findUnApprovedUsers();
@@ -140,7 +161,8 @@ public class UserController {
 			throw new IllegalArgumentException(ex.getMessage());
 		}
 	}
-	@RequestMapping(value="/approve/{role}/{email}", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/approve/{role}/{email}", method = RequestMethod.POST)
 	public void approveUser(@PathVariable Role role, @PathVariable String email) {
 		try {
 			this.userService.approveUser(role, email);
