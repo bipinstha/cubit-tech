@@ -9,14 +9,11 @@
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">First Name</label>
 			<div class="col-sm-7">
-				<input type="text" name="username" class="form-control"
-					ng-model="user.firstName" required pattern=".{5,10}" placeholder="First Name"
-					value="{{user.firstName}}"> 
-					<span style="color: red"
-					ng-show="user_details_form.username.$pristine || user_details_form.username.$dirty && user_details_form.username.$invalid && user_details_form.username.$error.pattern">
-					<span ng-show="user_details_form.username.$error.required">Username
-						is required.</span>
-						<span ng-show="user_details_form.username.$error.pattern">Invalid username.</span>
+				<input type="text" name="firstname" class="form-control"
+					ng-model="user.firstName" required placeholder="First Name"
+					value="{{user.firstName}}"> <span style="color: red"
+					ng-show="(user_details_form.firstname.$pristine || user_details_form.firstname.$dirty) && user_details_form.firstname.$invalid">
+					<span ng-show="user_details_form.firstname.$error.required">required.</span>
 				</span>
 			</div>
 		</div>
@@ -30,15 +27,28 @@
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">Last Name</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control" ng-model="user.lastName"
-					placeholder="Last Name" value="{{user.lastName}}">
+				<input type="text" class="form-control" name="lastname"
+					ng-model="user.lastName" required placeholder="Last Name"
+					value="{{user.lastName}}">
+				<!-- 					validation -->
+				<span style="color: red"
+					ng-show="(user_details_form.lastname.$pristine || user_details_form.lastname.$dirty )&& user_details_form.lastname.$invalid">
+					<span ng-show="user_details_form.lastname.$error.required">required.</span>
+				</span>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">Email</label>
 			<div class="col-sm-7">
-				<input type="email" class="form-control" ng-model="user.email"
-					placeholder="Last Name" value="{{user.email}}">
+				<input type="email" name="email" class="form-control"
+					ng-model="user.email" required placeholder="Email"
+					value="{{user.email}}"> <span style="color: red"
+					ng-show="user_details_form.email.$pristine || user_details_form.email.$dirty && user_details_form.email.$invalid">
+					<span ng-show="user_details_form.email.$error.required">required.</span>
+					<span ng-show="user_details_form.email.$error.email">invalid
+						email</span>
+				</span>
+
 			</div>
 		</div>
 		<div class="form-group">
@@ -46,20 +56,36 @@
 			<div class="col-sm-7 row">
 
 				<div class="col-sm-4">
-					<input type="text" class="form-control"
-						ng-model="user.phone.areaCode" placeholder=""
-						value="{{user.phone.areaCode}}">
+					<input type="text" class="form-control" name="areacode"
+						ng-model="user.phone.areaCode" required pattern="^[0-9]{3}"
+						placeholder="" value="{{user.phone.areaCode}}"> <span
+						style="color: red"
+						ng-show="(user_details_form.areacode.$pristine || user_details_form.areacode.$dirty||user_details_form.areacode.$error.pattern) && user_details_form.areacode.$invalid ">
+						<span ng-show="user_details_form.areacode.$error.required">required</span> <span
+						ng-show="user_details_form.areacode.$error.pattern">3 digits</span>
+					</span>
 
 				</div>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"
-						ng-model="user.phone.prefixValue" placeholder=""
-						value="{{user.phone.prefixValue}}">
+					<input type="text" class="form-control" name="prefix"
+						ng-model="user.phone.prefixValue" required pattern="^[0-9]{3}"
+						placeholder="" value="{{user.phone.prefixValue}}"> <span
+						style="color: red"
+						ng-show="(user_details_form.prefix.$pristine || user_details_form.prefix.$dirty ||user_details_form.prefix.$error.pattern) && user_details_form.prefix.$invalid ">
+						<span ng-show="user_details_form.prefix.$error.required">required.</span> <span
+						ng-show="user_details_form.prefix.$error.pattern">3 digits.</span>
+					</span>
+
 				</div>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"
-						ng-model="user.phone.number" placeholder=""
-						value="{{user.phone.number}}">
+					<input type="text" class="form-control" name="lastfourdigits"
+						ng-model="user.phone.number" required pattern="^[0-9]{4}"
+						placeholder="" value="{{user.phone.number}}"> <span
+						style="color: red"
+						ng-show="(user_details_form.lastfourdigits.$pristine || user_details_form.lastfourdigits.$dirty || user_details_form.lastfourdigits.$error.pattern )&& user_details_form.lastfourdigits.$invalid ">
+						<span ng-show="user_details_form.lastfourdigits.$error.required">required.</span> <span
+						ng-show="user_details_form.lastfourdigits.$error.pattern">4 digits</span>
+					</span>
 				</div>
 			</div>
 		</div>
@@ -67,9 +93,18 @@
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">Address Line 1</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control"
-					ng-model="user.address.address" placeholder="Address Line 1"
+				<input type="text" class="form-control" name="address1"
+					ng-model="user.address.address" required pattern=".{5,50}" placeholder="Address Line 1"
 					value="{{user.address.address}}">
+					
+					<span
+						style="color: red"
+						ng-show="(user_details_form.address1.$pristine || user_details_form.address1.$dirty || user_details_form.address1.$error.pattern)&& user_details_form.address1.$invalid ">
+						<span ng-show="user_details_form.address1.$error.required">required</span> 
+						<span
+						ng-show="user_details_form.address1.$error.pattern"> range 5 to 50 characters</span>
+					</span>
+					
 			</div>
 		</div>
 		<div class="form-group">
@@ -83,32 +118,49 @@
 		<div class="form-group">
 			<label class="col-sm-5 control-label"> City</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control" ng-model="user.address.city"
-					placeholder="City" value="{{user.address.city}}">
+				<input type="text" class="form-control" name="city" ng-model="user.address.city"
+					required placeholder="City" value="{{user.address.city}}">
+					<span style="color: red"
+					ng-show="(user_details_form.city.$pristine || user_details_form.city.$dirty) && user_details_form.city.$invalid">
+					<span ng-show="user_details_form.city.$error.required">required.</span>
+				</span>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-5 control-label"> State</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control"
-					ng-model="user.address.state" placeholder="State"
+				<input type="text" class="form-control" name="state"
+					ng-model="user.address.state" required placeholder="State"
 					value="{{user.address.state}}">
+					<span style="color: red"
+					ng-show="(user_details_form.state.$pristine || user_details_form.state.$dirty) && user_details_form.state.$invalid">
+					<span ng-show="user_details_form.state.$error.required">required.</span>
+				</span>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">Zip Code</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control"
-					ng-model="user.address.zipCode" placeholder="Zip Code"
+				<input type="text" class="form-control" name="zipcode"
+					ng-model="user.address.zipCode" required placeholder="Zip Code"
 					value="{{user.address.zipCode}}">
+					<span style="color: red"
+					ng-show="(user_details_form.zipcode.$pristine || user_details_form.zipcode.$dirty) && user_details_form.zipcode.$invalid">
+					<span ng-show="user_details_form.zipcode.$error.required">required.</span>
+				</span>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">Country</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control"
-					ng-model="user.address.country" placeholder="Country"
+				<input type="text" class="form-control" name="country"
+					ng-model="user.address.country" required placeholder="Country"
 					value="{{user.address.country}}">
+					
+					<span style="color: red"
+					ng-show="(user_details_form.country.$pristine || user_details_form.country.$dirty) && user_details_form.country.$invalid">
+					<span ng-show="user_details_form.country.$error.required">required.</span>
+				</span>
 			</div>
 		</div>
 		<div class="form-group">
