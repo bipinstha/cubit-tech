@@ -12,17 +12,13 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "users")
 public class User extends Person {
-
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	//@JsonIgnore
 	private String password;
 	@Transient
-	//@JsonIgnore
 	private String rePassword;
-	// @Column()
 	private Boolean enable;
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -30,14 +26,12 @@ public class User extends Person {
 	public User() {
 	}
 
-
 	public User(String email, String password, String rePassword, Role role) {
 		super(email);
 		this.password = password;
 		this.rePassword = rePassword;
 		this.role = role;
 	}
-
 
 	public User(String firstName, String lastName, String email, Address address, Phone phone, String password,
 			String rePassword, Role role) {
@@ -90,15 +84,6 @@ public class User extends Person {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", password=" + password + ", rePassword=" + rePassword + ", role=" + role + "]";
-	}
-
-	@Override
-	public String toJson() {
-		return "{\"id\":" + id + ", \"password\":\"" + password + "\", \"rePassword\":\"" + rePassword
-				+ "\", \"role\":\"" + role + "\"," + "\"firstName\":\"" + super.getFirstName() + "\", \"middleName\":\""
-				+ super.getMiddleName() + "\", \"lastName\":\"" + super.getLastName() + "\", \"email\":\""
-				+ super.getEmail() + "\",\"address\":" + super.getAddress().toJson() + ", \"phone\":"
-				+ super.getPhone().toJson() + "}";
 	}
 
 }

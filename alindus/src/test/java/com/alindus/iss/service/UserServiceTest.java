@@ -19,9 +19,9 @@ public class UserServiceTest extends BaseTest {
 	private static final String LAST_NAME = "Gurung";
 	private static final String MIDDLE_NAME = "Babu";
 	private static final String EMAIL = "gurung1.binod@gmail.com";
-	private static final Integer AREA_CODE = 641;
-	private static final Integer PREFIX_VALUE = 451;
-	private static final Integer NUMBER = 4568;
+	private static final String AREA_CODE = "641";
+	private static final String PREFIX_VALUE = "451";
+	private static final String NUMBER = "4568";
 
 	private static final String PASSWORD = "binod@123";
 	private static final String RE_PASSWORD = "binod@123";
@@ -39,6 +39,8 @@ public class UserServiceTest extends BaseTest {
 	@Before
 	public void addUserTest() {
 		User us = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
+		us.setFirstName(FIRST_NAME);
+		us.setLastName(LAST_NAME);
 		this.userService.add(us);
 		System.out.println("before execute");
 		User user1 = this.userService.findUserByEmail(EMAIL);

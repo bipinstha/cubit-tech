@@ -1,5 +1,6 @@
 package com.alindus.iss.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Phone;
+import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
 import com.alindus.iss.messaging.SmtpMailSender;
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("Password does not match with repassword");
 		}
 		t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
+		t.setCreatedDate(new Date());
 		this.userRepository.save(t);
 	}
 
@@ -66,6 +69,8 @@ public class UserServiceImpl implements UserService {
 		updateUser.setId(u.getId());
 		updateUser.setMiddleName(t.getMiddleName());
 		updateUser.setEnable(t.getEnable());
+		updateUser.setCreatedDate(u.getCreatedDate());
+		updateUser.setUpdatedDate(new Date());
 		this.userRepository.save(updateUser);
 	}
 
@@ -157,19 +162,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	//@Cacheable(value = CACHE_NAME)
+	// @Cacheable(value = CACHE_NAME)
 	public List<User> findByEnableFalse() {
 		return this.userRepository.findByEnableFalse();
 	}
 
 	@Override
-	//@Cacheable(value = CACHE_NAME)
-	public List<User> findByEnableTrue() {
-		return this.userRepository.findByEnableTrue();
+	// @Cacheable(value = CACHE_NAME)
+	public List<User> findByEnableTrue(String email) {
+		return this.userRepository.findByEmailNotAndEnableTrue(email);
 	}
 
 	@Override
-	//@Cacheable(value = CACHE_NAME)
+	// @Cacheable(value = CACHE_NAME)
 	public List<User> findUnApprovedUsers() {
 		return this.userRepository.findUnApprovedUsers();
 	}
@@ -184,7 +189,7 @@ public class UserServiceImpl implements UserService {
 		}
 		u.setEnable(true);
 		u.setRole(user.getRole());
-		
+		u.setUpdatedDate(new Date());
 		this.userRepository.save(u);
 		
 		try {
@@ -195,5 +200,11 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 		}
 		System.out.println("after mail sent");
+	}
+
+	@Override
+	@Cacheable(value = CACHE_NAME, key = "#role")
+	public List<User> findUserByRole(Role role) {
+		return this.userRepository.findByRole(role);
 	}
 }

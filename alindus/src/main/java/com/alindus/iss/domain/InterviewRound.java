@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -33,6 +34,7 @@ public class InterviewRound implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "round_id")
+	@Valid
 	private Round round;
 	@Enumerated(EnumType.STRING)
 	private InterviewStatus status;

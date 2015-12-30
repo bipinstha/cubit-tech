@@ -21,6 +21,7 @@ import com.alindus.iss.domain.Address;
 import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
+import com.alindus.iss.utils.CustomGsonBuilder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,9 +31,9 @@ public class UserControllerTest extends BaseTest {
 	private static final String LAST_NAME = "Sharma";
 	private static final String EMAIL = "chandni@cubicit.net";
 
-	private static final Integer AREA_CODE = 469;
-	private static final Integer PREFIX_VALUE = 346;
-	private static final Integer NUMBER = 1618;
+	private static final String AREA_CODE = "469";
+	private static final String PREFIX_VALUE = "346";
+	private static final String NUMBER = "1618";
 
 	private static final String PASSWORD = "password";
 	private static final String RE_PASSWORD = "password";
@@ -58,7 +59,9 @@ public class UserControllerTest extends BaseTest {
 		User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
 		user.setEnable(true);
 		user.setEnable(true);
-		Gson gson = new Gson();
+		user.setFirstName(FIRST_NAME);
+		user.setLastName(LAST_NAME);
+		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		String json = gson.toJson(user);
 		System.out.println("json obj: " + json);
 		MvcResult result = mvc
@@ -73,7 +76,7 @@ public class UserControllerTest extends BaseTest {
 
 	@Test
 	public void updateUserTest() throws Exception {
-		Gson gson = new Gson();
+		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		MvcResult result = mvc
 				.perform(MockMvcRequestBuilders.get("/secure/user/{email}/find", EMAIL)
 						.contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON_VALUE))
@@ -95,7 +98,7 @@ public class UserControllerTest extends BaseTest {
 
 	@Test
 	public void viewAllTest() throws Exception {
-		Gson gson = new Gson();
+		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		MvcResult result = mvc
 				.perform(MockMvcRequestBuilders.get("/secure/user/all").contentType(MediaType.APPLICATION_JSON_VALUE)
 						.accept(MediaType.APPLICATION_JSON_VALUE))

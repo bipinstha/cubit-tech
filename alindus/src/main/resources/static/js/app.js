@@ -6,7 +6,7 @@ myApp.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.
 	when('/', {
 		templateUrl : '/static/pages/dashboard.html',
-		controller : 'dashboardCtrl'
+		controller : 'DashboardCtrl'
 	}).
 	when('/reports', {
 		templateUrl : '/static/pages/reports.html',

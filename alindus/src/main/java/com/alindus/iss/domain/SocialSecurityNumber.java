@@ -9,31 +9,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity(name = "ssns")
 public class SocialSecurityNumber implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Pattern(regexp = "[0-9]{min=0,max=3}", message="first two digits of social security is not valid")
-	private Integer initValue;
-	@Pattern(regexp = "[0-9]{min=0,max=2}", message="mid value of social security is not valid")
-	private Integer midValue;
+	// this regular expression is to accept zero or three digits
+	@Pattern(regexp = "[0-9]{3}|/ ", message = "first three digits of social security is not valid")
+	// this is another way to do
+	private String initValue;
+	@Pattern(regexp = "^$|[0-9]{2}", message = "mid two digits of social security is not valid")
+	private String midValue;
 	@Column(unique = true)
-	@Pattern(regexp = "[0-9]{4}", message = "last four digits of valid social security is required")
-	private Integer lastValue;
+	@Pattern(regexp = "^$|[0-9]{4}", message = "last four digits of valid social security is required")
+	private String lastValue;
 
 	public SocialSecurityNumber() {
 	}
 
-	public SocialSecurityNumber(Integer lastValue) {
+	public SocialSecurityNumber(String lastValue) {
 		this.lastValue = lastValue;
 	}
 
-	public SocialSecurityNumber(Integer initValue, Integer midValue, Integer lastValue) {
+	public SocialSecurityNumber(String initValue, String midValue, String lastValue) {
 		this.initValue = initValue;
 		this.midValue = midValue;
 		this.lastValue = lastValue;
@@ -47,27 +46,27 @@ public class SocialSecurityNumber implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getInitValue() {
+	public String getInitValue() {
 		return initValue;
 	}
 
-	public void setInitValue(Integer initValue) {
+	public void setInitValue(String initValue) {
 		this.initValue = initValue;
 	}
 
-	public Integer getMidValue() {
+	public String getMidValue() {
 		return midValue;
 	}
 
-	public void setMidValue(Integer midValue) {
+	public void setMidValue(String midValue) {
 		this.midValue = midValue;
 	}
 
-	public Integer getLastValue() {
+	public String getLastValue() {
 		return lastValue;
 	}
 
-	public void setLastValue(Integer lastValue) {
+	public void setLastValue(String lastValue) {
 		this.lastValue = lastValue;
 	}
 

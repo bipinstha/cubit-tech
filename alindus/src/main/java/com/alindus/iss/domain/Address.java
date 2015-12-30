@@ -23,7 +23,7 @@ public class Address implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Size(min = 5, max = 25, message = "Your address should be between 5 - 25 characters.")
+	@Size(min = 5, max = 50, message = "Your address should be between 5 - 50 characters.")
 	private String address;
 	private String address1;
 
