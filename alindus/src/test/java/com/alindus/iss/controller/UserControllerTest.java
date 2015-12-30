@@ -59,6 +59,8 @@ public class UserControllerTest extends BaseTest {
 		User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
 		user.setEnable(true);
 		user.setEnable(true);
+		user.setFirstName(FIRST_NAME);
+		user.setLastName(LAST_NAME);
 		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		String json = gson.toJson(user);
 		System.out.println("json obj: " + json);

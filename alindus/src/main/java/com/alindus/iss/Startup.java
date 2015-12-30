@@ -12,6 +12,8 @@ import com.alindus.iss.service.UserService;
 @Component
 public class Startup {
 
+	private static final String FIRSTNAME = "Bardan";
+	private static final String LASTNAME = "Chalise";
 	private static final String EMAIL = "bardan.chalise@alindus.com";
 	private static final String PASSWORD = "admin@123";
 	private static final String RE_PASSWORD = "admin@123";
@@ -29,6 +31,8 @@ public class Startup {
 		if (this.userService.findUserByEmail(EMAIL) == null) {
 			User user = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
 			user.setEnable(true);
+			user.setFirstName(FIRSTNAME);
+			user.setLastName(LASTNAME);
 			userService.add(user);
 		}
 	}

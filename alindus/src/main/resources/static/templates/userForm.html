@@ -1,16 +1,23 @@
 <div class="col-sm-6">
-	<form class="form-horizontal">
+	<form class="form-horizontal" name="user_details_form">
 		<uib-alert class="alert alert-success" dismiss-on-timeout="100"
 			ng-show="success" type="success" close="closeAlert()">Info
 		Updated Successfully!</uib-alert>
-		<uib-alert dismiss-on-timeout="100"
-			ng-show="error" type="danger" close="closeAlert()">{{errMessage}}</uib-alert>
+		<uib-alert dismiss-on-timeout="100" ng-show="error" type="danger"
+			close="closeAlert()">{{errMessage}}</uib-alert>
 		<h3>Personal Detail:</h3>
 		<div class="form-group">
 			<label for="" class="col-sm-5 control-label">First Name</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control" ng-model="user.firstName"
-					placeholder="First Name" value="{{user.firstName}}">
+				<input type="text" name="username" class="form-control"
+					ng-model="user.firstName" required pattern=".{5,10}" placeholder="First Name"
+					value="{{user.firstName}}"> 
+					<span style="color: red"
+					ng-show="user_details_form.username.$pristine || user_details_form.username.$dirty && user_details_form.username.$invalid && user_details_form.username.$error.pattern">
+					<span ng-show="user_details_form.username.$error.required">Username
+						is required.</span>
+						<span ng-show="user_details_form.username.$error.pattern">Invalid username.</span>
+				</span>
 			</div>
 		</div>
 		<div class="form-group">

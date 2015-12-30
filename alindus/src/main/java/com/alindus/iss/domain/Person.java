@@ -12,17 +12,24 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @MappedSuperclass
 public abstract class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@NotEmpty(message="First name required")
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "middle_name")
 	private String middleName;
+	@NotEmpty(message="Last name required")
 	@Column(name = "last_name")
 	private String lastName;
 	@Column(unique = true)
+	@Email(message="Invalid Email")
+	@NotEmpty(message="Email required")
 	private String email;
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL)
@@ -33,6 +40,7 @@ public abstract class Person implements Serializable {
 	@JoinColumn(name = "phone_id")
 	private Phone phone;
 	@Temporal(TemporalType.TIMESTAMP)
+	
 	private Date createdDate;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;

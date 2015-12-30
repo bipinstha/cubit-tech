@@ -39,6 +39,8 @@ public class UserServiceTest extends BaseTest {
 	@Before
 	public void addUserTest() {
 		User us = new User(EMAIL, PASSWORD, RE_PASSWORD, ROLE);
+		us.setFirstName(FIRST_NAME);
+		us.setLastName(LAST_NAME);
 		this.userService.add(us);
 		System.out.println("before execute");
 		User user1 = this.userService.findUserByEmail(EMAIL);
