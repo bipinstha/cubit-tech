@@ -38,7 +38,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Query("from User u where u.enable is NULL")
 	public List<User> findUnApprovedUsers();
-
+	
+	@Query("from User u where u.enable = true and u.role = ?1")
 	public List<User> findByRole(Role role);
 
 }

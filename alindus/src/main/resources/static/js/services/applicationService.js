@@ -149,6 +149,24 @@ myApp.factory('ApplicationService',['$http', '$q', function ($http, $q,Candidate
 				console.error('Error while fetching status '+errResponse);
 				return $q.reject(errResponse);
 			})
+		},
+		getAllUsersByRole: function (role) {
+			return  $http({
+				  method: 'GET',
+				  url: '/secure/user/role/'+role,
+				  data: '',
+				  headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				}).then(function(response) {
+				return response;
+			}, function(errResponse) {
+				console.log(errResponse);
+				console.log(errResponse.data);
+				console.error('Error while fetching status '+errResponse);
+				return $q.reject(errResponse);
+			})
 		}
 	}
 }])

@@ -63,3 +63,7 @@ footer {
 .interview-round.APPROVED {
 	background: #dcffdc;
 }
+
+.table.interview-round tr td {
+    padding: 2px 20px;
+}

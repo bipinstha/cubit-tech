@@ -20,6 +20,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -44,6 +47,7 @@ public class InterviewRound implements Serializable {
 	private InterviewType interviewType;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "interview_date")
+	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	private Date interviewDate;
 	// TODO ignore circular dependency
 	@ManyToOne(fetch = FetchType.EAGER)
