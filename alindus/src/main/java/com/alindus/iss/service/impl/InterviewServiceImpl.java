@@ -1,11 +1,16 @@
 package com.alindus.iss.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.alindus.iss.domain.Client;
@@ -48,7 +53,9 @@ public class InterviewServiceImpl implements InterviewService {
 			if (round != null)
 				ir.setRound(round);
 			ir.setInterview(t);
+			ir.setCreatedDate(new Date());
 		}
+		t.setCreatedDate(new Date());
 		this.interviewRepository.save(t);
 
 	}
@@ -80,6 +87,7 @@ public class InterviewServiceImpl implements InterviewService {
 			list = updateInterviewRound(t, interview);
 		newInterview = new Interview(t.getCandidate(), client, vendor, t.getVc(), t.getMarketing(), technology, list,
 				t.getStatus());
+		newInterview.setModifiedDate(new Date());
 		newInterview.setId(interview.getId());
 		this.interviewRepository.save(newInterview);
 
@@ -130,6 +138,8 @@ public class InterviewServiceImpl implements InterviewService {
 			if (round != null)
 				newIR.setRound(round);
 			newIR.setId(iRound.getId());
+			newIR.setCreatedDate(oldIR.getCreatedDate());
+			newIR.setModifiedDate(new Date());
 			irToReturn.add(newIR);
 		}
 		for (InterviewRound nIR : newIRList) {
@@ -140,6 +150,7 @@ public class InterviewServiceImpl implements InterviewService {
 			Round round = this.interviewRepository.findRoundByName(nIR.getRound().getName());
 			if (round != null)
 				nIR.setRound(round);
+			nIR.setCreatedDate(new Date());
 			irToReturn.add(nIR);
 		}
 		return irToReturn;
@@ -257,6 +268,15 @@ public class InterviewServiceImpl implements InterviewService {
 	public List<InterviewRound> findInterviewRoundsByInterviewId(Long id) {
 		Interview interview = this.interviewRepository.findOne(id);
 		return this.interviewRepository.getInterviewRoundsByInterviewId(interview);
+	}
+
+	@Override
+	public Page<Interview> findAll(Pageable pageable) {
+		return this.interviewRepository.findAll(this.createPageRequest());
+	}
+
+	private Pageable createPageRequest() {
+		return new PageRequest(1, 20, Sort.Direction.DESC, "id", "createdDate");
 	}
 
 }

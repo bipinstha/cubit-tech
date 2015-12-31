@@ -12,6 +12,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @MappedSuperclass
 public abstract class Person implements Serializable {
 
@@ -33,8 +35,10 @@ public abstract class Person implements Serializable {
 	@JoinColumn(name = "phone_id")
 	private Phone phone;
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "MM/dd/yyyy hh:mm:ss")
 	private Date createdDate;
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "MM/dd/yyyy hh:mm:ss")
 	private Date updatedDate;
 
 	public Person() {

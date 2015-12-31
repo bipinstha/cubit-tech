@@ -2,6 +2,9 @@ package com.alindus.iss.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.alindus.iss.domain.Client;
 import com.alindus.iss.domain.Interview;
 import com.alindus.iss.domain.InterviewRound;
@@ -37,5 +40,7 @@ public interface InterviewService extends AbstractService<Interview, Long> {
 	public List<InterviewRound> findInterviewRounds();
 
 	public List<InterviewRound> findInterviewRoundsByInterviewId(Long id);
+	
+	public Page<Interview> findAll(Pageable pageable);
 
 }

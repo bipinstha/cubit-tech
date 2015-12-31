@@ -20,5 +20,5 @@
 		maxEntriesLocalDisk="1000">
 		<persistence strategy="localTempSwap" />
 	</cache>
-
+	
 </ehcache>

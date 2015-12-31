@@ -2,6 +2,7 @@ package com.alindus.iss.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 //import java.sql.Date;
 import java.util.List;
 
@@ -17,9 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 import com.alindus.iss.domain.InterviewRound.InterviewStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -63,6 +67,12 @@ public class Interview implements Serializable {
 	private List<InterviewRound> interviewRound;
 	@Enumerated(EnumType.STRING)
 	private InterviewStatus status;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "MM/dd/yyyy hh:mm:ss")
+	private Date createdDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "MM/dd/yyyy hh:mm:ss")
+	private Date modifiedDate;
 
 	public Interview() {
 		interviewRound = new ArrayList<InterviewRound>();
@@ -157,11 +167,28 @@ public class Interview implements Serializable {
 		this.status = status;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Interview [id=" + id + ", candidate=" + candidate + ", client=" + client + ", vendor=" + vendor
 				+ ", vc=" + vc + ", marketing=" + marketing + ", technology=" + technology + ", interviewRound="
-				+ interviewRound + ", status=" + status + "]";
+				+ interviewRound + ", status=" + status + ", createdDate=" + createdDate + ", modifiedDate="
+				+ modifiedDate + "]";
 	}
 
 }

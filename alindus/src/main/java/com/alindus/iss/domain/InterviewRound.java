@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "interview_rounds")
@@ -51,6 +52,12 @@ public class InterviewRound implements Serializable {
 	@OneToOne
 	@JoinColumn
 	private User callTaker;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "MM/dd/yyyy hh:mm:ss")
+	private Date createdDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "MM/dd/yyyy hh:mm:ss")
+	private Date modifiedDate;
 
 	public InterviewRound() {
 	}
@@ -121,6 +128,22 @@ public class InterviewRound implements Serializable {
 		this.callTaker = callTaker;
 	}
 
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
 	public enum InterviewStatus {
 		PENDING, APPROVED, CANCELED, FAILED
 	}
@@ -153,7 +176,8 @@ public class InterviewRound implements Serializable {
 	@Override
 	public String toString() {
 		return "InterviewRound [id=" + id + ", round=" + round + ", status=" + status + ", interviewType="
-				+ interviewType + ", interview=" + interview + ", callTaker=" + callTaker + "]";
+				+ interviewType + ", interviewDate=" + interviewDate + ", interview=" + interview + ", callTaker="
+				+ callTaker + ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate + "]";
 	}
 
 }
