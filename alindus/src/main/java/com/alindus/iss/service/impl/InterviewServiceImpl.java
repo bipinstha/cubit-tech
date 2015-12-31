@@ -85,8 +85,8 @@ public class InterviewServiceImpl implements InterviewService {
 		List<InterviewRound> list = new ArrayList<>();
 		if (t.getInterviewRound() != null)
 			list = updateInterviewRound(t, interview);
-		newInterview = new Interview(t.getCandidate(), client, vendor, t.getVc(), t.getMarketing(), technology, list,
-				t.getStatus());
+		newInterview = new Interview(t.getCandidate(), t.getClient(), t.getVendor(), t.getVc(), t.getMarketing(),
+				t.getTechnology(), list, t.getStatus());
 		newInterview.setModifiedDate(new Date());
 		newInterview.setId(interview.getId());
 		this.interviewRepository.save(newInterview);
