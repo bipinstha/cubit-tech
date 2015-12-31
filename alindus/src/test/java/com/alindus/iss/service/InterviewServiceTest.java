@@ -27,7 +27,8 @@ import com.alindus.iss.domain.Vendor;
 
 @org.junit.FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InterviewServiceTest extends BaseTest {
-
+	private static final String FIRSTNAME = "Amul";
+	private static final String LASTNAME = "Sapkota";
 	private static final String VC_EMAIL = "amul.shapkota@gmail.com";
 	private static final String MARKETING_EMAIL = "prabin.adhikari@gmail.com";
 	private static final String CANDIDATE_EMAIL = "bharat.thapa@gmail.com";
@@ -41,14 +42,20 @@ public class InterviewServiceTest extends BaseTest {
 
 	@Test
 	public void testA() {
-		User user = new User(MARKETING_EMAIL, "prabin@123", "prabin@123", Role.ROLE_MARKETING);
+		User user = new User(MARKETING_EMAIL, "prabin@123", "prabin@123", Role.ROLE_ADMIN);
 		user.setEnable(true);
+		user.setFirstName("Prabin");
+		user.setLastName("Adhikari");
 		this.userService.add(user);
 		User user1 = new User(VC_EMAIL, "amul@123", "amul@123", Role.ROLE_VC);
 		user1.setEnable(true);
+		user1.setFirstName(FIRSTNAME);
+		user1.setLastName(LASTNAME);
 		this.userService.add(user1);
 		User user2 = new User(CAL_TAKER, "rajib@123", "rajib@123", Role.ROLE_CALLTAKER);
 		user2.setEnable(true);
+		user2.setFirstName("Rajib");
+		user2.setLastName("Ghimire");
 		this.userService.add(user2);
 		SocialSecurityNumber ssn = new SocialSecurityNumber("4567");
 		Candidate candidate = new Candidate(CANDIDATE_EMAIL, "Thapa", CANDIDATE_EMAIL, null, null, ssn, "bharat.thapa",
@@ -85,7 +92,7 @@ public class InterviewServiceTest extends BaseTest {
 	@Test
 	public void testCupdateInterviewTest() {
 		List<Interview> interviews = this.interviewService.findAll();
-		if (interviews.size() >0) {
+		if (interviews.size() > 0) {
 			Interview interview = interviews.get(0);
 			System.out.println(interview.getInterviewRound().size());
 			User callTaker = this.userService.findUserByEmail(CAL_TAKER);

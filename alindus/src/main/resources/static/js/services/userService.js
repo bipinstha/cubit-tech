@@ -197,7 +197,7 @@ myApp.factory('UserService', [ '$http', '$q', function($http, $q) {
 				  }
 				}).then(
                 function(response){
-              	  console.log(response);
+              	  console.log("after approval " + response);
                     return response;
                 }, 
                 function(errResponse){
