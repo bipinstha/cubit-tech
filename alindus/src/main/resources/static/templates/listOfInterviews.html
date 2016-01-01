@@ -74,7 +74,7 @@
 	</thead>
 	<tbody>
 		<tr
-			ng-repeat="user in users | orderBy:sortType:sortReverse | filter:searchFilter">
+			ng-repeat="user in users | orderBy:sortType:sortReverse | filter:searchFilter" class="">
 			<td>{{user.firstName+" "+user.lastName}}</td>
 			<td>{{user.email}}</td>
 			<td>{{user.address.city+", "+user.address.state}}</td>

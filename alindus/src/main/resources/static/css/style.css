@@ -57,13 +57,18 @@ footer {
     background: #eaeaea;
 }
 
-.interview-round.PENDING {
+.PENDING {
 	background: #fffcb6;
 }
-.interview-round.APPROVED {
+.APPROVED {
 	background: #dcffdc;
 }
-
+.FAILED {
+	background: #ffc9c9;
+}
+.CANCELED {
+	background: #eee;
+}
 .table.interview-round tr td {
     padding: 2px 20px;
 }
