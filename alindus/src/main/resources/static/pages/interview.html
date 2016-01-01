@@ -48,7 +48,7 @@
 										<input type="text" class="form-control"
 											placeholder="New Client Name"
 											ng-model="newClient.name" />
-										<a ng-click="addClient()"><strong>+</strong></a>
+										<a ng-click="addClient()" class="add-btn"><strong>+</strong></a>
 									</div>
 								</div>
 							</div></td>
@@ -68,7 +68,7 @@
 										<input type="text" class="form-control"
 											placeholder="New Vendor Name"
 											ng-model="newVendor.name" />
-											<a ng-click="addVendor()"><strong>+</strong></a>
+											<a ng-click="addVendor()" class="add-btn" ><strong>+</strong></a>
 									</div>
 								</div>
 							</div></td>
@@ -119,8 +119,9 @@
 									</div>
 									<div class="col-sm-6">
 										<input type="text" class="form-control"
-											placeholder="New Technology Name" ng-change="addTechnology()"
+											placeholder="New Technology Name"
 											ng-model="newTechnology.name" />
+											<a ng-click="addTechnology()" class="add-btn"><strong>+</strong></a>
 									</div>
 								</div>
 							</div></td>
@@ -149,21 +150,7 @@
 						<tr>
 							<td>Type</td>
 							<td><span ng-show="!updateFlag">{{ir.interviewType.type}}</span>
-								<div class="col-sm-12" ng-show="updateFlag">
-									<div class="row">
-										<div class="col-sm-6">
-											<select class="form-control" ng-change=""
-												ng-model="interviewDTO.technology"
-												ng-options="c.name for c in listOfTechnologies"><option
-													value="">Choose</option></select>
-										</div>
-										<div class="col-sm-6">
-											<input type="text" class="form-control"
-												placeholder="New Technology Name"
-												ng-change="addTechnology()" ng-model="newTechnology.name" />
-										</div>
-									</div>
-								</div></td>
+								</td>
 						</tr>
 						<tr>
 							<td>Call Taker</td>
@@ -198,6 +185,8 @@
 											<input type="text" class="form-control"
 												placeholder="New Interview Type"
 												ng-model="newInterviewType.type" />
+											<a ng-click="addInterviewType()" class="add-btn"><strong>+</strong></a>
+											
 										</div>
 									</div>
 								</div></td>

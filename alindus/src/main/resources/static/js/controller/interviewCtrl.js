@@ -61,19 +61,32 @@ myApp.controller('InterviewCtrl', [
 				$scope.updateFlag = false;
 			}
 			
-			$scope.newClient = {name: ""};
 			
 			$scope.addClient = function () {
 				if ($scope.newClient.name != "") {
-					$scope.listOfClients.push($scope.newClient);
-					//$scope.interview.client = $scope.newClient;
+					$scope.listOfClients.push(angular.copy($scope.newClient));
+					$scope.newClient.name = "";
 				}
 			}
 			$scope.addVendor = function () {
 				if ($scope.newVendor.name != "") {
-					$scope.listOfVendors.push($scope.newVendor);
-					//$scope.interview.client = $scope.newClient;
+					$scope.listOfVendors.push(angular.copy($scope.newVendor));
+					$scope.newVendor.name = "";
 				}
 			}
+			$scope.addTechnology= function () {
+				if ($scope.newTechnology.name != "") {
+					$scope.listOfTechnologies.push(angular.copy($scope.newTechnology));
+					$scope.newTechnology.name = "";
+				}
+			}
+			$scope.newInterviewType = {};
+			$scope.addInterviewType= function () {
+				if ($scope.newInterviewType.type != "") {
+					$scope.listOfInterviewTypes.push(angular.copy($scope.newInterviewType));
+					$scope.newInterviewType.type = "";
+				}
+			}
+			
 			
 		} ]);
