@@ -88,7 +88,7 @@
 			<td>{{ir.round.name}}</td>
 			<td>{{ir.interviewType.type}}</td>
 			<td><a href="#user/{{ir.callTaker.email}}">{{ir.callTaker.firstName+" "+ir.callTaker.lastName}}</a></td>
-			<td>{{ir.interviewDate}}</td>
+			<td>{{ir.interviewDate | date:"MM/dd/yyyy"}}</td>
 			<td>{{ir.status}}</td>
 			<td><a href="#interview/{{interview.id}}">Detail</a> | <a href=""
 				ng-really-message="Are you sure to delete this interview?"

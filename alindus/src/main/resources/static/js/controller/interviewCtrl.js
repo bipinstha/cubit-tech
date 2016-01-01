@@ -4,9 +4,10 @@ myApp.controller('InterviewCtrl', [
 		'$routeParams',
 		'UserService',
 		'CandidateService',
-		'InterviewService','ApplicationService',
+		'InterviewService',
+		'ApplicationService',
 		function($scope, $http, $routeParams, UserService, CandidateService,
-				InterviewService,ApplicationService) {
+				InterviewService, ApplicationService) {
 			console.log("LOADED******Interview Controller");
 
 			$scope.interview_id = $routeParams.id;
@@ -56,37 +57,57 @@ myApp.controller('InterviewCtrl', [
 				console.log($scope.interviewDTO.candidate);
 				console.log($scope.interview.candidate);
 			}
-			$scope.resetUpdate = function () {
+			$scope.resetUpdate = function() {
 				$scope.interviewDTO = angular.copy($scope.interview);
 				$scope.updateFlag = false;
 			}
-			
-			
-			$scope.addClient = function () {
+
+			$scope.addClient = function() {
 				if ($scope.newClient.name != "") {
 					$scope.listOfClients.push(angular.copy($scope.newClient));
 					$scope.newClient.name = "";
 				}
 			}
-			$scope.addVendor = function () {
+
+			$scope.addVendor = function() {
 				if ($scope.newVendor.name != "") {
 					$scope.listOfVendors.push(angular.copy($scope.newVendor));
 					$scope.newVendor.name = "";
 				}
 			}
-			$scope.addTechnology= function () {
+
+			$scope.addTechnology = function() {
 				if ($scope.newTechnology.name != "") {
-					$scope.listOfTechnologies.push(angular.copy($scope.newTechnology));
+					$scope.listOfTechnologies.push(angular
+							.copy($scope.newTechnology));
 					$scope.newTechnology.name = "";
 				}
 			}
+
 			$scope.newInterviewType = {};
-			$scope.addInterviewType= function () {
+			$scope.addInterviewType = function() {
 				if ($scope.newInterviewType.type != "") {
-					$scope.listOfInterviewTypes.push(angular.copy($scope.newInterviewType));
+					$scope.listOfInterviewTypes.push(angular
+							.copy($scope.newInterviewType));
 					$scope.newInterviewType.type = "";
 				}
 			}
-			
-			
+
+			//Add New Round
+			$scope.showHideAddRoundForm = false;
+			$scope.toggleAddRoundForm = function() {
+				$scope.showHideAddRoundForm = true;
+			}
+			$scope.hideAddRoundForm = function() {
+				$scope.showHideAddRoundForm = false;
+			}
+			$scope.newInterviewRound = {};
+			$scope.addInterviewRound = function() {
+				if ($scope.newInterviewRound != null) {
+					$scope.interviewDTO.interviewRound.push(angular
+							.copy($scope.newInterviewRound));
+					$scope.newInterviewRound = {};
+				}
+			}
+
 		} ]);

@@ -67,3 +67,17 @@ footer {
 .table.interview-round tr td {
     padding: 2px 20px;
 }
+
+
+.add-btn {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    cursor: pointer;
+    margin-top: -10px;
+}
+
+.btn.btn-primary {
+	background: #D4001C;
+	border: none;
+}

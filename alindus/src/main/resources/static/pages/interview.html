@@ -46,9 +46,8 @@
 									</div>
 									<div class="col-sm-6">
 										<input type="text" class="form-control"
-											placeholder="New Client Name"
-											ng-model="newClient.name" />
-										<a ng-click="addClient()" class="add-btn"><strong>+</strong></a>
+											placeholder="New Client Name" ng-model="newClient.name" /> <a
+											ng-click="addClient()" class="add-btn"><strong>+</strong></a>
 									</div>
 								</div>
 							</div></td>
@@ -66,9 +65,8 @@
 									</div>
 									<div class="col-sm-6">
 										<input type="text" class="form-control"
-											placeholder="New Vendor Name"
-											ng-model="newVendor.name" />
-											<a ng-click="addVendor()" class="add-btn" ><strong>+</strong></a>
+											placeholder="New Vendor Name" ng-model="newVendor.name" /> <a
+											ng-click="addVendor()" class="add-btn"><strong>+</strong></a>
 									</div>
 								</div>
 							</div></td>
@@ -114,14 +112,13 @@
 										<select class="form-control" ng-change=""
 											ng-model="interviewDTO.technology"
 											ng-options="c.name for c in listOfTechnologies"><option
-												value=""
-												>Choose</option></select>
+												value="">Choose</option></select>
 									</div>
 									<div class="col-sm-6">
 										<input type="text" class="form-control"
 											placeholder="New Technology Name"
-											ng-model="newTechnology.name" />
-											<a ng-click="addTechnology()" class="add-btn"><strong>+</strong></a>
+											ng-model="newTechnology.name" /> <a
+											ng-click="addTechnology()" class="add-btn"><strong>+</strong></a>
 									</div>
 								</div>
 							</div></td>
@@ -150,7 +147,7 @@
 						<tr>
 							<td>Type</td>
 							<td><span ng-show="!updateFlag">{{ir.interviewType.type}}</span>
-								</td>
+							</td>
 						</tr>
 						<tr>
 							<td>Call Taker</td>
@@ -166,10 +163,97 @@
 						</tr>
 					</table>
 				</div>
-				<div ng-repeat="irDTO in interviewDTO.interviewRound"
-					ng-show="updateFlag">
-					<h4>{{irDTO.round.name}}</h4>
-					<table class="table interview-round {{irDTO.status}}">
+				<div ng-show="updateFlag">
+					<div ng-repeat="irDTO in interviewDTO.interviewRound">
+						<h4>{{irDTO.round.name}}</h4>
+						<table class="table interview-round {{irDTO.status}}">
+							<tr>
+								<td>Type</td>
+								<td>
+									<div class="col-sm-12">
+										<div class="row">
+											<div class="col-sm-6">
+												<select class="form-control" ng-model="irDTO.interviewType"
+													ng-options="c.type for c in listOfInterviewTypes"><option
+														value="">Choose</option></select>
+											</div>
+											<div class="col-sm-6">
+												<input type="text" class="form-control"
+													placeholder="New Interview Type"
+													ng-model="newInterviewType.type" /> <a
+													ng-click="addInterviewType()" class="add-btn"><strong>+</strong></a>
+
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>Call Taker</td>
+								<td>
+									<div class="col-sm-12">
+										<div class="row">
+											<div class="col-sm-6">
+												<select class="form-control" ng-model="irDTO.callTaker"
+													ng-options="(c.firstName+' '+c.lastName) for c in listOfCallTakerUsers"><option
+														value="">Choose</option></select>
+											</div>
+											<div class="col-sm-6">
+												<a href="#">+ Add New</a>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>Interview Date</td>
+								<td>{{irDTO.interviewDate | date:"MM/dd/yyyy"}}
+									<div class="col-sm-12">
+										<input type="date" class="form-control" ui-mask="99/99/9999"
+											model-view-value="true" ng-model="irDTO.interviewDate"
+											placeholder="MM/dd/yyyy" required />
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>Status</td>
+								<td>
+									<div class="col-sm-12">
+										<div class="row">
+											<div class="col-sm-6">
+												<select class="form-control" ng-model="irDTO.status"
+													ng-options="c for c in listOfStatus"></select>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<table class="table interview-round {{newInterviewRound.status}}"
+						ng-show="showHideAddRoundForm">
+						<tr>
+							<td>Round</td>
+							<td>
+								<div class="col-sm-12">
+									<div class="row">
+										<div class="col-sm-6">
+											<select class="form-control"
+												ng-model="newInterviewRound.round"
+												ng-options="c.name for c in listOfRounds"><option
+													value="">Choose</option></select>
+										</div>
+										<div class="col-sm-6">
+											<input type="text" class="form-control"
+												placeholder="New Interview Round"
+												ng-model="newInterviewRound.name" /> <a
+												ng-click="addInterviewRound()" class="add-btn"><strong>+</strong></a>
+
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
 						<tr>
 							<td>Type</td>
 							<td>
@@ -177,19 +261,20 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<select class="form-control"
-												ng-model="irDTO.interviewType"
+												ng-model="newInterviewRound.interviewType"
 												ng-options="c.type for c in listOfInterviewTypes"><option
 													value="">Choose</option></select>
 										</div>
 										<div class="col-sm-6">
 											<input type="text" class="form-control"
 												placeholder="New Interview Type"
-												ng-model="newInterviewType.type" />
-											<a ng-click="addInterviewType()" class="add-btn"><strong>+</strong></a>
-											
+												ng-model="newInterviewType.type" /> <a
+												ng-click="addInterviewType()" class="add-btn"><strong>+</strong></a>
+
 										</div>
 									</div>
-								</div></td>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td>Call Taker</td>
@@ -198,7 +283,7 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<select class="form-control"
-												ng-model="irDTO.callTaker"
+												ng-model="newInterviewRound.callTaker"
 												ng-options="(c.firstName+' '+c.lastName) for c in listOfCallTakerUsers"><option
 													value="">Choose</option></select>
 										</div>
@@ -206,17 +291,19 @@
 											<a href="#">+ Add New</a>
 										</div>
 									</div>
-								</div></td>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td>Interview Date</td>
-							<td>{{irDTO.interviewDate | date:"MM/dd/yyyy"}}
+							<td>
 								<div class="col-sm-12">
-									<input type="date" class="form-control"
-										ui-mask="99/99/9999" model-view-value="true"
-										ng-model="irDTO.interviewDate" placeholder="MM/dd/yyyy"
-										required />
-								</div></td>
+									<input type="date" class="form-control" ui-mask="99/99/9999"
+										model-view-value="true"
+										ng-model="newInterviewRound.interviewDate"
+										placeholder="MM/dd/yyyy" required />
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td>Status</td>
@@ -225,16 +312,25 @@
 									<div class="row">
 										<div class="col-sm-6">
 											<select class="form-control"
-												ng-model="irDTO.status"
+												ng-model="newInterviewRound.status"
 												ng-options="c for c in listOfStatus"></select>
 										</div>
 									</div>
 								</div>
 							</td>
 						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<div class="col-sm-12">
+									<button type="button" class="btn btn-primary" ng-click="addInterviewRound()">Add</button>
+									<button type="button" class="btn btn-default" ng-click="hideAddRoundForm()">Cancel</button>
+								</div>
+							</td>
+						</tr>
 					</table>
+					<a ng-click="toggleAddRoundForm()"><strong>+ Add Round</strong></a>
 				</div>
-				<a href="#"><strong>+ Add Round</strong></a>
 			</div>
 		</div>
 	</div>

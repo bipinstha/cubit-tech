@@ -50,5 +50,4 @@ myApp.controller('DashboardCtrl',['$scope','$routeParams','UserService','$rootSc
 		$scope.listOfCallTakerUsers = response.data;
 	})
 	
-	
 }])
