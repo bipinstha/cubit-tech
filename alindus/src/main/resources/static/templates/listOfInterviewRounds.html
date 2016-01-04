@@ -78,19 +78,19 @@
 		</tr>
 	</thead>
 	<tbody ng-repeat="interview in interviews | orderBy:sortType:sortReverse | filter:searchFilter">
-		<tr ng-class="ir.status" ng-repeat="ir in interview.interviewRound | orderBy:sortType:sortReverse | filter:searchFilter">
+		<tr class="{{ir.status}}" ng-repeat="ir in interview.interviewRound | orderBy:sortType:sortReverse | filter:searchFilter">
 			<td ><a href="#user/{{interview.vc.email}}">{{interview.vc.firstName+" "+interview.vc.lastName}}</a></td>
 			<td ><a href="#user/{{interview.marketing.email}}">{{interview.marketing.firstName+" "+interview.marketing.lastName}}</a></td>
-			<td class="{{ir.status}}"><a href="#candidate/{{interview.candidate.id}}">{{interview.candidate.firstName+" "+interview.candidate.lastName}}</a></td>
-			<td class="{{ir.status}}">{{interview.client.name}}</td>
-			<td class="{{ir.status}}">{{interview.vendor.name}}</td>
-			<td class="{{ir.status}}">{{interview.technology.name}}</td>
-			<td class="{{ir.status}}">{{ir.round.name}}</td>
-			<td class="{{ir.status}}">{{ir.interviewType.type}}</td>
-			<td class="{{ir.status}}"><a href="#user/{{ir.callTaker.email}}">{{ir.callTaker.firstName+" "+ir.callTaker.lastName}}</a></td>
-			<td class="{{ir.status}}">{{ir.interviewDate | date:"MM/dd/yyyy"}}</td>
-			<td class="{{ir.status}}">{{ir.status}}</td>
-			<td class="{{ir.status}}"><a href="#interview/{{interview.id}}">Detail</a> | <a href=""
+			<td><a href="#candidate/{{interview.candidate.id}}">{{interview.candidate.firstName+" "+interview.candidate.lastName}}</a></td>
+			<td>{{interview.client.name}}</td>
+			<td>{{interview.vendor.name}}</td>
+			<td>{{interview.technology.name}}</td>
+			<td>{{ir.round.name}}</td>
+			<td>{{ir.interviewType.type}}</td>
+			<td><a href="#user/{{ir.callTaker.email}}">{{ir.callTaker.firstName+" "+ir.callTaker.lastName}}</a></td>
+			<td>{{ir.interviewDate | date:"MM/dd/yyyy"}}</td>
+			<td>{{ir.status}}</td>
+			<td><a href="#interview/{{interview.id}}">Detail</a> | <a href=""
 				ng-really-message="Are you sure to delete this interview?"
 				ng-really-click="deleteInterview(interview)" item="interview">Delete</a></td>
 		</tr>

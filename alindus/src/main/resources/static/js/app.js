@@ -1,6 +1,6 @@
 'use strict';
 
-var myApp = angular.module('cubicApp', [ 'ngRoute', 'ui.bootstrap','ngCookies','ngReallyClickModule']);
+var myApp = angular.module('cubicApp', [ 'ngRoute', 'ui.bootstrap','ngCookies','ngReallyClickModule','ui.mask']);
 
 myApp.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.

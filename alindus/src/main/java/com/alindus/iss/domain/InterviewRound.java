@@ -46,7 +46,7 @@ public class InterviewRound implements Serializable {
 	private InterviewType interviewType;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "interview_date")
-	@DateTimeFormat(pattern = "mm/dd/yyyy")
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date interviewDate;
 	// TODO ignore circular dependency
 	@ManyToOne(fetch = FetchType.EAGER)
