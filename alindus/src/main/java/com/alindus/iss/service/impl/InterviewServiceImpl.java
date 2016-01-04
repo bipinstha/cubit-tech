@@ -87,7 +87,7 @@ public class InterviewServiceImpl implements InterviewService {
 			list = updateInterviewRound(t, interview);
 		newInterview = new Interview(t.getCandidate(), t.getClient(), t.getVendor(), t.getVc(), t.getMarketing(),
 				t.getTechnology(), list, t.getStatus());
-		newInterview.setModifiedDate(new Date());
+		newInterview.setUpdatedDate(new Date());
 		newInterview.setId(interview.getId());
 		this.interviewRepository.save(newInterview);
 
@@ -139,7 +139,7 @@ public class InterviewServiceImpl implements InterviewService {
 				newIR.setRound(round);
 			newIR.setId(iRound.getId());
 			newIR.setCreatedDate(oldIR.getCreatedDate());
-			newIR.setModifiedDate(new Date());
+			newIR.setUpdatedDate(new Date());
 			irToReturn.add(newIR);
 		}
 		for (InterviewRound nIR : newIRList) {

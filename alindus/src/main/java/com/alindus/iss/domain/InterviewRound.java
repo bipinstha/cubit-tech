@@ -21,7 +21,6 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -61,7 +60,7 @@ public class InterviewRound implements Serializable {
 	private Date createdDate;
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(pattern = "MM/dd/yyyy hh:mm:ss")
-	private Date modifiedDate;
+	private Date updatedDate;
 
 	public InterviewRound() {
 	}
@@ -140,12 +139,12 @@ public class InterviewRound implements Serializable {
 		this.createdDate = createdDate;
 	}
 
-	public Date getModifiedDate() {
-		return modifiedDate;
+	public Date getUpdatedDate() {
+		return updatedDate;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	public enum InterviewStatus {
@@ -181,7 +180,7 @@ public class InterviewRound implements Serializable {
 	public String toString() {
 		return "InterviewRound [id=" + id + ", round=" + round + ", status=" + status + ", interviewType="
 				+ interviewType + ", interviewDate=" + interviewDate + ", interview=" + interview + ", callTaker="
-				+ callTaker + ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate + "]";
+				+ callTaker + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
 }

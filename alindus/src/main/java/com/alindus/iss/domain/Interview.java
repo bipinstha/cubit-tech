@@ -72,7 +72,7 @@ public class Interview implements Serializable {
 	private Date createdDate;
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(pattern = "MM/dd/yyyy hh:mm:ss")
-	private Date modifiedDate;
+	private Date updatedDate;
 
 	public Interview() {
 		interviewRound = new ArrayList<InterviewRound>();
@@ -175,20 +175,20 @@ public class Interview implements Serializable {
 		this.createdDate = createdDate;
 	}
 
-	public Date getModifiedDate() {
-		return modifiedDate;
+	public Date getUpdatedDate() {
+		return updatedDate;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
+	public void setUpdatedDate(Date modifiedDate) {
+		this.updatedDate = modifiedDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Interview [id=" + id + ", candidate=" + candidate + ", client=" + client + ", vendor=" + vendor
 				+ ", vc=" + vc + ", marketing=" + marketing + ", technology=" + technology + ", interviewRound="
-				+ interviewRound + ", status=" + status + ", createdDate=" + createdDate + ", modifiedDate="
-				+ modifiedDate + "]";
+				+ interviewRound + ", status=" + status + ", createdDate=" + createdDate + ", updatedDate="
+				+ updatedDate + "]";
 	}
 
 }
