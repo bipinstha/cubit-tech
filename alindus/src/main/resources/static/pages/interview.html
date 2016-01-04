@@ -207,11 +207,13 @@
 							</tr>
 							<tr>
 								<td>Interview Date</td>
-								<td>{{irDTO.interviewDate | date:"MM/dd/yyyy"}}
+								<td>
 									<div class="col-sm-12">
-										<input type="date" class="form-control" ui-mask="99/99/9999"
+										<input type="text" name="date" class="form-control"
 											model-view-value="true" ng-model="irDTO.interviewDate"
-											placeholder="MM/dd/yyyy" required />
+											ui-mask="99/99/9999" placeholder="MM/dd/yyyy" required
+											 />
+										
 									</div>
 								</td>
 							</tr>
@@ -298,10 +300,8 @@
 							<td>Interview Date</td>
 							<td>
 								<div class="col-sm-12">
-									<input type="date" class="form-control" ui-mask="99/99/9999"
-										model-view-value="true"
-										ng-model="newInterviewRound.interviewDate"
-										placeholder="MM/dd/yyyy" required />
+									<input type="date" class="form-control" ng-model="date"
+										placeholder="MM/dd/yyyy" />
 								</div>
 							</td>
 						</tr>
@@ -323,8 +323,10 @@
 							<td></td>
 							<td>
 								<div class="col-sm-12">
-									<button type="button" class="btn btn-primary" ng-click="addInterviewRound()">Add</button>
-									<button type="button" class="btn btn-default" ng-click="hideAddRoundForm()">Cancel</button>
+									<button type="button" class="btn btn-primary"
+										ng-click="addInterviewRound()">Add</button>
+									<button type="button" class="btn btn-default"
+										ng-click="hideAddRoundForm()">Cancel</button>
 								</div>
 							</td>
 						</tr>
