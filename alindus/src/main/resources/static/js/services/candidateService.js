@@ -77,14 +77,14 @@ myApp.factory('CandidateService', [ '$http', '$q', function($http, $q) {
                     }
             )
 		},
-		addCandidate: function (user) {
-			return $http.post('/secure/candidate/add', user)
+		addCandidate: function (candidate) {
+			return $http.post('/secure/candidate/add', candidate)
             .then(
                     function(response){
                         return response.data;
                     }, 
                     function(errResponse){
-                        console.error('Error while creating user');
+                        console.error('Error while creating candidate');
                         return $q.reject(errResponse);
                     }
             );
