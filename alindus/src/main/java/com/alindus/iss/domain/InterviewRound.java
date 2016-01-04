@@ -19,8 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -48,7 +47,9 @@ public class InterviewRound implements Serializable {
 	@Column(name = "interview_date")
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date interviewDate;
-	// TODO ignore circular dependency
+	@Column(name = "interview_time")
+	@Pattern(regexp = "^$|([\\d]{1,2}:[\\d]{1,2})", message = "Interview Time should follow pattern hh:mm")
+	private String interviewTime;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonBackReference
 	private Interview interview;
@@ -113,6 +114,14 @@ public class InterviewRound implements Serializable {
 
 	public void setInterviewDate(Date interviewDate) {
 		this.interviewDate = interviewDate;
+	}
+
+	public String getInterviewTime() {
+		return interviewTime;
+	}
+
+	public void setInterviewTime(String interviewTime) {
+		this.interviewTime = interviewTime;
 	}
 
 	public Interview getInterview() {
