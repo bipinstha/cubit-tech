@@ -17,16 +17,16 @@ import com.alindus.iss.domain.Phone;
 import com.alindus.iss.domain.Role;
 import com.alindus.iss.domain.User;
 import com.alindus.iss.dto.ChangePassword;
-import com.alindus.iss.messaging.SmtpMailSender;
 import com.alindus.iss.repository.UserRepository;
 import com.alindus.iss.service.UserService;
+import com.alindus.iss.utils.messaging.SmptMailSender;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private SmtpMailSender smtpMailSender;
-	
+	private SmptMailSender smptMailSender;
+		
 	@Autowired
 	private UserRepository userRepository;	
 	private static final String CACHE_NAME = "Users";
@@ -193,13 +193,14 @@ public class UserServiceImpl implements UserService {
 		this.userRepository.save(u);
 		
 		try {
-			smtpMailSender.send(u.getEmail(), "Urgent", "Prabin, Be there at sales in 5 minutes");
+			smptMailSender.sendSimpleMail(u.getFirstName(), u.getEmail());
+			System.out.println("Email Sent");
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Error in msg sending");
+			System.out.println("Error while sending Email");
 			e.printStackTrace();
 		}
-		System.out.println("after mail sent");
+		System.out.println("Status --->>> Send");
 	}
 
 	@Override

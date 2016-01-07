@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.catalina.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ import com.alindus.iss.service.CandidateService;
 public class CandidateController {
 
 	Logger logger = Logger.getLogger(CandidateController.class);
-
+	
 	@Autowired
 	private CandidateService candidateService;
 
