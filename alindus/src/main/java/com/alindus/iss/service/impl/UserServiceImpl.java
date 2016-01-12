@@ -3,7 +3,6 @@ package com.alindus.iss.service.impl;
 import java.util.Date;
 import java.util.List;
 
-import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private SmptMailSender smptMailSender;
-		
+
 	@Autowired
-	private UserRepository userRepository;	
+	private UserRepository userRepository;
 	private static final String CACHE_NAME = "Users";
 
 	@Override
@@ -182,7 +181,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	@CacheEvict(value = CACHE_NAME, allEntries = true, beforeInvocation = true)
-	public void approveUser(User user){
+	public void approveUser(User user) {
 		User u = this.userRepository.findByEmail(user.getEmail());
 		if (u == null) {
 			throw new IllegalArgumentException("User not found.");
@@ -191,11 +190,13 @@ public class UserServiceImpl implements UserService {
 		u.setRole(user.getRole());
 		u.setUpdatedDate(new Date());
 		this.userRepository.save(u);
-		
+
 		try {
-			smptMailSender.sendSimpleMail(u.getFirstName(), u.getEmail());
+			smptMailSender.sendSimpleMail(u.getFirstName() + " " + u.getMiddleName() + " " + u.getLastName(),
+					u.getEmail());
+//			smptMailSender.sendMessage("Bipin", "aakee.stha@gmail.com");
 			System.out.println("Email Sent");
-		} catch (MessagingException e) {
+		} catch (Exception  e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error while sending Email");
 			e.printStackTrace();
