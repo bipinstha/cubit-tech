@@ -31,7 +31,7 @@ public class InterviewServiceTest extends BaseTest {
 	private static final String LASTNAME = "Sapkota";
 	private static final String VC_EMAIL = "amul.shapkota@gmail.com";
 	private static final String MARKETING_EMAIL = "prabin.adhikari@gmail.com";
-	private static final String CANDIDATE_EMAIL = "bharat.thapa@gmail.com";
+	private static final String CANDIDATE_EMAIL = "bharat.thapa1@gmail.com";
 	private static final String CAL_TAKER = "rajib.gandi@gmail.com";
 	@Autowired
 	private InterviewService interviewService;

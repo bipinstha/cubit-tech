@@ -20,7 +20,7 @@ public class CandidateServiceTest extends BaseTest {
 	private static final String FIRST_NAME = "Bharat";
 	private static final String MIDDLE_NAME = "Bahadur";
 	private static final String LAST_NAME = "Thapa";
-	private static final String EMAIL = "bharat.thapa@gmail.com";
+	private static final String EMAIL = "bharat.thapa1@gmail.com";
 	private static final String SKYPE_ID = "bharat.thapa";
 	private static final CandidateStatus STATUS = CandidateStatus.MARKETING;
 

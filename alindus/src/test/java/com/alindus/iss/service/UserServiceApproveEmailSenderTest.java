@@ -15,7 +15,7 @@ public class UserServiceApproveEmailSenderTest extends BaseTest {
 	public static final String FIRST_NAME = "Bharat";
 	public static final String MIDDLE_NAME = "Bikram";
 	public static final String LAST_NAME = "Thapa";
-	public static final String EMAIL = "b4ureach@gmail.com";
+	public static final String EMAIL = "alindusincorporation@gmail.com";
 	public static final Role ROLE = Role.ROLE_ADMIN;
 	public static final String PASSWORD = "bharat";
 	private static final String RE_PASSWORD = "bharat";
