@@ -7,8 +7,8 @@
 						<div class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</div>
-						<input type="text" class="form-control" placeholder="Search Candidates"
-							ng-model="searchFilter">
+						<input type="text" class="form-control"
+							placeholder="Search Candidates" ng-model="searchFilter">
 					</div>
 				</div>
 			</div>
@@ -52,12 +52,15 @@
 		<tbody>
 			<tr
 				ng-repeat="candidate in candidates | orderBy:sortType:sortReverse | filter:searchFilter">
-				<td>{{candidate.firstName+" "+candidate.lastName}}</td>
+				<td>{{candidate.firstName+" "+((candidate.middleName==null)?"
+					": candidate.middleName)+" "+candidate.lastName}}</td>
 				<td>{{candidate.email}}</td>
-				<td>{{candidate.address.city+", "+candidate.address.state}}</td>
+				<td>{{candidate.address.address + ", " +
+					candidate.address.city+", "+candidate.address.state}}</td>
 				<td>{{candidate.phone.areacode+""+candidate.phone.prefixValue+""+user.phone.number}}</td>
-				<td><a href="#candidate/{{candidate.email}}">Detail</a> | <a href="#candidate/update/{{candidate.email}}">Update</a> | <a href=""
-					ng-really-message="Are you sure to disable this user?"
+				<td><a href="#candidate/{{candidate.email}}">Detail</a> | <a
+					href="#candidate/update/{{candidate.email}}">Update</a> | <a
+					href="" ng-really-message="Are you sure to disable this user?"
 					ng-really-click="" item="candidate">Disable</a></td>
 			</tr>
 		</tbody>

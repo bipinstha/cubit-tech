@@ -148,7 +148,7 @@ public class InterviewServiceTest extends BaseTest {
 
 	}
 
-	@Test
+	//@Test
 	public void testZremoveData() {
 		List<Interview> list = this.interviewService.findAll();
 		for (Interview interview : list) {

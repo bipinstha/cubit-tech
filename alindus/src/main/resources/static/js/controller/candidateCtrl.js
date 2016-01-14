@@ -19,7 +19,8 @@ myApp.controller('CandidateCtrl', [ '$scope', '$http', 'UserService',
 					console.log("++++++++++++++++++Response++++++++++++++++++")
 					console.log(response);
 					$scope.candidate = response;
-					$scope.success = true;
+					$scope.success = true;	
+					$location.path('/manage');
 				})
 			}
 			

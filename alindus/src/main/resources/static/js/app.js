@@ -38,7 +38,7 @@ myApp.config([ '$routeProvider', function($routeProvider) {
 	}).
 	when('/add_candidate',{
 		templateUrl: 'static/pages/addCandidate.html',
-		controller : 'CandidateListCtrl'
+		controller : 'CandidateCtrl'
 	}).
 	otherwise({
 		redirectTo : '/'
