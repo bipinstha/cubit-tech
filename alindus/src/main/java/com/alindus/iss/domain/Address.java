@@ -27,14 +27,14 @@ public class Address implements Serializable {
 	private String address;
 	private String address1;
 
-	@NotEmpty(message = "City cannot be null")
+	@NotEmpty(message = "City cannot be empty!")
 	private String city;
 
-	@NotEmpty(message = "State cannot be null")
+	@NotEmpty(message = "State cannot be empty!")
 	private String state;
 
 	@Column(name = "zip_code")
-	@Pattern(regexp = "[0-9]{5}", message = "Wrong zip!")
+	@Pattern(regexp = "[0-9]{5}", message = "Wrong zip code!")
 	
 	private String zipCode;
 	

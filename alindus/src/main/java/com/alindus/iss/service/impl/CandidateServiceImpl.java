@@ -38,6 +38,9 @@ public class CandidateServiceImpl implements CandidateService {
 		if (this.candidateRepository.findByEmail(t.getEmail()) != null) {
 			throw new IllegalArgumentException("Candidate email already exist.");
 		}
+		if (t.getSsn() == null) {
+			throw new IllegalArgumentException("SSN is required.");
+		}
 		if (this.candidateRepository.findBySsn(t.getSsn().getLastValue()) != null) {
 			throw new IllegalArgumentException("Candidate ssn already exist.");
 		}
@@ -78,8 +81,10 @@ public class CandidateServiceImpl implements CandidateService {
 		Candidate can = new Candidate(t.getFirstName(), t.getLastName(), t.getEmail(), address, phone, ssn,
 				t.getSkypeId(), t.getStatus());
 		Technology technology = this.interviewRepository.findTechnologyByName(t.getTechnology().getName());
-		if (technology != null) can.setTechnology(technology);
-		else can.setTechnology(t.getTechnology());
+		if (technology != null)
+			can.setTechnology(technology);
+		else
+			can.setTechnology(t.getTechnology());
 		can.setId(c.getId());
 		can.setCreatedDate(c.getCreatedDate());
 		can.setUpdatedDate(new Date());
@@ -99,6 +104,7 @@ public class CandidateServiceImpl implements CandidateService {
 		}
 		this.candidateRepository.delete(obj);
 	}
+
 	@Override
 	@Cacheable(value = CACHE_NAME, key = "#id")
 	public Candidate findOne(Long obj) {

@@ -3,7 +3,7 @@
 
 var signUp = angular.module('cubicAppSignUp', [ 'ui.bootstrap']);
 
-signUp.controller('SignUpController',['$scope','$http',function ($scope, $http){
+signUp.controller('SignUpController',['$scope','$http', '$q',function ($scope, $http, $q){
 	$scope.user = {};
 	$scope.success = false;
 	$scope.error = false;

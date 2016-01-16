@@ -1,6 +1,6 @@
-myApp.controller('CandidateCtrl', [ '$scope', '$http', 'UserService',
-		'CandidateService',
-		function($scope, $http, UserService, CandidateService) {
+myApp.controller('CandidateCtrl', [ '$scope', '$http', '$location', 'UserService',
+		'CandidateService', 'AlertService',
+		function($scope, $http, $location, UserService, CandidateService, AlertService) {
 
 			console.log("======================Candidate Controller Loaded================");
 			$scope.success = false;
@@ -18,9 +18,16 @@ myApp.controller('CandidateCtrl', [ '$scope', '$http', 'UserService',
 				CandidateService.addCandidate(candidate).then(function(response){
 					console.log("++++++++++++++++++Response++++++++++++++++++")
 					console.log(response);
-					$scope.candidate = response;
-					$scope.success = true;	
-					$location.path('/manage');
+					if(response.status == 500){
+						$scope.error = true;
+						$scope.errorMessage = JSON.parse(response.message);
+						console.log(response.message);
+					} else {
+						$scope.candidate = response;
+						AlertService.setSuccessMsg("Candidate added successfully.");
+						console.log(AlertService.isSuccess());
+						$location.path('/manage');
+					}
 				})
 			}
 			

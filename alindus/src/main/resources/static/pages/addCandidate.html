@@ -1,58 +1,67 @@
 <h1 class="page-head">Add Candidate</h1>
 <div class="row">
 	<div class="col-sm-12">
-		<div class="col-sm-6">
+		<div class="col-sm-12">
 			<form class="form-horizontal">
 				<uib-alert class="alert alert-success" dismiss-on-timeout="100"
-			ng-show="success" type="success" close="closeAlert()">Candidate
-		Added Successfully!</uib-alert>
-				<h3>Candidate Form:</h3>
+					ng-show="success" type="success" close="closeAlert()">Candidate
+				Added Successfully!</uib-alert>
+				<uib-alert class="alert alert-danger" dismiss-on-timeout="100"
+					ng-show="error" close="closeAlert()">{{errorMessage}}</uib-alert>
+<!-- 				<h3>Candidate Form:</h3> -->
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">First Name</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">First Name</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.firstName" placeholder="First Name">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.firstName}}</span>
+<!-- 					<div ng-show="error" class="alert alert-danger col-sm-7">{{errorMessage.firstName}}</div> -->
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Middle Name</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Middle Name</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.middleName" placeholder="Middle Name">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.middleName}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Last Name</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Last Name</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.lastName" placeholder="Last Name">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.lastName}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Email</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Email</label>
+					<div class="col-sm-4">
 						<input type="email" class="form-control"
 							ng-model="candidate.email" placeholder="Email">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.email}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Primary Skype</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Primary Skype</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.skypeId" placeholder="Primary Skype">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.skypeId}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Secondary
+					<label for="" class="col-sm-3 control-label">Secondary
 						Skype</label>
-					<div class="col-sm-7">
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.skypeId1" placeholder="Secondary Skype">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.skypeId1}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Phone Number</label>
-					<div class="col-sm-7 row">
+					<label for="" class="col-sm-3 control-label">Phone Number</label>
+					<div class="col-sm-4 row">
 
 						<div class="col-sm-4">
 							<input type="text" maxlength="3" class="form-control"
@@ -68,12 +77,13 @@
 								ng-model="candidate.phone.number" placeholder="">
 						</div>
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.phone}}</span>
 				</div>
 
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Secondary
+					<label for="" class="col-sm-3 control-label">Secondary
 						Phone Number</label>
-					<div class="col-sm-7 row">
+					<div class="col-sm-4 row">
 
 						<div class="col-sm-4">
 							<input type="text" maxlength="3" class="form-control"
@@ -89,11 +99,12 @@
 								ng-model="candidate.phone1.number" placeholder="">
 						</div>
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.phone1}}</span>
 				</div>
 
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">SSN</label>
-					<div class="col-sm-7 row">
+					<label for="" class="col-sm-3 control-label">SSN</label>
+					<div class="col-sm-4 row">
 
 						<div class="col-sm-4">
 							<input type="text" maxlength="3" class="form-control"
@@ -109,55 +120,62 @@
 								ng-model="candidate.ssn.lastValue" placeholder="">
 						</div>
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.ssn}}</span>
 				</div>
 
 				<h3>Address:</h3>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Address Line 1</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Address Line 1</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.address.address" placeholder="Address Line 1">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.address.address}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Address Line 2</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Address Line 2</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.address.address1"
 							placeholder="Address Line 2">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.address.address1}}</span>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-5 control-label"> City</label>
-					<div class="col-sm-7">
+					<label class="col-sm-3 control-label"> City</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.address.city" placeholder="City">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.address.city}}</span>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-5 control-label"> State</label>
-					<div class="col-sm-7">
+					<label class="col-sm-3 control-label"> State</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.address.state" placeholder="State">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.address.state}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Zip Code</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Zip Code</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.address.zipCode" placeholder="Zip Code">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.address.zipCode}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Country</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Country</label>
+					<div class="col-sm-4">
 						<input type="text" class="form-control"
 							ng-model="candidate.address.country" placeholder="Country">
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.address.country}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-5 control-label">Technology</label>
-					<div class="col-sm-7">
+					<label for="" class="col-sm-3 control-label">Technology</label>
+					<div class="col-sm-4">
 						<div class="row">
 							<div class="col-sm-6">
 								<select class="form-control" ng-change=""
@@ -172,9 +190,10 @@
 							</div>
 						</div>
 					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.technology}}</span>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-5 col-sm-7">
+					<div class="col-sm-offset-3 col-sm-3">
 						<button type="submit" class="btn btn-default"
 							ng-click="addcandidate(candidate)">Add</button>
 					</div>

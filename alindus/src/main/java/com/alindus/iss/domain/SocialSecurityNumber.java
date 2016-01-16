@@ -16,13 +16,13 @@ public class SocialSecurityNumber implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	// this regular expression is to accept zero or three digits
-	@Pattern(regexp = "[0-9]{3}|/ ", message = "first three digits of social security is not valid")
+	@Pattern(regexp = "^$|[0-9]{3}|/ ", message = "First three digits of social security is not valid")
 	// this is another way to do
 	private String initValue;
-	@Pattern(regexp = "^$|[0-9]{2}", message = "mid two digits of social security is not valid")
+	@Pattern(regexp = "^$|[0-9]{2}", message = "Mid two digits of social security is not valid")
 	private String midValue;
 	@Column(unique = true)
-	@Pattern(regexp = "^$|[0-9]{4}", message = "last four digits of valid social security is required")
+	@Pattern(regexp = "[0-9]{4}", message = "Last four digits of valid social security is required")
 	private String lastValue;
 
 	public SocialSecurityNumber() {

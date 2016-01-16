@@ -1,9 +1,11 @@
 package com.alindus.iss.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alindus.iss.domain.Candidate;
 import com.alindus.iss.service.CandidateService;
+import com.alindus.iss.utils.CustomGsonBuilder;
+import com.google.gson.Gson;
 
 @RestController
 @RequestMapping(value = "/secure/candidate", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
@@ -36,17 +40,18 @@ public class CandidateController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Candidate add(@Valid @RequestBody Candidate candidate, BindingResult bindingResult) {
 		logger.error(candidate.getEmail());
-
+		Gson gson = CustomGsonBuilder.createCustomGsonBuilder().create();
 		if (bindingResult.hasErrors()) {
-			List<String> errorLsit = new ArrayList<String>();
+			Map<String, String> errorLsit = new HashMap<>();
 			for (Object object : bindingResult.getAllErrors()) {
 				if (object instanceof FieldError) {
 					FieldError fieldError = (FieldError) object;
-					errorLsit.add(fieldError.getDefaultMessage());
+					errorLsit.put(fieldError.getField(), fieldError.getDefaultMessage());
 				}
 
 			}
-			throw new IllegalArgumentException(errorLsit.toString());
+			
+			throw new IllegalArgumentException(gson.toJson(errorLsit));
 		} else {
 
 			try {
@@ -71,8 +76,8 @@ public class CandidateController {
 		}
 	}
 
-	@RequestMapping(value = "/{id}/remove", method = RequestMethod.GET)
-	public void remove(@PathVariable Long id) {
+	@RequestMapping(value = "/remove", method = RequestMethod.DELETE)
+	public void remove(@PathParam("id") Long id) {
 		try {
 			candidateService.remove(id);
 		} catch (IllegalArgumentException ex) {

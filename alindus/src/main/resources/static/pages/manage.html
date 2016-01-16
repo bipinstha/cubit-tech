@@ -1,15 +1,16 @@
-<h1 class="page-head">Manage</h1>
+<h3 class="page-head">Manage</h3>
+<div class="alert alert-success" dismiss-on-timeout="100"
+	ng-show="success" close="closeAlert()">{{successMsg}}</div>
+<div class="alert alert-danger" dismiss-on-timeout="100"
+	ng-show="error" close="closeAlert()">{{errorMsg}}</div>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="users-list">
-			<uib-tabset>
-				<uib-tab heading="Candidate">
-					<div ng-include="'/static/templates/listOfCandidates.html'"></div>
-				</uib-tab>
-				<uib-tab heading="Interview">
-				<div ng-include="'/static/templates/listOfInterviews.html'"></div>
-				</uib-tab>
-			</uib-tabset>
+			<uib-tabset> <uib-tab heading="Candidate">
+			<div ng-include="'/static/templates/listOfCandidates.html'"></div>
+			</uib-tab> <uib-tab heading="Interview">
+			<div ng-include="'/static/templates/listOfInterviews.html'"></div>
+			</uib-tab> </uib-tabset>
 		</div>
 	</div>
 </div>

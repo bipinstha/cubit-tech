@@ -84,22 +84,48 @@ myApp.factory('CandidateService', [ '$http', '$q', function($http, $q) {
                         return response.data;
                     }, 
                     function(errResponse){
-                        console.error('Error while creating candidate');
-                        return $q.reject(errResponse);
+                        console.log('==== Error while creating candidate ====');
+                        console.log(errResponse);
+                        //console.log(errResponse.done);
+                        $q.reject(errResponse);
+                        return errResponse.data;
                     }
             );
 		},
 		removeCandidateByEmail: function (email){
-			return $http.post('/secure/candidate/'+email+'/remove')
+			return $http({
+				method:'DELETE',
+				url:'/secure/candidate/' + email + '/remove',
+				data:'data',
+				headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+				})
             .then(
                     function(response){
+                    	console.log(response);
                         return response.data;
                     }, 
                     function(errResponse){
-                        console.error('Error while creating user');
-                        return $q.reject(errResponse);
+                        console.error('Error while deleting candidate');
+                        console.log(errResponse);
+                        $q.reject(errResponse);
+                        return errResponse;
                     }
             );
+		},
+		removeCandidateById: function (id){
+			return $http({
+				method: 'DELETE',
+				data:'data',
+				url:'/secure/candidate/remove', 
+				params: {id: id},
+				headers: {
+					  'Accept':'application/json; charset=utf-8',
+					  'Content-Type':'application/json; charset=utf-8'
+				  }
+			});
 		}
 	}
 

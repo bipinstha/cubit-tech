@@ -48,6 +48,6 @@ myApp.controller('DashboardCtrl',['$scope','$routeParams','UserService','$rootSc
 	})
 	ApplicationService.getAllUsersByRole('ROLE_CALLTAKER').then(function(response){
 		$scope.listOfCallTakerUsers = response.data;
+		console.log("===getAllUserByRole====");
 	})
-	
 }])

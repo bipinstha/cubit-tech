@@ -21,7 +21,7 @@ public class Technology implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotEmpty(message="Technologu name cannot be empty")
+	@NotEmpty(message="Technology name cannot be empty.")
 	@Column(unique = true)
 	private String name;
 
