@@ -35,12 +35,20 @@
 					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.lastName}}</span>
 				</div>
 				<div class="form-group">
-					<label for="" class="col-sm-3 control-label">Email</label>
+					<label for="" class="col-sm-3 control-label">Primary Email</label>
 					<div class="col-sm-4">
 						<input type="email" class="form-control"
 							ng-model="candidate.email" placeholder="Email">
 					</div>
 					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.email}}</span>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label">Secondary Email</label>
+					<div class="col-sm-4">
+						<input type="email" class="form-control"
+							ng-model="candidate.email1" placeholder="Email">
+					</div>
+					<span ng-show="error" class="col-sm-3 help-inline text-danger">{{errorMessage.email1}}</span>
 				</div>
 				<div class="form-group">
 					<label for="" class="col-sm-3 control-label">Primary Skype</label>
