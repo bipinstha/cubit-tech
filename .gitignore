@@ -1,2 +1,11 @@
 /target/
 /src/main/resources/application.properties
+/.settings/
+/.mvn
+/.classpath
+/.project
+/.tern-project
+/alindus.iml
+/mvnw
+/mvnw.cmd
+
