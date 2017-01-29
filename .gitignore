@@ -1,5 +1,4 @@
 /target/
-/src/main/resources/application.properties
 /.settings/
 /.mvn
 /.classpath
